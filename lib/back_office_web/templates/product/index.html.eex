@@ -1,0 +1,56 @@
+<section class="row">
+  <article class="column">
+    <h2>Products</h2>
+
+    <table>
+      <thead>
+        <th>venue</th>
+        <th>symbol</th>
+        <th>alias</th>
+        <th>type</th>
+        <th>status</th>
+        <th>price_increment</th>
+        <th>size_increment</th>
+        <th>min_price</th>
+        <th>min_size</th>
+        <th>max_price</th>
+        <th>max_size</th>
+        <th>min_notional</th>
+        <th>value</th>
+        <th>is_quanto</th>
+        <th>is_inverse</th>
+        <th>maker_fee</th>
+        <th>taker_fee</th>
+      </thead>
+      <tbody>
+        <%= if Enum.any?(@products) do %>
+          <%= for p <- @products do %>
+            <tr>
+              <td><%= link p.venue_id, to: Routes.product_path(@conn, :show, "#{p.venue_id}-#{p.symbol}") %></td>
+              <td><%= link p.symbol, to: Routes.product_path(@conn, :show, "#{p.venue_id}-#{p.symbol}") %></td>
+              <td><%= p.alias %></td>
+              <td><%= p.type %></td>
+              <td><%= p.status %></td>
+              <td><%= decimal(p.price_increment) %></td>
+              <td><%= decimal(p.size_increment) %></td>
+              <td><%= decimal(p.min_price) %></td>
+              <td><%= decimal(p.min_size) %></td>
+              <td><%= p.max_price && decimal(p.max_price) %></td>
+              <td><%= p.max_size && decimal(p.max_size) %></td>
+              <td><%= p.min_notional && decimal(p.min_notional) %></td>
+              <td><%= p.value && decimal(p.value) %></td>
+              <td><%= p.is_quanto %></td>
+              <td><%= p.is_inverse %></td>
+              <td><%= p.maker_fee && decimal(p.maker_fee) %></td>
+              <td><%= p.taker_fee && decimal(p.taker_fee) %></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="17">No products</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </article>
+</section>

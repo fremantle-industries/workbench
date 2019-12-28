@@ -1,0 +1,42 @@
+<section class="row">
+  <article class="column">
+    <div>
+      <h2>Asset Balances</h2>
+
+      <%= if @show_zero do %>
+        <%= live_link "hide zero balances", to: Routes.live_path(@socket, BackOfficeWeb.LiveAssetBalanceView, %{}) %>
+      <% else %>
+        <%= live_link "show zero balances", to: Routes.live_path(@socket, BackOfficeWeb.LiveAssetBalanceView, %{show_zero: true}) %>
+      <% end %>
+    </div>
+
+    <table>
+      <thead>
+        <th>venue</th>
+        <th>asset</th>
+        <th>type</th>
+        <th>account</th>
+        <th>free</th>
+        <th>locked</th>
+      </thead>
+      <tbody>
+        <%= if Enum.any?(@asset_balances) do %>
+          <%= Enum.map @asset_balances, fn p -> %>
+            <tr>
+              <td><%= p.venue_id %></td>
+              <td><%= p.asset %></td>
+              <td><%= p.type %></td>
+              <td><%= p.account_id %></td>
+              <td><%= p.free %></td>
+              <td><%= p.locked %></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="6">No asset balances</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </article>
+</section>

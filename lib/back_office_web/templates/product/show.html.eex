@@ -1,0 +1,13 @@
+<section class="product__show row">
+  <article class="column">
+    <h2><%= @product.venue_id %>: <%= @product.symbol %></h2>
+
+    <ul class="pair-list">
+      <%= for key <- attrs() do %>
+        <li>
+          <strong><%= key %></strong> <%= key |> pluck(@product) %>
+        </li>
+      <% end %>
+    </ul>
+  </article>
+</section>
