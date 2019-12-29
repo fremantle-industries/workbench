@@ -8,6 +8,14 @@ Manage operations of a fund
 ![wallets](./docs/wallets.png)
 ![products](./docs/products.png)
 
+## Requirements
+
+- [Erlang OTP](https://www.erlang.org/)
+- [Elixir](https://elixir-lang.org/)
+- [Postgres](https://www.postgresql.org/)
+- [Tai](https://github.com/fremantle-capital/tai)
+- [Google OAuth 2.0](https://developers.google.com/identity/protocols/OAuth2)
+
 ## Test
 
 ```bash
