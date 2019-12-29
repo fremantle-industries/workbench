@@ -44,3 +44,17 @@ LIVE_VIEW_SIGNING_SALT=(mix phx.gen.secret 32) \
 GUARDIAN_SECRET_KEY=(mix guardian.gen.secret) \
 mix phx.server
 ```
+
+## Help Wanted :)
+
+If you think this `back_office` thing might be worthwhile and you don't see a feature 
+we would love your contributions to add them! Feel free to drop us an email or open 
+a Github issue.
+
+## Authors
+
+* Alex Kwiatkowski - alex+git@rival-studios.com
+
+## License
+
+`back_office` is released under the [MIT license](./LICENSE.md)
