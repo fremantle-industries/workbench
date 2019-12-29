@@ -21,7 +21,11 @@
               <td><%= number_to_delimited(w.amount) %></td>
               <td><%= w.address %></td>
               <td>
-                <button phx-click="delete" phx-value-wallet-id="<%= w.id %>">
+                <button
+                  class="danger"
+                  phx-click="delete"
+                  phx-value-wallet-id="<%= w.id %>"
+                >
                   Delete
                 </button>
               </td>

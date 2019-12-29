@@ -69,7 +69,11 @@
               <td><%= b.usd_quote_venue %></td>
               <td><%= b.usd_quote_asset %></td>
               <td>
-                <button phx-click="delete" phx-value-balance-id="<%= b.id %>">
+                <button
+                  class="danger"
+                  phx-click="delete"
+                  phx-value-balance-id="<%= b.id %>"
+                >
                   Delete
                 </button>
               </td>
