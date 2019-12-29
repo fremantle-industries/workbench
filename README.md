@@ -17,6 +17,15 @@ Manage operations of a fund
 - [Postgres](https://www.postgresql.org/)
 - [Google OAuth 2.0](https://developers.google.com/identity/protocols/OAuth2)
 
+## Install
+
+Clone the repository and install dependencies
+
+```
+$ git clone https://github.com/fremantle-capital/back_office.git /tmp/back_office && cd /tmp/back_office
+$ mix deps.get
+```
+
 ## Test
 
 ```bash
