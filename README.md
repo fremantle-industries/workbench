@@ -12,8 +12,9 @@ Manage operations of a fund
 
 - [Erlang OTP](https://www.erlang.org/)
 - [Elixir](https://elixir-lang.org/)
-- [Postgres](https://www.postgresql.org/)
+- [Phoenix](https://www.phoenixframework.org/)
 - [Tai](https://github.com/fremantle-capital/tai)
+- [Postgres](https://www.postgresql.org/)
 - [Google OAuth 2.0](https://developers.google.com/identity/protocols/OAuth2)
 
 ## Test
