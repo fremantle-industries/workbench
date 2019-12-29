@@ -3,6 +3,11 @@
 
 Manage operations of a fund
 
+![balances-chart](./docs/balances-chart.png)
+![balances-form](./docs/balances-form.png)
+![wallets](./docs/wallets.png)
+![products](./docs/products.png)
+
 ## Test
 
 ```bash
