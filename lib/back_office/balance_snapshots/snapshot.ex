@@ -18,7 +18,7 @@ defmodule BackOffice.BalanceSnapshots.Snapshot do
            |> BalanceSnapshots.UsdBalance.fetch(config.usd_quote_venue),
          {:ok, assets_usd_balance} <-
            config.usd_quote_asset
-           |> asset_balance_resources()
+           |> account_resources()
            |> BalanceSnapshots.UsdBalance.fetch(config.usd_quote_venue) do
       usd_balance = Decimal.add(wallets_usd_balance, assets_usd_balance)
 
@@ -53,12 +53,12 @@ defmodule BackOffice.BalanceSnapshots.Snapshot do
     end)
   end
 
-  defp asset_balance_resources(usd_quote_asset) do
-    Tai.Venues.AssetBalanceStore.all()
+  defp account_resources(usd_quote_asset) do
+    Tai.Venues.AccountStore.all()
     |> Enum.map(fn a ->
       {
         build_pricing_symbol(a.asset, usd_quote_asset),
-        Tai.Venues.AssetBalance.total(a),
+        Tai.Venues.Account.total(a),
         a
       }
     end)

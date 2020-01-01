@@ -34,7 +34,7 @@ defmodule BackOfficeWeb.Router do
     pipe_through [:browser, :auth]
 
     live "/balances", LiveBalanceView
-    live "/asset_balances", LiveAssetBalanceView
+    live "/accounts", LiveAccountView
     resources "/wallets", WalletController, only: [:index]
     live "/positions", LivePositionView
     resources "/products", ProductController, only: [:index, :show]
