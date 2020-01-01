@@ -92,12 +92,6 @@ config :tai,
       adapter: Tai.VenueAdapters.Bitmex,
       timeout: 60_000,
       products: "xbth20 ethh20 ltch20"
-    ],
-    gdax: [
-      enabled: true,
-      adapter: Tai.VenueAdapters.Gdax,
-      timeout: 60_000,
-      products: "btc_usd"
     ]
   }
 

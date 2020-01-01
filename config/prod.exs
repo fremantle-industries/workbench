@@ -64,6 +64,7 @@ config :tai,
       timeout: 120_000,
       adapter: Tai.VenueAdapters.Binance,
       products: ~w(
+        btc_usdc
         btc_usdt
 
         etc_usdt
@@ -80,12 +81,6 @@ config :tai,
       adapter: Tai.VenueAdapters.Bitmex,
       timeout: 60_000,
       products: "xbth20 ethh20 ltch20"
-    ],
-    gdax: [
-      enabled: true,
-      timeout: 60_000,
-      adapter: Tai.VenueAdapters.Gdax,
-      products: "btc_usd"
     ]
   }
 
