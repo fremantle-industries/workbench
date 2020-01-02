@@ -45,13 +45,25 @@ $ mix phx.server
 ## Production
 
 ```bash
-$ MIX_ENV=prod mix ecto.create
-$ MIX_ENV=prod mix ecto.migrate
-$ MIX_ENV=prod \
-DATABASE_URL=ecto://user@localhost/back_office_prod \
-SECRET_KEY_BASE=(mix phx.gen.secret) \
-LIVE_VIEW_SIGNING_SALT=(mix phx.gen.secret 32) \
-GUARDIAN_SECRET_KEY=(mix guardian.gen.secret) \
+$ DATABASE_URL=ecto://user@localhost/back_office_prod \
+SECRET_KEY_BASE=$(mix phx.gen.secret) \
+LIVE_VIEW_SIGNING_SALT=$(mix phx.gen.secret 32) \
+GUARDIAN_SECRET_KEY=$(mix guardian.gen.secret) \
+MIX_ENV=prod \
+mix ecto.create
+
+$ DATABASE_URL=ecto://user@localhost/back_office_prod \
+SECRET_KEY_BASE=$(mix phx.gen.secret) \
+LIVE_VIEW_SIGNING_SALT=$(mix phx.gen.secret 32) \
+GUARDIAN_SECRET_KEY=$(mix guardian.gen.secret) \
+MIX_ENV=prod \
+mix ecto.migrate
+
+$ DATABASE_URL=ecto://user@localhost/back_office_prod \
+SECRET_KEY_BASE=$(mix phx.gen.secret) \
+LIVE_VIEW_SIGNING_SALT=$(mix phx.gen.secret 32) \
+GUARDIAN_SECRET_KEY=$(mix guardian.gen.secret) \
+MIX_ENV=prod \
 mix phx.server
 ```
 
