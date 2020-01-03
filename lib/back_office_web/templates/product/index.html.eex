@@ -4,23 +4,25 @@
 
     <table>
       <thead>
-        <th>venue</th>
-        <th>symbol</th>
-        <th>alias</th>
-        <th>type</th>
-        <th>status</th>
-        <th>price_increment</th>
-        <th>size_increment</th>
-        <th>min_price</th>
-        <th>min_size</th>
-        <th>max_price</th>
-        <th>max_size</th>
-        <th>min_notional</th>
-        <th>value</th>
-        <th>is_quanto</th>
-        <th>is_inverse</th>
-        <th>maker_fee</th>
-        <th>taker_fee</th>
+        <th>Venue</th>
+        <th>Symbol</th>
+        <th>Alias</th>
+        <th>Type</th>
+        <th>Status</th>
+        <th>Listing</th>
+        <th>Expiry</th>
+        <th>Price Increment</th>
+        <th>Size Increment</th>
+        <th>Min Price</th>
+        <th>Min Size</th>
+        <th>Max Price</th>
+        <th>Max Size</th>
+        <th>Min Notional</th>
+        <th>Value</th>
+        <th>Is Quanto</th>
+        <th>Is Inverse</th>
+        <th>Maker Fee</th>
+        <th>Taker Fee</th>
       </thead>
       <tbody>
         <%= if Enum.any?(@products) do %>
@@ -31,6 +33,8 @@
               <td><%= p.alias %></td>
               <td><%= p.type %></td>
               <td><%= p.status %></td>
+              <td><%= p.listing && from_now(p.listing) %></td>
+              <td><%= p.expiry && from_now(p.expiry) %></td>
               <td><%= decimal(p.price_increment) %></td>
               <td><%= decimal(p.size_increment) %></td>
               <td><%= decimal(p.min_price) %></td>
@@ -47,7 +51,7 @@
           <% end %>
         <% else %>
           <tr>
-            <td colspan="17">No products</td>
+            <td colspan="19">No products</td>
           </tr>
         <% end %>
       </tbody>
