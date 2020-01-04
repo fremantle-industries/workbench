@@ -8,6 +8,8 @@ defmodule BackOfficeWeb.ProductView do
     quote
     type
     status
+    listing
+    expiry
     price_increment
     size_increment
     min_price
@@ -27,5 +29,6 @@ defmodule BackOfficeWeb.ProductView do
 
   def format(nil), do: "-"
   def format(%Decimal{} = val), do: val |> decimal()
+  def format(%DateTime{} = val), do: val |> from_now()
   def format(val) when is_binary(val) or is_atom(val), do: val
 end

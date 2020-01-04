@@ -63,7 +63,7 @@ defmodule BackOffice.BalanceSnapshots.SnapshotTest do
       |> BackOffice.Repo.insert()
 
     :ok =
-      Tai.Venues.AssetBalance
+      Tai.Venues.Account
       |> struct(
         venue_id: :venue_a,
         account_id: :main,
@@ -71,10 +71,10 @@ defmodule BackOffice.BalanceSnapshots.SnapshotTest do
         free: Decimal.new(1),
         locked: Decimal.new("0.1")
       )
-      |> Tai.Venues.AssetBalanceStore.upsert()
+      |> Tai.Venues.AccountStore.upsert()
 
     :ok =
-      Tai.Venues.AssetBalance
+      Tai.Venues.Account
       |> struct(
         venue_id: :venue_a,
         account_id: :main,
@@ -82,7 +82,7 @@ defmodule BackOffice.BalanceSnapshots.SnapshotTest do
         free: Decimal.new(2),
         locked: Decimal.new("0.2")
       )
-      |> Tai.Venues.AssetBalanceStore.upsert()
+      |> Tai.Venues.AccountStore.upsert()
 
     assert {:ok, balance} = BalanceSnapshots.Snapshot.create(@config)
     assert %BackOffice.Balance{} = balance

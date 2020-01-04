@@ -17,7 +17,7 @@
         <nav class="primary-nav">
           <ol>
             <li><%= link "Balances", to: Routes.live_path(@conn, BackOfficeWeb.LiveBalanceView) %></li>
-            <li><%= link "Asset Balances", to: Routes.live_path(@conn, BackOfficeWeb.LiveAssetBalanceView) %></li>
+            <li><%= link "Accounts", to: Routes.live_path(@conn, BackOfficeWeb.LiveAccountView) %></li>
             <li><%= link "Wallets", to: Routes.wallet_path(@conn, :index) %></li>
             <li><%= link "Positions", to: Routes.live_path(@conn, BackOfficeWeb.LivePositionView) %></li>
             <li><%= link "Products", to: Routes.product_path(@conn, :index) %></li>

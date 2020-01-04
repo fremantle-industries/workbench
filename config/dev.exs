@@ -92,6 +92,12 @@ config :tai,
       adapter: Tai.VenueAdapters.Bitmex,
       timeout: 60_000,
       products: "xbth20 ethh20 ltch20"
+    ],
+    okex: [
+      enabled: true,
+      adapter: Tai.VenueAdapters.OkEx,
+      timeout: 60_000,
+      products: "btc_usdt btc_usd_swap btc_usdt_swap btc_usd_200327 btc_usdt_200327"
     ]
   }
 

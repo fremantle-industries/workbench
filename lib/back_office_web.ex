@@ -45,6 +45,7 @@ defmodule BackOfficeWeb do
       import BackOfficeWeb.ErrorHelpers
       import BackOfficeWeb.Gettext
       import BackOfficeWeb.Decimal
+      import BackOfficeWeb.Time
       import Phoenix.LiveView, only: [live_render: 2, live_render: 3, live_link: 1, live_link: 2]
       alias BackOfficeWeb.Router.Helpers, as: Routes
     end
