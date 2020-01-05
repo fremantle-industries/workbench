@@ -1,7 +1,7 @@
 # Back Office
 [![Build Status](https://github.com/fremantle-capital/back_office/workflows/CI/badge.svg)](https://github.com/fremantle-capital/back_office/actions?query=workflow%3ACI)
 
-Manage operations of a fund
+Web app starter kit to manage operations of a fund.
 
 ![balances-chart](./docs/balances-chart.png)
 ![balances-form](./docs/balances-form.png)
