@@ -38,6 +38,7 @@ defmodule BackOfficeWeb.Router do
     resources "/wallets", WalletController, only: [:index]
     live "/positions", LivePositionView
     resources "/products", ProductController, only: [:index, :show]
+    resources "/fees", FeeController, only: [:index]
   end
 
   scope "/auth", BackOfficeWeb do

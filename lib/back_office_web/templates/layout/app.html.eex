@@ -21,6 +21,7 @@
             <li><%= link "Wallets", to: Routes.wallet_path(@conn, :index) %></li>
             <li><%= link "Positions", to: Routes.live_path(@conn, BackOfficeWeb.LivePositionView) %></li>
             <li><%= link "Products", to: Routes.product_path(@conn, :index) %></li>
+            <li><%= link "Fees", to: Routes.fee_path(@conn, :index) %></li>
             <%= if Guardian.Plug.current_resource(@conn) do %>
               <li>
                 <%= form_for @conn, Routes.auth_path(@conn, :delete), fn _f -> %>
