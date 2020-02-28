@@ -35,54 +35,31 @@ defmodule BackOffice.BalanceSnapshots.SnapshotTest do
     end)
 
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(BackOffice.Repo)
-    {:ok, _} = Tai.Markets.QuoteStore.upsert(@btc_usd_market_quote)
-    {:ok, _} = Tai.Markets.QuoteStore.upsert(@ltc_usd_market_quote)
+    {:ok, _} = Tai.Markets.QuoteStore.put(@btc_usd_market_quote)
+    {:ok, _} = Tai.Markets.QuoteStore.put(@ltc_usd_market_quote)
 
     :ok
   end
 
   test "creates a balance snapshot with the USD value of wallets, assets, current btc_usd price, venue and symbol" do
-    {:ok, _} =
-      %BackOffice.Wallet{}
-      |> BackOffice.Wallet.changeset(%{
-        name: "venue_b",
-        asset: "btc",
-        amount: Decimal.new(1),
-        address: "bc1abc"
-      })
-      |> BackOffice.Repo.insert()
+    create_wallet(name: "venue_b", asset: "btc", amount: Decimal.new(1))
+    create_wallet(name: "venue_b", asset: "ltc", amount: Decimal.new(200))
 
-    {:ok, _} =
-      %BackOffice.Wallet{}
-      |> BackOffice.Wallet.changeset(%{
-        name: "venue_b",
-        asset: "ltc",
-        amount: Decimal.new(200),
-        address: "lc1abc"
-      })
-      |> BackOffice.Repo.insert()
+    create_account(
+      venue: :venue_a,
+      credential: :main,
+      asset: :btc,
+      free: Decimal.new(1),
+      locked: Decimal.new("0.1")
+    )
 
-    :ok =
-      Tai.Venues.Account
-      |> struct(
-        venue_id: :venue_a,
-        account_id: :main,
-        asset: :btc,
-        free: Decimal.new(1),
-        locked: Decimal.new("0.1")
-      )
-      |> Tai.Venues.AccountStore.upsert()
-
-    :ok =
-      Tai.Venues.Account
-      |> struct(
-        venue_id: :venue_a,
-        account_id: :main,
-        asset: :ltc,
-        free: Decimal.new(2),
-        locked: Decimal.new("0.2")
-      )
-      |> Tai.Venues.AccountStore.upsert()
+    create_account(
+      venue: :venue_a,
+      credential: :main,
+      asset: :ltc,
+      free: Decimal.new(2),
+      locked: Decimal.new("0.2")
+    )
 
     assert {:ok, balance} = BalanceSnapshots.Snapshot.create(@config)
     assert %BackOffice.Balance{} = balance
@@ -103,5 +80,41 @@ defmodule BackOffice.BalanceSnapshots.SnapshotTest do
       struct(BalanceSnapshots.Config, btc_usd_venue: :venue_b, btc_usd_symbol: @product)
 
     assert BalanceSnapshots.Snapshot.create(no_mid_price_config) == {:error, :not_found}
+  end
+
+  defp create_wallet(name: name, asset: asset, amount: amount) do
+    {:ok, _} =
+      %BackOffice.Wallet{}
+      |> BackOffice.Wallet.changeset(%{
+        name: name,
+        asset: asset,
+        amount: Decimal.cast(amount),
+        address: "-"
+      })
+      |> BackOffice.Repo.insert()
+  end
+
+  defp create_account(
+         venue: venue,
+         credential: credential,
+         asset: asset,
+         free: free,
+         locked: locked
+       ) do
+    free = Decimal.cast(free)
+    locked = Decimal.cast(locked)
+    equity = Decimal.add(free, locked)
+
+    {:ok, _} =
+      Tai.Venues.Account
+      |> struct(
+        venue_id: venue,
+        credential_id: credential,
+        asset: asset,
+        equity: equity,
+        free: free,
+        locked: locked
+      )
+      |> Tai.Venues.AccountStore.put()
   end
 end

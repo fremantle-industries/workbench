@@ -29,7 +29,7 @@ defmodule BackOffice.Application do
   end
 
   def start_advisors do
-    store_id = Tai.Advisors.Store.default_store_id()
+    store_id = Tai.Advisors.SpecStore.default_store_id()
 
     {started, already_started} =
       []

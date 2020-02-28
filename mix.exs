@@ -34,9 +34,9 @@ defmodule BackOffice.MixProject do
   defp deps do
     [
       {:enumerati, "~> 0.0.5"},
-      {:stored, "~> 0.0.3"},
+      {:stored, "~> 0.0.4"},
       # {:tai, path: "vendor/tai_monorepo/apps/tai"},
-      {:tai, "~> 0.0.48"},
+      {:tai, "~> 0.0.50"},
       {:logger_json, "~> 3.1"},
       {:ecto_sql, "~> 3.1"},
       {:phoenix, "~> 1.4.9"},

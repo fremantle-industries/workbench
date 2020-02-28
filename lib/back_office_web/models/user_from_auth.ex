@@ -8,7 +8,7 @@ defmodule BackOfficeWeb.UserFromAuth do
 
   def find_or_create(%Auth{provider: provider} = auth) when provider == :google do
     user = build_user(auth)
-    {:ok, _} = BackOfficeWeb.UserStore.upsert(user)
+    {:ok, _} = BackOfficeWeb.UserStore.put(user)
     {:ok, user}
   end
 

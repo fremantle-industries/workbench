@@ -58,7 +58,7 @@ defmodule BackOffice.BalanceSnapshots.Snapshot do
     |> Enum.map(fn a ->
       {
         build_pricing_symbol(a.asset, usd_quote_asset),
-        Tai.Venues.Account.total(a),
+        a.equity,
         a
       }
     end)

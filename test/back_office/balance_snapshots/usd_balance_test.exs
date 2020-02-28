@@ -18,7 +18,7 @@ defmodule BackOffice.BalanceSnapshots.UsdBalanceTest do
     end)
 
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(BackOffice.Repo)
-    {:ok, _} = Tai.Markets.QuoteStore.upsert(@eth_usd_market_quote)
+    {:ok, _} = Tai.Markets.QuoteStore.put(@eth_usd_market_quote)
 
     :ok
   end
@@ -75,7 +75,7 @@ defmodule BackOffice.BalanceSnapshots.UsdBalanceTest do
         asks: []
       )
 
-    {:ok, _} = Tai.Markets.QuoteStore.upsert(btc_usd_market_quote)
+    {:ok, _} = Tai.Markets.QuoteStore.put(btc_usd_market_quote)
 
     {:ok, btc} =
       %BackOffice.Wallet{}
