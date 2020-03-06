@@ -75,7 +75,7 @@ a Github issue.
 
 ## Authors
 
-* Alex Kwiatkowski - alex+git@fremantle.io
+* [Alex Kwiatkowski](https://github.com/rupurt) - alex+git@fremantle.io
 
 ## License
 
