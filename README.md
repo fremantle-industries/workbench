@@ -1,5 +1,5 @@
 # Back Office
-[![Build Status](https://github.com/fremantle-capital/back_office/workflows/CI/badge.svg)](https://github.com/fremantle-capital/back_office/actions?query=workflow%3ACI)
+[![Build Status](https://github.com/fremantle-industries/back_office/workflows/CI/badge.svg)](https://github.com/fremantle-industries/back_office/actions?query=workflow%3ACI)
 
 Web app starter kit to manage operations of a fund.
 
@@ -13,7 +13,7 @@ Web app starter kit to manage operations of a fund.
 - [Erlang OTP](https://www.erlang.org/)
 - [Elixir](https://elixir-lang.org/)
 - [Phoenix](https://www.phoenixframework.org/)
-- [Tai](https://github.com/fremantle-capital/tai)
+- [Tai](https://github.com/fremantle-industries/tai)
 - [Postgres](https://www.postgresql.org/)
 - [Google OAuth 2.0](https://developers.google.com/identity/protocols/OAuth2)
 
@@ -22,7 +22,7 @@ Web app starter kit to manage operations of a fund.
 Clone the repository and install dependencies
 
 ```
-$ git clone https://github.com/fremantle-capital/back_office.git /tmp/back_office && cd /tmp/back_office
+$ git clone https://github.com/fremantle-industries/back_office.git /tmp/back_office && cd /tmp/back_office
 $ mix deps.get
 ```
 
