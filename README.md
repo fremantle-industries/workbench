@@ -75,7 +75,7 @@ a Github issue.
 
 ## Authors
 
-* Alex Kwiatkowski - alex+git@rival-studios.com
+* Alex Kwiatkowski - alex+git@fremantle.io
 
 ## License
 
