@@ -1,10 +1,10 @@
 use Mix.Config
 
 # Configure your database
-config :back_office, BackOffice.Repo,
+config :workbench, Workbench.Repo,
   username: "postgres",
   password: "postgres",
-  database: "back_office_dev",
+  database: "workbench_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
@@ -15,9 +15,9 @@ config :back_office, BackOffice.Repo,
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :back_office, BackOfficeWeb.Endpoint,
+config :workbench, WorkbenchWeb.Endpoint,
   http: [port: 4000],
-  url: [host: "back_office.lvh.me", port: "4000"],
+  url: [host: "workbench.lvh.me", port: "4000"],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
@@ -56,13 +56,13 @@ config :back_office, BackOfficeWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :back_office, BackOfficeWeb.Endpoint,
+config :workbench, WorkbenchWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/back_office_web/{live,views}/.*(ex)$",
-      ~r"lib/back_office_web/templates/.*(eex)$"
+      ~r"lib/workbench_web/{live,views}/.*(ex)$",
+      ~r"lib/workbench_web/templates/.*(eex)$"
     ]
   ]
 
@@ -101,7 +101,7 @@ config :tai,
     ]
   }
 
-config :back_office,
+config :workbench,
   balance_snapshot: %{
     enabled: {:system, :boolean, "BALANCE_SNAPSHOT_ENABLED", false},
     btc_usd_venue: {:system, :atom, "BALANCE_SNAPSHOT_BTC_USD_VENUE", :gdax},

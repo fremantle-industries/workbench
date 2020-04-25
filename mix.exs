@@ -1,9 +1,9 @@
-defmodule BackOffice.MixProject do
+defmodule Workbench.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :back_office,
+      app: :workbench,
       version: "0.0.1",
       elixir: "~> 1.9",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -18,7 +18,7 @@ defmodule BackOffice.MixProject do
 
   def application do
     [
-      mod: {BackOffice.Application, []},
+      mod: {Workbench.Application, []},
       extra_applications: app_list(Mix.env())
     ]
   end

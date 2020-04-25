@@ -1,4 +1,4 @@
-defmodule BackOffice.Repo.Migrations.CreateBalances do
+defmodule Workbench.Repo.Migrations.CreateBalances do
   use Ecto.Migration
 
   def change do

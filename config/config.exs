@@ -8,15 +8,15 @@
 use Mix.Config
 
 # Ecto Repo
-config :back_office,
-  ecto_repos: [BackOffice.Repo]
+config :workbench,
+  ecto_repos: [Workbench.Repo]
 
 # Configures the endpoint
-config :back_office, BackOfficeWeb.Endpoint,
+config :workbench, WorkbenchWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "vJP36v4Gi2Orw8b8iBRg6ZFdzXKLvcRYkk1AaMLYX0+ry7k5XaJXd/LY/itmoxPP",
-  render_errors: [view: BackOfficeWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: BackOffice.PubSub, adapter: Phoenix.PubSub.PG2],
+  render_errors: [view: WorkbenchWeb.ErrorView, accepts: ~w(html json)],
+  pubsub: [name: Workbench.PubSub, adapter: Phoenix.PubSub.PG2],
   live_view: [signing_salt: "TolmUusQ6//zaa5GZHu7DG2V3YAgOoP/"]
 
 # Use Jason for JSON parsing in Phoenix
@@ -48,8 +48,8 @@ config :ueberauth, Ueberauth.Strategy.Google.OAuth,
   client_id: {System, :get_env, ["GOOGLE_CLIENT_ID"]},
   client_secret: {System, :get_env, ["GOOGLE_CLIENT_SECRET"]}
 
-config :back_office, BackOfficeWeb.Guardian,
-  issuer: "back_office",
+config :workbench, WorkbenchWeb.Guardian,
+  issuer: "workbench",
   secret_key: {System, :get_env, ["GUARDIAN_SECRET_KEY"]}
 
 # Import environment specific config. This must remain at the bottom

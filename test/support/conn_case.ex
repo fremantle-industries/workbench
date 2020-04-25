@@ -1,4 +1,4 @@
-defmodule BackOfficeWeb.ConnCase do
+defmodule WorkbenchWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -19,10 +19,10 @@ defmodule BackOfficeWeb.ConnCase do
     quote do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
-      alias BackOfficeWeb.Router.Helpers, as: Routes
+      alias WorkbenchWeb.Router.Helpers, as: Routes
 
       # The default endpoint for testing
-      @endpoint BackOfficeWeb.Endpoint
+      @endpoint WorkbenchWeb.Endpoint
     end
   end
 

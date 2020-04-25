@@ -1,5 +1,5 @@
-# Back Office
-[![Build Status](https://github.com/fremantle-industries/back_office/workflows/CI/badge.svg)](https://github.com/fremantle-industries/back_office/actions?query=workflow%3ACI)
+# Workbench
+[![Build Status](https://github.com/fremantle-industries/workbench/workflows/CI/badge.svg)](https://github.com/fremantle-industries/workbench/actions?query=workflow%3ACI)
 
 Web app starter kit to manage operations of a fund.
 
@@ -22,7 +22,7 @@ Web app starter kit to manage operations of a fund.
 Clone the repository and install dependencies
 
 ```
-$ git clone https://github.com/fremantle-industries/back_office.git /tmp/back_office && cd /tmp/back_office
+$ git clone https://github.com/fremantle-industries/workbench.git /tmp/workbench && cd /tmp/workbench
 $ mix deps.get
 ```
 
@@ -45,21 +45,21 @@ $ mix phx.server
 ## Production
 
 ```bash
-$ DATABASE_URL=ecto://user@localhost/back_office_prod \
+$ DATABASE_URL=ecto://user@localhost/workbench_prod \
 SECRET_KEY_BASE=$(mix phx.gen.secret) \
 LIVE_VIEW_SIGNING_SALT=$(mix phx.gen.secret 32) \
 GUARDIAN_SECRET_KEY=$(mix guardian.gen.secret) \
 MIX_ENV=prod \
 mix ecto.create
 
-$ DATABASE_URL=ecto://user@localhost/back_office_prod \
+$ DATABASE_URL=ecto://user@localhost/workbench_prod \
 SECRET_KEY_BASE=$(mix phx.gen.secret) \
 LIVE_VIEW_SIGNING_SALT=$(mix phx.gen.secret 32) \
 GUARDIAN_SECRET_KEY=$(mix guardian.gen.secret) \
 MIX_ENV=prod \
 mix ecto.migrate
 
-$ DATABASE_URL=ecto://user@localhost/back_office_prod \
+$ DATABASE_URL=ecto://user@localhost/workbench_prod \
 SECRET_KEY_BASE=$(mix phx.gen.secret) \
 LIVE_VIEW_SIGNING_SALT=$(mix phx.gen.secret 32) \
 GUARDIAN_SECRET_KEY=$(mix guardian.gen.secret) \
@@ -69,7 +69,7 @@ mix phx.server
 
 ## Help Wanted :)
 
-If you think this `back_office` thing might be worthwhile and you don't see a feature 
+If you think this `workbench` thing might be worthwhile and you don't see a feature 
 we would love your contributions to add them! Feel free to drop us an email or open 
 a Github issue.
 
@@ -79,4 +79,4 @@ a Github issue.
 
 ## License
 
-`back_office` is released under the [MIT license](./LICENSE.md)
+`workbench` is released under the [MIT license](./LICENSE.md)
