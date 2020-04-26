@@ -42,7 +42,7 @@ defmodule Workbench.BalanceSnapshots.Scheduler do
       {:error, reason} ->
         BalanceSnapshots.Events.Error
         |> struct!(reason: reason)
-        |> Tai.Events.error()
+        |> TaiEvents.error()
     end
 
     {:noreply, state}

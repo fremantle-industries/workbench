@@ -91,13 +91,13 @@ config :tai,
       enabled: true,
       adapter: Tai.VenueAdapters.Bitmex,
       timeout: 60_000,
-      products: "xbth20 ethh20 ltch20"
+      products: "xbtu20 ethu20 ltcu20"
     ],
     okex: [
       enabled: true,
       adapter: Tai.VenueAdapters.OkEx,
       timeout: 60_000,
-      products: "btc_usdt btc_usd_swap btc_usdt_swap btc_usd_200327 btc_usdt_200327"
+      products: "btc_usdt btc_usd_swap btc_usdt_swap btc_usd_200626 btc_usdt_200626"
     ]
   }
 

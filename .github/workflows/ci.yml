@@ -1,4 +1,4 @@
-name: CI
+name: test
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: elixir:1.9.4-slim
+      image: elixir:1.10.2-slim
 
     services:
       db:

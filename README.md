@@ -1,5 +1,5 @@
 # Workbench
-[![Build Status](https://github.com/fremantle-industries/workbench/workflows/CI/badge.svg)](https://github.com/fremantle-industries/workbench/actions?query=workflow%3ACI)
+[![Build Status](https://github.com/fremantle-industries/workbench/workflows/test/badge.svg)](https://github.com/fremantle-industries/workbench/actions?query=workflow%3Atest)
 
 Web app starter kit to manage operations of a fund.
 
