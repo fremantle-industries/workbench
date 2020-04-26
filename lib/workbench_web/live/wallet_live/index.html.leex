@@ -1,0 +1,68 @@
+<section class="row">
+  <article class="column">
+    <h2>Wallets</h2>
+
+    <%= form_for @changeset, "#", [phx_submit: :save], fn f -> %>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Asset</th>
+            <th>Amount</th>
+            <th>Address</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= if Enum.any?(@wallets) do %>
+            <%= for w <- @wallets do %>
+              <tr>
+                <td><%= w.name %></td>
+                <td><%= w.asset %></td>
+                <td><%= number_to_delimited(w.amount) %></td>
+                <td><%= w.address %></td>
+                <td>
+                  <button
+                    class="danger"
+                    phx-click="delete"
+                    phx-value-wallet-id="<%= w.id %>"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="5">No wallets</td>
+            </tr>
+          <% end %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>
+              <%= text_input f, :name, placeholder: "bitmex:main" %>
+              <%= error_tag f, :name %>
+            </td>
+            <td>
+              <%= text_input f, :asset, placeholder: "btc" %>
+              <%= error_tag f, :asset %>
+            </td>
+            <td>
+              <%= text_input f, :amount, type: :number, min: 0, step: 0.0000000000000000001, placeholder: "1.1" %>
+            </td>
+            <td>
+              <%= text_input f, :address, placeholder: "bc1q34aq5drpuwy3wgl9lhup9892qp6svr8ldzyy7c" %>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td colspan="5">
+              <button>Add</button>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    <% end %>
+  </article>
+</section>

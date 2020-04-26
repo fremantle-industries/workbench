@@ -1,0 +1,12 @@
+.balances .nav-secondary li:last-of-type::after {
+  content: "";
+}
+
+.balances tfoot a::after {
+  content: "|";
+  margin-left: 8px;
+  margin-right: 8px;
+}
+.balances tfoot a:last-of-type::after {
+  content: "";
+}

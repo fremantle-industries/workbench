@@ -31,12 +31,13 @@ defmodule Workbench.BalanceSnapshots.Scheduler do
     {:ok, state}
   end
 
+  @topic :balance_snapshot
   def handle_info(:start_snapshot, state) do
     state.config
     |> BalanceSnapshots.Snapshot.create()
     |> case do
       {:ok, balance} ->
-        state.config.after_snapshot.(balance)
+        Workbench.Schoolbus.broadcast(@topic, {@topic, :new_balance, balance})
         Process.send_after(self(), :start_snapshot, state.config.every_ms)
 
       {:error, reason} ->

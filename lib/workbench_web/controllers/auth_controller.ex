@@ -16,7 +16,7 @@ defmodule WorkbenchWeb.AuthController do
         conn
         |> put_flash(:info, "Successfully authenticated.")
         |> Guardian.Plug.sign_in(WorkbenchWeb.Guardian, user)
-        |> redirect(to: "/balances")
+        |> redirect(to: "/balances/all")
 
       {:error, reason} ->
         conn

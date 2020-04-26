@@ -1,0 +1,81 @@
+<section class="balances row">
+  <article class="column">
+    <h3>All Balances</h3>
+
+    <nav class="nav-secondary">
+      <ul>
+        <li>
+          <%= link "All", to: "/balances/all" %>
+        </li>
+        <li>
+          <%= link "Day", to: "/balances/day" %>
+        </li>
+        <li>
+          <%= link "Hour", to: "/balances/hour" %>
+        </li>
+        <li>
+          <%= link "Table", to: "/balances/table" %>
+        </li>
+        <li>
+          <%= link "Config", to: "/balances/config" %>
+        </li>
+      </ul>
+    </nav>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Start Time</th>
+          <th>Finish Time</th>
+          <th>USD</th>
+          <th>BTC/USD Venue</th>
+          <th>BTC/USD Symbol</th>
+          <th>BTC/USD price</th>
+          <th>USD Quote Venue</th>
+          <th>USD Quote Asset</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= if Enum.any?(@balances) do %>
+          <%= for b <- @balances do %>
+            <tr>
+              <td><%= format_timestamp(b.start_time) %></td>
+              <td><%= format_timestamp(b.finish_time) %></td>
+              <td><%= number_to_currency(b.usd) %></td>
+              <td><%= b.btc_usd_venue %></td>
+              <td><%= b.btc_usd_symbol %></td>
+              <td><%= number_to_currency(b.btc_usd_price) %></td>
+              <td><%= b.usd_quote_venue %></td>
+              <td><%= b.usd_quote_asset %></td>
+              <td>
+                <button
+                  class="danger"
+                  phx-click="delete"
+                  phx-value-id="<%= b.id %>"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="9">No balances</td>
+          </tr>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="9">
+            <%= live_redirect "first", to: Routes.live_path(@socket, WorkbenchWeb.BalanceTableLive.Index, %{page: first_page(), page_size: @page_size}) %>
+            <%= live_redirect "previous", to: Routes.live_path(@socket, WorkbenchWeb.BalanceTableLive.Index, %{page: previous_page(@page), page_size: @page_size}) %>
+            <%= live_redirect @page, to: Routes.live_path(@socket, WorkbenchWeb.BalanceTableLive.Index, %{}) %>
+            <%= live_redirect "next", to: Routes.live_path(@socket, WorkbenchWeb.BalanceTableLive.Index, %{page: next_page(@page), page_size: @page_size}) %>
+            <%= live_redirect "last", to: Routes.live_path(@socket, WorkbenchWeb.BalanceTableLive.Index, %{page: last_page(@page_count, @page_size), page_size: @page_size}) %>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </article>
+</section>

@@ -1,45 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Workbench - Fremantle Industries</title>
-    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
-  </head>
-  <body>
-    <header>
-      <section class="container">
-        <h1>
-          <a href="/">Workbench</a>
-        </h1>
+<p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+<p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
-        <nav class="primary-nav">
-          <ol>
-            <li><%= link "Balances", to: Routes.live_path(@conn, WorkbenchWeb.LiveBalanceView) %></li>
-            <li><%= link "Accounts", to: Routes.live_path(@conn, WorkbenchWeb.LiveAccountView) %></li>
-            <li><%= link "Wallets", to: Routes.wallet_path(@conn, :index) %></li>
-            <li><%= link "Positions", to: Routes.live_path(@conn, WorkbenchWeb.LivePositionView) %></li>
-            <li><%= link "Products", to: Routes.product_path(@conn, :index) %></li>
-            <li><%= link "Fees", to: Routes.fee_path(@conn, :index) %></li>
-            <%= if Guardian.Plug.current_resource(@conn) do %>
-              <li>
-                <%= form_for @conn, Routes.auth_path(@conn, :delete), fn _f -> %>
-                  <%= submit "Logout", class: "btn btn-danger" %>
-                <% end %>
-              </li>
-            <% end %>
-          </ol>
-        </nav>
-      </section>
-    </header>
-
-    <main role="main" class="container">
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-      <%= render @view_module, @view_template, assigns %>
-    </main>
-
-    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
-  </body>
-</html>
+<%= @inner_content %>

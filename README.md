@@ -1,12 +1,22 @@
-# Workbench
+# Workbench - Orchestrate Your Trading
 [![Build Status](https://github.com/fremantle-industries/workbench/workflows/test/badge.svg)](https://github.com/fremantle-industries/workbench/actions?query=workflow%3Atest)
 
-Web app starter kit to manage operations of a fund.
+Manage & explore your trading operation across a globally distributed cluster
 
-![balances-chart](./docs/balances-chart.png)
-![balances-form](./docs/balances-form.png)
+## Features
+
+### Live Balance Snapshots For Assets & Positions
+
+[![live-balance-snapshots](./docs/live-balance-snapshots.png)](https://youtu.be/cklMhS0KD88)
+
+### Track Cold Storage
+
 ![wallets](./docs/wallets.png)
-![products](./docs/products.png)
+
+### Explore Products Across Venues
+
+![products-index](./docs/products-index.png)
+![products-show](./docs/products-show.png)
 
 ## Requirements
 

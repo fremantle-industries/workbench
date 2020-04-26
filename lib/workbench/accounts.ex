@@ -5,11 +5,11 @@ defmodule Workbench.Accounts do
     show_zero = filters |> Keyword.get(:show_zero, false)
 
     Tai.Venues.AccountStore.all()
-    |> Enum.filter(fn a ->
+    |> Enum.filter(fn ab ->
       if show_zero do
-        a
+        ab
       else
-        Decimal.cmp(a.free, @zero) != :eq || Decimal.cmp(a.locked, @zero) != :eq
+        Decimal.cmp(ab.free, @zero) != :eq || Decimal.cmp(ab.locked, @zero) != :eq
       end
     end)
   end

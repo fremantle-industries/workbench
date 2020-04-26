@@ -7,16 +7,18 @@
 # General application configuration
 use Mix.Config
 
-# Ecto Repo
-config :workbench,
-  ecto_repos: [Workbench.Repo]
+# Metrics
+config :telemetry_poller, :default, period: 1_000
+
+# Datastore
+config :workbench, ecto_repos: [Workbench.Repo]
 
 # Configures the endpoint
 config :workbench, WorkbenchWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "vJP36v4Gi2Orw8b8iBRg6ZFdzXKLvcRYkk1AaMLYX0+ry7k5XaJXd/LY/itmoxPP",
   render_errors: [view: WorkbenchWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Workbench.PubSub, adapter: Phoenix.PubSub.PG2],
+  pubsub_server: Workbench.PubSub,
   live_view: [signing_salt: "TolmUusQ6//zaa5GZHu7DG2V3YAgOoP/"]
 
 # Use Jason for JSON parsing in Phoenix
@@ -45,8 +47,8 @@ config :ueberauth, Ueberauth,
   ]
 
 config :ueberauth, Ueberauth.Strategy.Google.OAuth,
-  client_id: {System, :get_env, ["GOOGLE_CLIENT_ID"]},
-  client_secret: {System, :get_env, ["GOOGLE_CLIENT_SECRET"]}
+  client_id: {System, :get_env, ["GOOGLE_OAUTH_CLIENT_ID"]},
+  client_secret: {System, :get_env, ["GOOGLE_OAUTH_CLIENT_SECRET"]}
 
 config :workbench, WorkbenchWeb.Guardian,
   issuer: "workbench",

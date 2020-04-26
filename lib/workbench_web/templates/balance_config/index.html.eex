@@ -1,0 +1,53 @@
+<section class="row">
+  <article class="column">
+    <h3>Daily Balances</h3>
+
+    <nav class="nav-secondary">
+      <ul>
+        <li>
+          <%= link "All", to: "/balances/all" %>
+        </li>
+        <li>
+          <%= link "Day", to: "/balances/day" %>
+        </li>
+        <li>
+          <%= link "Hour", to: "/balances/hour" %>
+        </li>
+        <li>
+          <%= link "Table", to: "/balances/table" %>
+        </li>
+        <li>
+          <%= link "Config", to: "/balances/config" %>
+        </li>
+      </ul>
+    </nav>
+
+    <ul class="u-margin-top-md">
+      <li>
+        <strong>Enabled:</strong> <%= @config.enabled %>
+      </li>
+      <li>
+        <strong>Boot Delay (ms):</strong> <%= @config.boot_delay_ms %>
+      </li>
+      <li>
+        <strong>Every (ms):</strong> <%= @config.every_ms %>
+      </li>
+      <li>
+        <strong>BTC/USD venue:</strong> <%= @config.btc_usd_venue %>
+      </li>
+      <li>
+        <strong>BTC/USD symbol:</strong> <%= @config.btc_usd_symbol %>
+      </li>
+      <li>
+        <strong>USD quote venue:</strong> <%= @config.usd_quote_venue %>
+      </li>
+      <li>
+        <strong>USD quote symbol:</strong> <%= @config.usd_quote_asset %>
+      </li>
+      <li>
+        <strong>Quote Pairs</strong>
+        <%= @config.quote_pairs |> Enum.map(fn {venue, asset} -> "#{venue}.#{asset}" end) |> Enum.join(", ") %>
+      </li>
+    </ul>
+  </article>
+</section>

@@ -1,0 +1,35 @@
+<section class="row">
+  <article class="column">
+    <h3>Daily Balances</h3>
+
+    <nav class="nav-secondary">
+      <ul>
+        <li>
+          <%= link "All", to: "/balances/all" %>
+        </li>
+        <li>
+          <%= link "Hour", to: "/balances/hour" %>
+        </li>
+        <li>
+          <%= link "Day", to: "/balances/day" %>
+        </li>
+        <li>
+          <%= link "Table", to: "/balances/table" %>
+        </li>
+        <li>
+          <%= link "Config", to: "/balances/config" %>
+        </li>
+      </ul>
+    </nav>
+
+    <div
+      phx-hook="BalanceDay"
+      data-days="<%= Jason.encode!(days(@balances)) %>"
+      data-usd-min="<%= Jason.encode!(usd_min(@balances)) %>"
+      data-usd-max="<%= Jason.encode!(usd_max(@balances)) %>"
+    >
+      <div phx-update="ignore">
+      </div>
+    </div>
+  </article>
+</section>

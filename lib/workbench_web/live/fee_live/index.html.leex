@@ -1,0 +1,54 @@
+<section class="row">
+  <article class="column">
+    <div>
+      <h2>Fees</h2>
+
+      <form
+        phx-change="node_selected"
+      >
+        <select name="node" id="select_nodes" phx-update="ignore">
+          <%= content_tag :option, value: Node.self() do %>
+            <%= Node.self() %>
+          <% end %>
+
+          <%= for n <- Node.list do %>
+            <%= content_tag :option, value: n, selected: @node == Atom.to_string(n) do %>
+              <%= n %>
+            <% end %>
+          <% end %>
+        </select>
+      </form>
+    </div>
+
+    <table>
+      <thead>
+        <th>Venue</th>
+        <th>Symbol</th>
+        <th>Credential</th>
+        <th>Maker</th>
+        <th>Maker Type</th>
+        <th>Taker</th>
+        <th>Taker Type</th>
+      </thead>
+      <tbody>
+        <%= if Enum.any?(@fees) do %>
+          <%= for f <- @fees do %>
+            <tr>
+              <td><%= f.venue_id %></td>
+              <td><%= f.symbol %></td>
+              <td><%= f.credential_id %></td>
+              <td><%= f.maker && decimal(f.maker) %></td>
+              <td><%= f.maker_type %></td>
+              <td><%= f.taker && decimal(f.taker) %></td>
+              <td><%= f.taker_type %></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="7">No fees</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </article>
+</section>

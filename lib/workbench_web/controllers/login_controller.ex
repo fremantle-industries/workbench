@@ -1,17 +1,11 @@
 defmodule WorkbenchWeb.LoginController do
   use WorkbenchWeb, :controller
 
-  plug :put_layout, "unauthenticated.html"
-
   def index(conn, _params) do
-    current_user = Guardian.Plug.current_resource(conn)
-
-    if current_user do
-      conn
-      |> redirect(to: "/balances")
+    if Guardian.Plug.current_resource(conn) do
+      redirect(conn, to: "/balances/all")
     else
-      conn
-      |> render("index.html", current_user: current_user)
+      render(conn, "index.html")
     end
   end
 end

@@ -12,9 +12,13 @@ database_url =
     """
 
 config :workbench, Workbench.Repo,
-  # ssl: true,
   url: database_url,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
+
+host = System.get_env("HOST") || "workbench.lvh.me"
+
+s_port = System.get_env("PORT") || "80"
+i_port = s_port |> String.to_integer()
 
 secret_key_base =
   System.get_env("SECRET_KEY_BASE") ||
@@ -23,9 +27,18 @@ secret_key_base =
     You can generate one by calling: mix phx.gen.secret
     """
 
+live_view_signing_salt =
+  System.get_env("LIVE_VIEW_SIGNING_SALT") ||
+    raise """
+    environment variable LIVE_VIEW_SIGNING_SALT is missing.
+    You can generate one by calling: mix phx.gen.secret 32
+    """
+
 config :workbench, WorkbenchWeb.Endpoint,
-  http: [:inet6, port: String.to_integer(System.get_env("PORT") || "4000")],
-  secret_key_base: secret_key_base
+  http: [:inet6, port: i_port],
+  url: [host: host, port: s_port],
+  secret_key_base: secret_key_base,
+  live_view: [signing_salt: live_view_signing_salt]
 
 guardian_secret_key =
   System.get_env("GUARDIAN_SECRET_KEY") ||

@@ -76,6 +76,14 @@ config :phoenix, :stacktrace_depth, 20
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
 
+# Cluster
+config :libcluster,
+  topologies: [
+    gossip: [
+      strategy: Cluster.Strategy.Gossip
+    ]
+  ]
+
 # Tai
 config :tai, advisor_groups: %{}
 
@@ -85,7 +93,7 @@ config :tai,
       enabled: true,
       adapter: Tai.VenueAdapters.Binance,
       timeout: 60_000,
-      products: "btc_usdt"
+      products: "btc_usdc btc_usdt"
     ],
     bitmex: [
       enabled: true,
@@ -97,15 +105,22 @@ config :tai,
       enabled: true,
       adapter: Tai.VenueAdapters.OkEx,
       timeout: 60_000,
-      products: "btc_usdt btc_usd_swap btc_usdt_swap btc_usd_200626 btc_usdt_200626"
+      products: "btc_usdt btc_usd_swap btc_usdt_swap btc_usd_200626 btc_usdt_200626 usdc_usdt"
     ]
   }
 
 config :workbench,
+  asset_aliases: %{
+    btc: [:xbt],
+    usd: [:busd, :pax, :usdc, :usdt, :tusd]
+  },
   balance_snapshot: %{
     enabled: {:system, :boolean, "BALANCE_SNAPSHOT_ENABLED", false},
-    btc_usd_venue: {:system, :atom, "BALANCE_SNAPSHOT_BTC_USD_VENUE", :gdax},
-    btc_usd_symbol: {:system, :atom, "BALANCE_SNAPSHOT_BTC_USD_SYMBOL", :btc_usd},
+    boot_delay_ms: {:system, :integer, "BALANCE_SNAPSHOT_BOOT_DELAY_MS", 10_000},
+    every_ms: {:system, :integer, "BALANCE_SNAPSHOT_EVERY_MS", 60_000},
+    btc_usd_venue: {:system, :atom, "BALANCE_SNAPSHOT_BTC_USD_VENUE", :binance},
+    btc_usd_symbol: {:system, :atom, "BALANCE_SNAPSHOT_BTC_USD_SYMBOL", :btc_usdc},
     usd_quote_venue: {:system, :atom, "BALANCE_SNAPSHOT_USD_QUOTE_VENUE", :binance},
-    usd_quote_asset: {:system, :atom, "BALANCE_SNAPSHOT_USD_QUOTE_ASSET", :usdt}
+    usd_quote_asset: {:system, :atom, "BALANCE_SNAPSHOT_USD_QUOTE_ASSET", :usdt},
+    quote_pairs: [binance: :usdt, okex: :usdt]
   }

@@ -9,7 +9,7 @@ defmodule WorkbenchWeb.AuthErrorHandler do
   end
 
   def auth_error(conn, {:already_authenticated, _reason}, _opts) do
-    conn |> Phoenix.Controller.redirect(to: "/balances")
+    conn |> Phoenix.Controller.redirect(to: "/balances/all")
   end
 
   def auth_error(conn, {:unauthenticated, _reason}, _opts) do

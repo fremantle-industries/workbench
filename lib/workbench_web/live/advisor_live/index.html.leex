@@ -1,0 +1,145 @@
+<section class="row">
+  <article class="column">
+    <div>
+      <h2>Groups & Advisors</h2>
+
+      <form
+        phx-change="node_selected"
+      >
+        <select name="node" id="select_nodes" phx-update="ignore">
+          <%= content_tag :option, value: Node.self() do %>
+            <%= Node.self() %>
+          <% end %>
+
+          <%= for n <- Node.list do %>
+            <%= content_tag :option, value: n, selected: @node == Atom.to_string(n) do %>
+              <%= n %>
+            <% end %>
+          <% end %>
+        </select>
+      </form>
+    </div>
+  </article>
+</section>
+
+<hr />
+
+<section class="row">
+  <article class="column">
+    <h3>Groups</h3>
+
+    <table>
+      <thead>
+        <th>Group</th>
+        <th>Total</th>
+        <th>Running</th>
+        <th>Stopped</th>
+        <th>Actions</th>
+      </thead>
+      <tbody>
+        <%= if Enum.any?(@groups) do %>
+          <%= Enum.map @groups, fn g -> %>
+            <tr>
+              <td><%= g.id %></td>
+              <td><%= g.total %></td>
+              <td><%= g.running %></td>
+              <td><%= g.stopped %></td>
+              <td>
+                <%= if g.running == g.total do %>
+                  <button
+                    phx-click="start-group"
+                    phx-value-id="<%= g.id %>"
+                    disabled
+                  >
+                    start all
+                  </button>
+                <% else %>
+                  <button
+                    phx-click="start-group"
+                    phx-value-id="<%= g.id %>"
+                  >
+                    start all
+                  </button>
+                <% end %>
+
+                <%= if g.running > 0 do %>
+                  <button
+                    phx-click="stop-group"
+                    phx-value-id="<%= g.id %>"
+                  >
+                    stop all
+                  </button>
+                <% else %>
+                  <button
+                    phx-click="stop-group"
+                    phx-value-id="<%= g.id %>"
+                    disabled
+                  >
+                    stop all
+                  </button>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="5">No advisor groups</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </article>
+</section>
+
+<hr />
+
+<section class="row">
+  <article class="column">
+    <h3>Advisors</h3>
+
+    <table>
+      <thead>
+        <th>Group ID</th>
+        <th>Advisor ID</th>
+        <th>Status</th>
+        <th>PID</th>
+        <th>Actions</th>
+      </thead>
+      <tbody>
+        <%= if Enum.any?(@instances) do %>
+          <%= Enum.map @instances, fn a -> %>
+            <tr>
+              <td><%= a.group_id %></td>
+              <td><%= a.advisor_id %></td>
+              <td><%= a.status %></td>
+              <td><%= a.pid |> format %></td>
+              <td>
+                <%= if a.status == :running do %>
+                  <button
+                    phx-click="stop-advisor"
+                    phx-value-group-id="<%= a.group_id %>"
+                    phx-value-advisor-id="<%= a.advisor_id %>"
+                  >
+                    stop
+                  </button>
+                <% else %>
+                  <button
+                    phx-click="start-advisor"
+                    phx-value-group-id="<%= a.group_id %>"
+                    phx-value-advisor-id="<%= a.advisor_id %>"
+                  >
+                    start
+                  </button>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="5">No instances</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </article>
+</section>

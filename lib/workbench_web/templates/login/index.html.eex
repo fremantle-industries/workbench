@@ -1,9 +1,7 @@
 <section class="row">
   <article class="column">
-    <%= unless @current_user do %>
-      <a class="btn btn-primary btn-lg" href="/auth/google">
-        Login
-      </a>
-    <% end %>
+    <a class="btn btn-primary btn-lg" href="/auth/google">
+      Login
+    </a>
   </article>
 </section>

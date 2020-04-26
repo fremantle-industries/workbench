@@ -1,0 +1,70 @@
+<section class="row">
+  <article class="column">
+    <div>
+      <h2>Orders</h2>
+
+      <form
+        phx-change="node_selected"
+      >
+        <select name="node" id="select_nodes" phx-update="ignore">
+          <%= content_tag :option, value: Node.self() do %>
+            <%= Node.self() %>
+          <% end %>
+
+          <%= for n <- Node.list do %>
+            <%= content_tag :option, value: n, selected: @node == Atom.to_string(n) do %>
+              <%= n %>
+            <% end %>
+          <% end %>
+        </select>
+      </form>
+    </div>
+
+    <table>
+      <thead>
+        <th>Client ID</th>
+        <th>Venue</th>
+        <th>Credential</th>
+        <th>Symbol</th>
+        <th>Status</th>
+        <th>Price</th>
+        <th>Qty</th>
+        <th>Leaves Qty</th>
+        <th>Cumulative Qty</th>
+        <th>Post Only?</th>
+        <th>Close?</th>
+        <th>Enqueued</th>
+        <th>Updated</th>
+        <th>Last Received</th>
+        <th>Last Venue</th>
+      </thead>
+      <tbody>
+        <%= if Enum.any?(@orders) do %>
+          <%= Enum.map @orders, fn o -> %>
+            <tr>
+              <td><%= o.client_id %></td>
+              <td><%= o.venue_id %></td>
+              <td><%= o.credential_id %></td>
+              <td><%= o.product_symbol %></td>
+              <td><%= o.status %></td>
+              <td><%= o.price |> Decimal.to_string(:normal) %></td>
+              <td><%= o.qty |> Decimal.to_string(:normal) %></td>
+              <td><%= o.leaves_qty |> Decimal.to_string(:normal) %></td>
+              <td><%= o.cumulative_qty |> Decimal.to_string(:normal) %></td>
+              <td><%= o.post_only %></td>
+              <td><%= o.close %></td>
+              <td><%= relative_time(o.enqueued_at) %></td>
+              <td><%= o.updated_at && relative_time(o.updated_at) %></td>
+              <td><%= o.last_received_at && relative_time(o.last_received_at) %></td>
+              <td><%= o.last_venue_timestamp && relative_time(o.last_venue_timestamp) %></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="15">No orders</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </article>
+</section>

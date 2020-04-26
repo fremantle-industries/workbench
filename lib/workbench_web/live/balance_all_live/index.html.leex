@@ -1,0 +1,36 @@
+<section class="row">
+  <article class="column">
+    <h3>All Balances</h3>
+
+    <nav class="nav-secondary">
+      <ul>
+        <li>
+          <%= link "All", to: "/balances/all" %>
+        </li>
+        <li>
+          <%= link "Hour", to: "/balances/hour" %>
+        </li>
+        <li>
+          <%= link "Day", to: "/balances/day" %>
+        </li>
+        <li>
+          <%= link "Table", to: "/balances/table" %>
+        </li>
+        <li>
+          <%= link "Config", to: "/balances/config" %>
+        </li>
+      </ul>
+    </nav>
+
+    <div
+      phx-hook="BalanceAll"
+      data-finish-times="<%= Jason.encode!(finish_times(@balances)) %>"
+      data-usd-balances="<%= Jason.encode!(usd_balances(@balances)) %>"
+      data-btc-balances="<%= Jason.encode!(btc_balances(@balances)) %>"
+      data-btc-usd-prices="<%= Jason.encode!(btc_usd_prices(@balances)) %>"
+    >
+      <div phx-update="ignore">
+      </div>
+    </div>
+  </article>
+</section>

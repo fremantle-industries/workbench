@@ -1,0 +1,78 @@
+<section class="row">
+  <article class="column">
+    <div>
+      <h2>Products</h2>
+
+      <form
+        phx-change="node_selected"
+      >
+        <select name="node" id="select_nodes" phx-update="ignore">
+          <%= content_tag :option, value: Node.self() do %>
+            <%= Node.self() %>
+          <% end %>
+
+          <%= for n <- Node.list do %>
+            <%= content_tag :option, value: n, selected: @node == Atom.to_string(n) do %>
+              <%= n %>
+            <% end %>
+          <% end %>
+        </select>
+      </form>
+    </div>
+
+    <table>
+      <thead>
+        <th>Venue</th>
+        <th>Symbol</th>
+        <th>Alias</th>
+        <th>Type</th>
+        <th>Status</th>
+        <th>Listing</th>
+        <th>Expiry</th>
+        <th>Price Increment</th>
+        <th>Size Increment</th>
+        <th>Min Price</th>
+        <th>Min Size</th>
+        <th>Max Price</th>
+        <th>Max Size</th>
+        <th>Min Notional</th>
+        <th>Value</th>
+        <th>Is Quanto</th>
+        <th>Is Inverse</th>
+        <th>Maker Fee</th>
+        <th>Taker Fee</th>
+      </thead>
+      <tbody>
+        <%= if Enum.any?(@products) do %>
+          <%= for p <- @products do %>
+            <tr>
+              <td><%= link p.venue_id, to: Routes.product_path(@socket, :show, "#{p.venue_id}-#{p.symbol}") %></td>
+              <td><%= link p.symbol, to: Routes.product_path(@socket, :show, "#{p.venue_id}-#{p.symbol}") %></td>
+              <td><%= p.alias %></td>
+              <td><%= p.type %></td>
+              <td><%= p.status %></td>
+              <td><%= p.listing && relative_time(p.listing) %></td>
+              <td><%= p.expiry && relative_time(p.expiry) %></td>
+              <td><%= decimal(p.price_increment) %></td>
+              <td><%= decimal(p.size_increment) %></td>
+              <td><%= decimal(p.min_price) %></td>
+              <td><%= decimal(p.min_size) %></td>
+              <td><%= p.max_price && decimal(p.max_price) %></td>
+              <td><%= p.max_size && decimal(p.max_size) %></td>
+              <td><%= p.min_notional && decimal(p.min_notional) %></td>
+              <td><%= p.value && decimal(p.value) %></td>
+              <td><%= p.is_quanto %></td>
+              <td><%= p.is_inverse %></td>
+              <td><%= p.maker_fee && decimal(p.maker_fee) %></td>
+              <td><%= p.taker_fee && decimal(p.taker_fee) %></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="19">No products</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </article>
+</section>

@@ -6,7 +6,10 @@ defmodule Workbench.BalanceSnapshots.ConfigTest do
                   btc_usd_venue: :mock_venue_a,
                   btc_usd_symbol: :btc_usdt,
                   usd_quote_venue: :mock_venue_a,
-                  usd_quote_asset: :usdt
+                  usd_quote_asset: :usdt,
+                  quote_pairs: [
+                    mock_venue_a: :usdt
+                  ]
                 )
 
   test "parses a snapshot config from the application environment" do
@@ -16,6 +19,7 @@ defmodule Workbench.BalanceSnapshots.ConfigTest do
     assert config.btc_usd_symbol == :btc_usdt
     assert config.usd_quote_venue == :mock_venue_a
     assert config.usd_quote_asset == :usdt
+    assert config.quote_pairs == [mock_venue_a: :usdt]
   end
 
   test "returns an error when enabled is not present" do
@@ -53,6 +57,13 @@ defmodule Workbench.BalanceSnapshots.ConfigTest do
              {:error, [{:error, :usd_quote_asset, :presence, "must be present"}]}
   end
 
+  test "returns an error when it least 1 usd quote is not present" do
+    config_without_symbol = Map.delete(@valid_config, :quote_pairs)
+
+    assert Workbench.BalanceSnapshots.Config.parse(config_without_symbol) ==
+             {:error, [{:error, :quote_pairs, :presence, "must be present"}]}
+  end
+
   test "can parse boot_delay_ms" do
     config = Map.put(@valid_config, :boot_delay_ms, 1)
 
@@ -65,13 +76,5 @@ defmodule Workbench.BalanceSnapshots.ConfigTest do
 
     assert {:ok, config} = Workbench.BalanceSnapshots.Config.parse(config)
     assert config.every_ms == 2
-  end
-
-  test "can parse after_snapshot" do
-    after_snapshot = fn _ -> nil end
-    config = Map.put(@valid_config, :after_snapshot, after_snapshot)
-
-    assert {:ok, config} = Workbench.BalanceSnapshots.Config.parse(config)
-    assert config.after_snapshot == after_snapshot
   end
 end

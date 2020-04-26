@@ -10,7 +10,10 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :workbench, WorkbenchWeb.Endpoint,
-  url: [host: "workbench.example.com", port: 80],
+  # TODO:
+  # For testing liveview on localhost. Once actually deployed set it to a real domain
+  url: [host: "localhost", port: 4000],
+  # url: [host: "example.com", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
@@ -60,37 +63,53 @@ config :tai, advisor_groups: %{}
 config :tai,
   venues: %{
     binance: [
-      enabled: true,
-      timeout: 120_000,
+      start_on_boot: true,
       adapter: Tai.VenueAdapters.Binance,
-      products: ~w(
-        btc_usdc
-        btc_usdt
-
-        etc_usdt
-
-        eth_usdt
-
-        ltc_usdt
-
-        xrp_usdt
-      ) |> Enum.join(" ")
+      timeout: 120_000,
+      products: "btc_usdc btc_usdt eth_btc ltc_btc eos_btc",
+      credentials: %{
+        main: %{
+          api_key: {:system_file, "BINANCE_API_KEY"},
+          secret_key: {:system_file, "BINANCE_API_SECRET"}
+        }
+      }
     ],
     bitmex: [
-      enabled: true,
+      start_on_boot: true,
       adapter: Tai.VenueAdapters.Bitmex,
+      timeout: 120_000,
+      products: "ethm20 ltcm20 eosm20",
+      credentials: %{
+        main: %{
+          api_key: {:system_file, "BITMEX_API_KEY"},
+          api_secret: {:system_file, "BITMEX_API_SECRET"}
+        }
+      }
+    ],
+    okex: [
+      start_on_boot: true,
+      adapter: Tai.VenueAdapters.OkEx,
       timeout: 60_000,
-      products: "xbth20 ethh20 ltch20"
+      products: "btc_usdt btc_usd_swap btc_usdt_swap btc_usd_200626 btc_usdt_200626 okb_usdt",
+      accounts: "ada bch btc eos etc eth link ltc okb pax trx tusd usdc usdk usdt xrp",
+      credentials: %{
+        main: %{
+          api_key: {:system_file, "OKEX_API_KEY"},
+          api_secret: {:system_file, "OKEX_API_SECRET"},
+          api_passphrase: {:system_file, "OKEX_API_PASSPHRASE"}
+        }
+      }
     ]
   }
 
 config :workbench,
   balance_snapshot: %{
-    enabled: {:system, :boolean, "BALANCE_SNAPSHOT_ENABLED", false},
-    btc_usd_venue: {:system, :atom, "BALANCE_SNAPSHOT_BTC_USD_VENUE", :gdax},
-    btc_usd_symbol: {:system, :atom, "BALANCE_SNAPSHOT_BTC_USD_SYMBOL", :btc_usd},
-    usd_quote_venue: {:system, :atom, "BALANCE_SNAPSHOT_USD_QUOTE_VENUE", :binance},
-    usd_quote_asset: {:system, :atom, "BALANCE_SNAPSHOT_USD_QUOTE_ASSET", :usdt}
+    enabled: true,
+    btc_usd_venue: :binance,
+    btc_usd_symbol: :btc_usdc,
+    usd_quote_venue: :binance,
+    usd_quote_asset: :usdt,
+    quote_pairs: [binance: :usdt, okex: :usdt]
   }
 
 config :logger_json, :backend, metadata: :all

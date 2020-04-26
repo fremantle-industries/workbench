@@ -1,0 +1,60 @@
+<section class="row">
+  <article class="column">
+    <div>
+      <h2>Venues</h2>
+
+      <form
+        phx-change="node_selected"
+      >
+        <select name="node" id="select_nodes" phx-update="ignore">
+          <%= content_tag :option, value: Node.self() do %>
+            <%= Node.self() %>
+          <% end %>
+
+          <%= for n <- Node.list do %>
+            <%= content_tag :option, value: n, selected: @node == Atom.to_string(n) do %>
+              <%= n %>
+            <% end %>
+          <% end %>
+        </select>
+      </form>
+    </div>
+
+    <table>
+      <thead>
+        <th>Venue</th>
+        <th>Status</th>
+        <th>Credentials</th>
+        <th>Quote Depth</th>
+        <th>Timeout</th>
+        <th>Start On Boot</th>
+        <th>Actions</th>
+      </thead>
+      <tbody>
+        <%= if Enum.any?(@venues) do %>
+          <%= Enum.map @venues, fn v -> %>
+            <tr>
+              <td><%= v.id %></td>
+              <td><%= v.status %></td>
+              <td><%= v.credentials |> Map.keys() |> Enum.join(", ") %></td>
+              <td><%= v.quote_depth %></td>
+              <td><%= v.timeout %> ms</td>
+              <td><%= v.start_on_boot %></td>
+              <td>
+                <%= if v.status == :running do %>
+                  <button phx-click="stop" phx-value-id="<%= v.id %>">stop</button>
+                <% else %>
+                  <button phx-click="start" phx-value-id="<%= v.id %>">start</button>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="7">No venues</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </article>
+</section>

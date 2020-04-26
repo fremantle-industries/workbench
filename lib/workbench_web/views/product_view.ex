@@ -6,6 +6,8 @@ defmodule WorkbenchWeb.ProductView do
     alias
     base
     quote
+    venue_base
+    venue_quote
     type
     status
     listing
@@ -29,6 +31,6 @@ defmodule WorkbenchWeb.ProductView do
 
   def format(nil), do: "-"
   def format(%Decimal{} = val), do: val |> decimal()
-  def format(%DateTime{} = val), do: val |> from_now()
+  def format(%DateTime{} = val), do: val |> relative_time()
   def format(val) when is_binary(val) or is_atom(val), do: val
 end

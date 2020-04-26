@@ -1,0 +1,38 @@
+<section class="row">
+  <article class="column">
+    <h2>Positions</h2>
+
+    <table>
+      <thead>
+        <th>venue</th>
+        <th>product</th>
+        <th>account</th>
+        <th>side</th>
+        <th>qty</th>
+        <th>entry price</th>
+        <th>leverage</th>
+        <th>margin mode</th>
+      </thead>
+      <tbody>
+        <%= if Enum.any?(@positions) do %>
+          <%= Enum.map @positions, fn p -> %>
+            <tr>
+              <td><%= p.venue_id %></td>
+              <td><%= p.product_symbol %></td>
+              <td><%= p.credential_id %></td>
+              <td><%= p.side %></td>
+              <td><%= p.qty %></td>
+              <td><%= p.entry_price %></td>
+              <td><%= p.leverage %></td>
+              <td><%= p.margin_mode %></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="8">No positions</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </article>
+</section>

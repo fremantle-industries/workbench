@@ -5,37 +5,29 @@ defmodule Workbench.Application do
 
   def start(_type, _args) do
     Confex.resolve_env!(:workbench)
-
+    topologies = Application.get_env(:libcluster, :topologies, [])
     {:ok, snapshot_config} = Workbench.BalanceSnapshots.Config.parse()
 
     children = [
+      {Cluster.Supervisor, [topologies, [name: Workbench.ClusterSupervisor]]},
       Workbench.Repo,
+      {Phoenix.PubSub, name: Workbench.PubSub},
+      {Workbench.Schoolbus, [topics: [:balance_snapshot]]},
       {Workbench.BalanceSnapshots.Scheduler, [config: snapshot_config]},
       WorkbenchWeb.UserStore,
+      WorkbenchWeb.Telemetry,
       WorkbenchWeb.Endpoint
     ]
 
     opts = [strategy: :one_for_one, name: Workbench.Supervisor]
 
-    {:ok, pid} = Supervisor.start_link(children, opts)
-    {:ok, _} = start_advisors()
-
-    {:ok, pid}
+    Supervisor.start_link(children, opts)
   end
 
+  # Tell Phoenix to update the endpoint configuration
+  # whenever the application is updated.
   def config_change(changed, _new, removed) do
     WorkbenchWeb.Endpoint.config_change(changed, removed)
     :ok
-  end
-
-  def start_advisors do
-    store_id = Tai.Advisors.SpecStore.default_store_id()
-
-    {started, already_started} =
-      []
-      |> Tai.Advisors.Instances.where(store_id)
-      |> Tai.Advisors.Instances.start()
-
-    {:ok, {started, already_started}}
   end
 end

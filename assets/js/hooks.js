@@ -1,28 +1,109 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import Balances from "./components/Balances";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore } from './createStore';
+import BalanceAll from './components/BalanceAll';
+import BalanceDay from './components/BalanceDay';
+import BalanceHour from './components/BalanceHour';
+
+const store = createStore()
 
 export const hooks = {};
 
-hooks.Balances = {
+hooks.BalanceAll = {
   mounted() {
-    const finishTimes = parseJson(this.el, "phx-value-finish-times");
-    const usdBalances = parseJson(this.el, "phx-value-usd-balances");
-    const btcBalances = parseJson(this.el, "phx-value-btc-balances");
-    const btcUsdPrices = parseJson(this.el, "phx-value-btc-usd-prices");
+    Object.assign(this, { store })
+
+    this.dispatchAction()
 
     ReactDOM.render(
-      <Balances
-        finishTimes={finishTimes}
-        usdBalances={usdBalances}
-        btcBalances={btcBalances}
-        btcUsdPrices={btcUsdPrices}
-      />,
-      this.el
-    );
+      <Provider store={store}>
+        <BalanceAll />
+      </Provider>,
+      this.el.querySelector(':first-child')
+    )
+  },
+
+  updated() {
+    this.dispatchAction()
+  },
+
+  dispatchAction() {
+    const finishTimes = JSON.parse(this.el.dataset.finishTimes);
+    const usdBalances = JSON.parse(this.el.dataset.usdBalances);
+    const btcBalances = JSON.parse(this.el.dataset.btcBalances);
+    const btcUsdPrices = JSON.parse(this.el.dataset.btcUsdPrices);
+
+    this.store.dispatch({
+      type: 'FETCH_ALL_SUCCEEDED',
+      finishTimes,
+      usdBalances,
+      btcBalances,
+      btcUsdPrices
+    })
   }
 };
 
-function parseJson(el, key) {
-  return JSON.parse(el.getAttribute(key));
+hooks.BalanceDay = {
+  mounted() {
+    Object.assign(this, { store })
+
+    this.dispatchAction()
+
+    ReactDOM.render(
+      <Provider store={store}>
+        <BalanceDay />
+      </Provider>,
+      this.el.querySelector(':first-child')
+    )
+  },
+
+  updated() {
+    this.dispatchAction()
+  },
+
+  dispatchAction() {
+    const days = JSON.parse(this.el.dataset.days);
+    const usdMin = JSON.parse(this.el.dataset.usdMin);
+    const usdMax = JSON.parse(this.el.dataset.usdMax);
+
+    this.store.dispatch({
+      type: 'FETCH_BALANCE_DAYS_SUCCEEDED',
+      days,
+      usdMin,
+      usdMax,
+    })
+  }
+}
+
+hooks.BalanceHour = {
+  mounted() {
+    Object.assign(this, { store })
+
+    this.dispatchAction()
+
+    ReactDOM.render(
+      <Provider store={store}>
+        <BalanceHour />
+      </Provider>,
+      this.el.querySelector(':first-child')
+    )
+  },
+
+  updated() {
+    this.dispatchAction()
+  },
+
+  dispatchAction() {
+    const hours = JSON.parse(this.el.dataset.hours);
+    const usdMin = JSON.parse(this.el.dataset.usdMin);
+    const usdMax = JSON.parse(this.el.dataset.usdMax);
+
+    this.store.dispatch({
+      type: 'FETCH_BALANCE_HOURS_SUCCEEDED',
+      hours,
+      usdMin,
+      usdMax,
+    })
+  }
 }

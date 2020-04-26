@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.es6.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "*": ["*", "js/*", "@types/*"]
+    },
+    "outDir": "./dist",
+    "allowJs": true
+  },
+  "include": ["js", "@types"]
+}
