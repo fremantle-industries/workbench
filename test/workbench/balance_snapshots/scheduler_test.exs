@@ -67,13 +67,13 @@ defmodule Workbench.BalanceSnapshots.SchedulerTest do
   end
 
   test "logs an event when there is an error taking the snapshot", %{config: config} do
-    Tai.Events.firehose_subscribe()
+    TaiEvents.firehose_subscribe()
 
     with_mock Workbench.BalanceSnapshots.Snapshot,
       create: fn _config -> {:error, :not_found} end do
       {:ok, _} = Workbench.BalanceSnapshots.Scheduler.start_link(config: config, id: @test_name)
 
-      assert_receive {Tai.Event, event, :error}
+      assert_receive {TaiEvents.Event, event, :error}
       assert %Workbench.BalanceSnapshots.Events.Error{} = event
       assert event.reason == :not_found
     end

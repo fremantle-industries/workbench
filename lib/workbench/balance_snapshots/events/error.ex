@@ -9,7 +9,7 @@ defmodule Workbench.BalanceSnapshots.Events.Error do
   defstruct ~w(reason)a
 end
 
-defimpl Tai.LogEvent, for: Workbench.BalanceSnapshots.Events.Error do
+defimpl TaiEvents.LogEvent, for: Workbench.BalanceSnapshots.Events.Error do
   def to_data(event) do
     keys =
       event

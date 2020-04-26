@@ -6,7 +6,7 @@ defmodule Workbench.BalanceSnapshots.Events.ErrorTest do
       reason: [{:market_quote_not_found, :btc_usd}]
     }
 
-    assert Tai.LogEvent.to_data(event) == %{
+    assert TaiEvents.LogEvent.to_data(event) == %{
              reason: "[market_quote_not_found: :btc_usd]"
            }
   end
