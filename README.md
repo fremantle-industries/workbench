@@ -1,22 +1,42 @@
-# Workbench - Orchestrate Your Trading
+# Workbench - From Idea to Execution
 [![Build Status](https://github.com/fremantle-industries/workbench/workflows/test/badge.svg)](https://github.com/fremantle-industries/workbench/actions?query=workflow%3Atest)
 
-Manage & explore your trading operation across a globally distributed cluster
+Manage your trading operation across a globally distributed cluster
+
+## Project Goals
+
+`workbench` strives to provide a first class development environment that brings the same 
+productivity and performance benefits from the [Phoenix](https://www.phoenixframework.org/) 
+& [Elixir](https://elixir-lang.org/) community to real time algorithmic and quant workflows.
 
 ## Features
 
-### Live Balance Snapshots For Assets & Positions
+### Remotely Control Trade Instances in the Cloud
+
+![remote-control-trade](./docs/remote-control-trade.png)
+
+### Live Portfolio Tracking & Historical Snapshots
 
 [![live-balance-snapshots](./docs/live-balance-snapshots.png)](https://youtu.be/cklMhS0KD88)
+
+### Watch System, Research & Trade Metrics Across Your Cluster
+
+![metrics](./docs/metrics.png)
 
 ### Track Cold Storage
 
 ![wallets](./docs/wallets.png)
 
-### Explore Products Across Venues
+### Explore Products within the Trading Universe
 
 ![products-index](./docs/products-index.png)
 ![products-show](./docs/products-show.png)
+
+## Planned Features
+
+- Notifications
+- Backtester
+- Trade Execution Reports
 
 ## Requirements
 
