@@ -10,6 +10,8 @@ defmodule Workbench.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       deps: deps(),
+      description: description(),
+      package: package(),
       dialyzer: [
         plt_add_apps: [:tai]
       ]
@@ -65,7 +67,20 @@ defmodule Workbench.MixProject do
       {:logger_file_backend_with_formatters, "~> 0.0.1", only: [:dev, :test]},
       {:logger_file_backend_with_formatters_stackdriver, "~> 0.0.4", only: [:dev, :test]},
       {:mock, "~> 0.3", only: :test},
-      {:floki, ">= 0.0.0", only: :test}
+      {:floki, ">= 0.0.0", only: :test},
+      {:ex_doc, ">= 0.0.0", only: :dev}
     ]
+  end
+
+  defp description do
+    "From Idea to Execution - Manage your trading operation across a globally distributed cluster"
+  end
+
+  defp package do
+    %{
+      licenses: ["MIT"],
+      maintainers: ["Alex Kwiatkowski"],
+      links: %{"GitHub" => "https://github.com/fremantle-industries/workbench"}
+    }
   end
 end
