@@ -48,7 +48,7 @@ defmodule Workbench.MixProject do
       {:phoenix_html, "~> 2.14"},
       {:phoenix_active_link, "~> 0.3"},
       {:postgrex, ">= 0.0.0"},
-      {:gettext, "~> 0.17.4"},
+      {:gettext, "~> 0.18.0"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.1"},
       {:number, "~> 1.0.0"},
