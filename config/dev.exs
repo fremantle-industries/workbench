@@ -1,11 +1,11 @@
 use Mix.Config
 
+database_url =
+  System.get_env("DATABASE_URL") || "ecto://postgres:password:password@db:5432/postgres"
+
 # Configure your database
 config :workbench, Workbench.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "workbench_dev",
-  hostname: "localhost",
+  url: database_url,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 

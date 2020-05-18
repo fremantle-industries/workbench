@@ -66,11 +66,22 @@ $ mix test
 
 ## Development
 
+### Mac/Linux
+
 ```bash
 $ mix ecto.create
 $ mix ecto.migrate
 $ mix phx.server
 ```
+
+### Docker
+
+```bash
+$ docker-compose build
+$ docker-compose run
+```
+
+Wait a few seconds for the app to boot and you should be able to view the app at `http://workbench.lvh.me:4000`
 
 ## Production
 

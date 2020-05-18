@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    volumes:
+      - type: bind
+        source: .
+        target: /app
+    ports:
+      - "${HOST_PORT}:${PORT}"
+      - "4369:4369"
+      - "9999:9999"
+    depends_on:
+      - db
+    environment:
+      - PORT
+      - HOST_PORT
+      - HOST
+      - SECRET_KEY_BASE
+      - LIVE_VIEW_SIGNING_SALT
+      - GUARDIAN_SECRET_KEY
+      - BALANCE_SNAPSHOT_ENABLED
+      - BALANCE_SNAPSHOT_BTC_USD_VENUE
+      - BALANCE_SNAPSHOT_BTC_USD_SYMBOL
+      - BALANCE_SNAPSHOT_USD_QUOTE_VENUE
+      - BALANCE_SNAPSHOT_USD_QUOTE_ASSET
+      - DATABASE_URL
+    command: './bin/run'
+  db:
+    image: postgres:12.3
+    volumes:
+      - "dbdata:/var/lib/postgresql/data"
+    environment:
+      - POSTGRES_PASSWORD
+
+volumes:
+  dbdata:
