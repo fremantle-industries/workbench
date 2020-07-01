@@ -4,6 +4,7 @@
 /doc/
 /log/
 /.fetch
+.env
 erl_crash.dump
 *.ez
 alert-*.tar
