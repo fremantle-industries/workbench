@@ -1,7 +1,7 @@
 use Mix.Config
 
 database_url =
-  System.get_env("DATABASE_URL") || "ecto://postgres:password:password@db:5432/postgres"
+  System.get_env("DATABASE_URL") || "postgresql://postgres:postgres@localhost:5432/workbench_dev"
 
 # Configure your database
 config :workbench, Workbench.Repo,
