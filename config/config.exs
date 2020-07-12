@@ -27,18 +27,10 @@ config :phoenix, :json_library, Jason
 # Support .leex LiveView templates
 config :phoenix, template_engines: [leex: Phoenix.LiveView.Engine]
 
-# Elixir Logger
-config :logger,
-  backends: [{LoggerFileBackendWithFormatters, :file_log}],
-  utc_log: true
-
-config :logger, :file_log, path: "./log/#{Mix.env()}.log"
-
-if System.get_env("DEBUG") == "true" do
-  config :logger, :file_log, level: :debug
-else
-  config :logger, :file_log, level: :info
-end
+# Configures Elixir's Logger
+config :logger, :console,
+  format: "$time $metadata[$level] $message\n",
+  metadata: [:request_id, :config_url]
 
 # Google OAuth
 config :ueberauth, Ueberauth,
