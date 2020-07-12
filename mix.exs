@@ -29,7 +29,7 @@ defmodule Workbench.MixProject do
   @dotenvs ~w(dev test)a
   defp app_list(env) when env in @dotenvs, do: [:dotenv | app_list()]
   defp app_list(_), do: app_list()
-  defp app_list, do: [:logger, :runtime_tools, :ueberauth_google, :tai]
+  defp app_list, do: [:logger, :runtime_tools, :os_mon, :ueberauth_google, :tai]
 
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
