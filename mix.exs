@@ -9,6 +9,7 @@ defmodule Workbench.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
+      aliases: aliases(),
       deps: deps(),
       description: description(),
       package: package(),
@@ -82,5 +83,16 @@ defmodule Workbench.MixProject do
       maintainers: ["Alex Kwiatkowski"],
       links: %{"GitHub" => "https://github.com/fremantle-industries/workbench"}
     }
+  end
+
+  defp aliases do
+    [
+      "setup.assets": ["cmd npm install --prefix assets"],
+      setup: ["deps.get", "ecto.setup", "cmd npm install --prefix assets"],
+      "docker.phx.server": ["setup.assets", "phx.server"],
+      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
+      "ecto.reset": ["ecto.drop", "ecto.setup"],
+      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
+    ]
   end
 end

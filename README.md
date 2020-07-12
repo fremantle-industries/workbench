@@ -49,19 +49,10 @@ productivity and performance benefits from the [Phoenix](https://www.phoenixfram
 
 ## Install
 
-Clone the repository and install dependencies
+Clone the repository
 
 ```
 $ git clone https://github.com/fremantle-industries/workbench.git /tmp/workbench && cd /tmp/workbench
-$ mix deps.get
-```
-
-## Test
-
-```bash
-$ MIX_ENV=test mix ecto.create
-$ MIX_ENV=test mix ecto.migrate
-$ mix test
 ```
 
 ## Development
@@ -69,8 +60,9 @@ $ mix test
 ### Mac/Linux
 
 ```bash
-$ mix ecto.create
-$ mix ecto.migrate
+# Create database & install dependencies
+$ mix setup
+# Run the app
 $ mix phx.server
 ```
 
@@ -78,34 +70,15 @@ $ mix phx.server
 
 ```bash
 $ docker-compose build
-$ docker-compose run
+$ docker-compose up
 ```
 
 Wait a few seconds for the app to boot and you should be able to view the app at `http://workbench.lvh.me:4000`
 
-## Production
+## Test
 
 ```bash
-$ DATABASE_URL=ecto://user@localhost/workbench_prod \
-SECRET_KEY_BASE=$(mix phx.gen.secret) \
-LIVE_VIEW_SIGNING_SALT=$(mix phx.gen.secret 32) \
-GUARDIAN_SECRET_KEY=$(mix guardian.gen.secret) \
-MIX_ENV=prod \
-mix ecto.create
-
-$ DATABASE_URL=ecto://user@localhost/workbench_prod \
-SECRET_KEY_BASE=$(mix phx.gen.secret) \
-LIVE_VIEW_SIGNING_SALT=$(mix phx.gen.secret 32) \
-GUARDIAN_SECRET_KEY=$(mix guardian.gen.secret) \
-MIX_ENV=prod \
-mix ecto.migrate
-
-$ DATABASE_URL=ecto://user@localhost/workbench_prod \
-SECRET_KEY_BASE=$(mix phx.gen.secret) \
-LIVE_VIEW_SIGNING_SALT=$(mix phx.gen.secret 32) \
-GUARDIAN_SECRET_KEY=$(mix guardian.gen.secret) \
-MIX_ENV=prod \
-mix phx.server
+$ mix test
 ```
 
 ## Help Wanted :)
