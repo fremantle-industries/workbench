@@ -15,7 +15,8 @@ defmodule Workbench.MixProject do
       package: package(),
       dialyzer: [
         plt_add_apps: [:tai]
-      ]
+      ],
+      releases: releases()
     ]
   end
 
@@ -92,6 +93,20 @@ defmodule Workbench.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
+    ]
+  end
+
+  defp releases do
+    [
+      workbench: [
+        include_executables_for: [:unix],
+        applications: [
+          runtime_tools: :permanent,
+          workbench: :permanent
+        ],
+        runtime_config_path: "config/releases/config.exs",
+        steps: [:assemble]
+      ]
     ]
   end
 end

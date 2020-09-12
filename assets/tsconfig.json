@@ -1,6 +1,11 @@
 {
   "compilerOptions": {
     "outDir": "./dist/",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["deps/*", "assets/*", "assets/js/*", "assets/@types/*"]
+    },
+    "rootDir": "../",
     "noImplicitAny": true,
     "module": "es6",
     "target": "es5",

@@ -1,4 +1,4 @@
-use Mix.Config
+import Config
 
 # Configure your database
 default_database_url = "postgres://postgres:postgres@localhost:5432/workbench_?"

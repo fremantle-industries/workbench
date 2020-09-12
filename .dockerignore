@@ -1,19 +1,13 @@
-# Environment
-.env
-.envrc
-
-# Elixir & Erlang
 /_build/
 /cover/
 /deps/
 /doc/
 /log/
 /.fetch
+.env
 erl_crash.dump
 *.ez
 alert-*.tar
-
-# NodeJS
 npm-debug.log
 /assets/node_modules/
 /assets/dist
@@ -23,6 +17,7 @@ npm-debug.log
 /priv/static/
 
 # Terraform
+
 *.tfstate*
 .terraform
 

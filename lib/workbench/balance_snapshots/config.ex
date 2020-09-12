@@ -38,7 +38,9 @@ defmodule Workbench.BalanceSnapshots.Config do
   @default_every_ms 60_000
 
   # TODO: Use Workbench.Config here
-  def parse(env \\ Application.get_env(:workbench, :balance_snapshot)) do
+  def parse(env \\ nil) do
+    env = if is_nil(env), do: Application.get_env(:workbench, :balance_snapshot), else: env
+
     config = %Config{
       enabled: Map.get(env, :enabled),
       boot_delay_ms: Map.get(env, :boot_delay_ms, @default_boot_delay_ms),
