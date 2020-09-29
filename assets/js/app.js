@@ -16,6 +16,9 @@ import { Socket } from "phoenix";
 import LiveSocket from "phoenix_live_view";
 import NProgress from "nprogress";
 
+// Import Bootstrap
+import 'bootstrap';
+
 // Import local files
 //
 // Local files can be imported directly using relative paths, for example:
