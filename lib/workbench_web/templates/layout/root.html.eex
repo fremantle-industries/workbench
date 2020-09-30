@@ -11,32 +11,27 @@
   </head>
   <body>
     <header>
-      <section class="container">
-        <h1>
-          <a href="/">Workbench</a>
-        </h1>
-
-        <%= if Guardian.Plug.current_resource(@conn) do %>
-          <nav class="nav-primary">
-            <ol>
-              <li><%= link "Balances", to: Routes.live_path(@conn, WorkbenchWeb.BalanceAllLive.Index) %></li>
-              <li><%= link "Accounts", to: Routes.live_path(@conn, WorkbenchWeb.AccountLive.Index) %></li>
-              <li><%= link "Wallets", to: Routes.live_path(@conn, WorkbenchWeb.WalletLive.Index) %></li>
-              <li><%= link "Orders", to: Routes.live_path(@conn, WorkbenchWeb.OrderLive.Index) %></li>
-              <li><%= link "Positions", to: Routes.live_path(@conn, WorkbenchWeb.PositionLive.Index) %></li>
-              <li><%= link "Products", to: Routes.live_path(@conn, WorkbenchWeb.ProductLive.Index) %></li>
-              <li><%= link "Fees", to: Routes.live_path(@conn, WorkbenchWeb.FeeLive.Index) %></li>
-              <li><%= link "Venues", to: Routes.live_path(@conn, WorkbenchWeb.VenueLive.Index) %></li>
-              <li><%= link "Advisors", to: Routes.live_path(@conn, WorkbenchWeb.AdvisorLive.Index) %></li>
-              <li><%= link "Metrics", to: Routes.live_dashboard_path(@conn, :home) %></li>
-              <li>
-                <%= form_for @conn, Routes.auth_path(@conn, :delete), fn _f -> %>
-                  <%= submit "Logout", class: "btn btn-danger" %>
-                <% end %>
-              </li>
-            </ol>
-          </nav>
-        <% end %>
+      <section class="">
+        <nav class="navbar navbar-dark bg-dark">
+          <a href="/" class="nav-link navbar-brand float-left">Workbench</a>
+          <%= if Guardian.Plug.current_resource(@conn) do %>
+            <nav class="nav">
+              <%= link "Balances", to: Routes.live_path(@conn, WorkbenchWeb.BalanceAllLive.Index), class: "nav-link text-primary" %>
+              <%= link "Accounts", to: Routes.live_path(@conn, WorkbenchWeb.AccountLive.Index), class: "nav-link text-primary" %>
+              <%= link "Wallets", to: Routes.live_path(@conn, WorkbenchWeb.WalletLive.Index), class: "nav-link text-primary" %>
+              <%= link "Orders", to: Routes.live_path(@conn, WorkbenchWeb.OrderLive.Index), class: "nav-link text-primary" %>
+              <%= link "Positions", to: Routes.live_path(@conn, WorkbenchWeb.PositionLive.Index), class: "nav-link text-primary" %>
+              <%= link "Products", to: Routes.live_path(@conn, WorkbenchWeb.ProductLive.Index), class: "nav-link text-primary" %>
+              <%= link "Fees", to: Routes.live_path(@conn, WorkbenchWeb.FeeLive.Index), class: "nav-link text-primary" %>
+              <%= link "Venues", to: Routes.live_path(@conn, WorkbenchWeb.VenueLive.Index), class: "nav-link text-primary" %>
+              <%= link "Advisors", to: Routes.live_path(@conn, WorkbenchWeb.AdvisorLive.Index), class: "nav-link text-primary" %>
+              <%= link "Metrics", to: Routes.live_dashboard_path(@conn, :home), class: "nav-link text-primary" %>
+            </nav>
+            <%= form_for @conn, Routes.auth_path(@conn, :delete), fn _f ->%>
+              <%= submit "Logout", class: "btn btn-primary float-right text-dark" %>
+            <% end %>
+          <% end %>
+        </nav>
       </section>
     </header>
 

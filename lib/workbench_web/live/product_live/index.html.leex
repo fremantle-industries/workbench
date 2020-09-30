@@ -20,27 +20,27 @@
       </form>
     </div>
 
-    <table>
-      <thead>
-        <th>Venue</th>
-        <th>Symbol</th>
-        <th>Alias</th>
-        <th>Type</th>
-        <th>Status</th>
-        <th>Listing</th>
-        <th>Expiry</th>
-        <th>Price Increment</th>
-        <th>Size Increment</th>
-        <th>Min Price</th>
-        <th>Min Size</th>
-        <th>Max Price</th>
-        <th>Max Size</th>
-        <th>Min Notional</th>
-        <th>Value</th>
-        <th>Is Quanto</th>
-        <th>Is Inverse</th>
-        <th>Maker Fee</th>
-        <th>Taker Fee</th>
+    <table class="table table-hover border mt-3">
+      <thead class="thead-dark x-bg-secondary">
+        <th scope="col">Venue</th>
+        <th scope="col">Symbol</th>
+        <th scope="col">Alias</th>
+        <th scope="col">Type</th>
+        <th scope="col">Status</th>
+        <th scope="col">Listing</th>
+        <th scope="col">Expiry</th>
+        <th scope="col" class="text-right">Price Increment</th>
+        <th scope="col" class="text-right">Size Increment</th>
+        <th scope="col" class="text-right">Min Price</th>
+        <th scope="col" class="text-right">Min Size</th>
+        <th scope="col" class="text-right">Max Price</th>
+        <th scope="col" class="text-right">Max Size</th>
+        <th scope="col" class="text-right">Min Notional</th>
+        <th scope="col" class="text-right">Value</th>
+        <th scope="col">Is Quanto</th>
+        <th scope="col">Is Inverse</th>
+        <th scope="col" class="text-right">Maker Fee</th>
+        <th scope="col" class="text-right">Taker Fee</th>
       </thead>
       <tbody>
         <%= if Enum.any?(@products) do %>
@@ -53,18 +53,18 @@
               <td><%= p.status %></td>
               <td><%= p.listing && relative_time(p.listing) %></td>
               <td><%= p.expiry && relative_time(p.expiry) %></td>
-              <td><%= decimal(p.price_increment) %></td>
-              <td><%= decimal(p.size_increment) %></td>
-              <td><%= decimal(p.min_price) %></td>
-              <td><%= decimal(p.min_size) %></td>
-              <td><%= p.max_price && decimal(p.max_price) %></td>
-              <td><%= p.max_size && decimal(p.max_size) %></td>
-              <td><%= p.min_notional && decimal(p.min_notional) %></td>
-              <td><%= p.value && decimal(p.value) %></td>
+              <td class="text-right"><%= decimal(p.price_increment) %></td>
+              <td class="text-right"><%= decimal(p.size_increment) %></td>
+              <td class="text-right"><%= decimal(p.min_price) %></td>
+              <td class="text-right"><%= decimal(p.min_size) %></td>
+              <td class="text-right"><%= p.max_price && decimal(p.max_price) %></td>
+              <td class="text-right"><%= p.max_size && decimal(p.max_size) %></td>
+              <td class="text-right"><%= p.min_notional && decimal(p.min_notional) %></td>
+              <td class="text-right"><%= p.value && decimal(p.value) %></td>
               <td><%= p.is_quanto %></td>
               <td><%= p.is_inverse %></td>
-              <td><%= p.maker_fee && decimal(p.maker_fee) %></td>
-              <td><%= p.taker_fee && decimal(p.taker_fee) %></td>
+              <td class="text-right"><%= p.maker_fee && decimal(p.maker_fee) %></td>
+              <td class="text-right"><%= p.taker_fee && decimal(p.taker_fee) %></td>
             </tr>
           <% end %>
         <% else %>

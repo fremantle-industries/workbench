@@ -1,25 +1,13 @@
 <section class="row">
   <article class="column">
-    <h3>All Balances</h3>
+    <h3 class="text-dark">All Balances</h3>
 
-    <nav class="nav-secondary">
-      <ul>
-        <li>
-          <%= link "All", to: "/balances/all" %>
-        </li>
-        <li>
-          <%= link "Hour", to: "/balances/hour" %>
-        </li>
-        <li>
-          <%= link "Day", to: "/balances/day" %>
-        </li>
-        <li>
-          <%= link "Table", to: "/balances/table" %>
-        </li>
-        <li>
-          <%= link "Config", to: "/balances/config" %>
-        </li>
-      </ul>
+    <nav class="nav nav-pills">
+      <%= link "All", to: "/balances/all" , class: "nav-link active bg-primary" %>
+      <%= link "Hour", to: "/balances/hour" , class: "nav-link text-primary" %>
+      <%= link "Day", to: "/balances/day" , class: "nav-link text-primary" %>
+      <%= link "Table", to: "/balances/table" , class: "nav-link text-primary" %>
+      <%= link "Config", to: "/balances/config" , class: "nav-link text-primary" %>
     </nav>
 
     <div
