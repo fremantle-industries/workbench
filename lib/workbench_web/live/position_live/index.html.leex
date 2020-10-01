@@ -2,7 +2,7 @@
   <article class="column">
     <h2>Positions</h2>
 
-    <table>
+    <table class="table table-hover border mt-3 ">
       <thead>
         <th>venue</th>
         <th>product</th>
@@ -17,14 +17,14 @@
         <%= if Enum.any?(@positions) do %>
           <%= Enum.map @positions, fn p -> %>
             <tr>
-              <td><%= p.venue_id %></td>
-              <td><%= p.product_symbol %></td>
-              <td><%= p.credential_id %></td>
-              <td><%= p.side %></td>
-              <td><%= p.qty %></td>
-              <td><%= p.entry_price %></td>
-              <td><%= p.leverage %></td>
-              <td><%= p.margin_mode %></td>
+              <td class="align-middle"><%= p.venue_id %></td>
+              <td class="align-middle"><%= p.product_symbol %></td>
+              <td class="align-middle"><%= p.credential_id %></td>
+              <td class="align-middle"><%= p.side %></td>
+              <td class="align-middle"><%= p.qty %></td>
+              <td class="align-middle"><%= p.entry_price %></td>
+              <td class="align-middle"><%= p.leverage %></td>
+              <td class="align-middle"><%= p.margin_mode %></td>
             </tr>
           <% end %>
         <% else %>

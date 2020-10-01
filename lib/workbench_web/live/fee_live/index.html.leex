@@ -34,13 +34,13 @@
         <%= if Enum.any?(@fees) do %>
           <%= for f <- @fees do %>
             <tr>
-              <td><%= f.venue_id %></td>
-              <td><%= f.symbol %></td>
-              <td><%= f.credential_id %></td>
-              <td><%= f.maker && decimal(f.maker) %></td>
-              <td><%= f.maker_type %></td>
-              <td><%= f.taker && decimal(f.taker) %></td>
-              <td><%= f.taker_type %></td>
+              <td class="align-middle"><%= f.venue_id %></td>
+              <td class="align-middle"><%= f.symbol %></td>
+              <td class="align-middle"><%= f.credential_id %></td>
+              <td class="align-middle"><%= f.maker && decimal(f.maker) %></td>
+              <td class="align-middle"><%= f.maker_type %></td>
+              <td class="align-middle"><%= f.taker && decimal(f.taker) %></td>
+              <td class="align-middle"><%= f.taker_type %></td>
             </tr>
           <% end %>
         <% else %>

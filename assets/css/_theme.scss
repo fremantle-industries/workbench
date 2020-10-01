@@ -43,3 +43,10 @@ select:focus {
 select:focus {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="14" viewBox="0 0 29 14" width="29"><path fill="%230069d9" d="M9.37727 3.625l5.08154 6.93523L19.54036 3.625"/></svg>');
 }
+
+.table {
+  th, td {
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}

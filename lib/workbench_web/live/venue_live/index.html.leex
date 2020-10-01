@@ -20,7 +20,7 @@
       </form>
     </div>
 
-    <table>
+    <table class="table table-hover border mt-3 ">
       <thead>
         <th>Venue</th>
         <th>Status</th>
@@ -34,17 +34,17 @@
         <%= if Enum.any?(@venues) do %>
           <%= Enum.map @venues, fn v -> %>
             <tr>
-              <td><%= v.id %></td>
-              <td><%= v.status %></td>
-              <td><%= v.credentials |> Map.keys() |> Enum.join(", ") %></td>
-              <td><%= v.quote_depth %></td>
-              <td><%= v.timeout %> ms</td>
-              <td><%= v.start_on_boot %></td>
-              <td>
+              <td class="align-middle"><%= v.id %></td>
+              <td class="align-middle"><%= v.status %></td>
+              <td class="align-middle"><%= v.credentials |> Map.keys() |> Enum.join(", ") %></td>
+              <td class="align-middle"><%= v.quote_depth %></td>
+              <td class="align-middle"><%= v.timeout %> ms</td>
+              <td class="align-middle"><%= v.start_on_boot %></td>
+              <td class="align-middle">
                 <%= if v.status == :running do %>
-                  <button phx-click="stop" phx-value-id="<%= v.id %>">stop</button>
+                  <button phx-click="stop" phx-value-id="<%= v.id %>" class="btn btn-danger btn-sm">stop</button>
                 <% else %>
-                  <button phx-click="start" phx-value-id="<%= v.id %>">start</button>
+                  <button phx-click="start" phx-value-id="<%= v.id %>" class="btn btn-primary btn-sm">start</button>
                 <% end %>
               </td>
             </tr>

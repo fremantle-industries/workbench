@@ -20,7 +20,7 @@
       </form>
     </div>
 
-    <table>
+    <table class="table table-hover border mt-3 table-scroll">
       <thead>
         <th>Client ID</th>
         <th>Venue</th>
@@ -42,21 +42,21 @@
         <%= if Enum.any?(@orders) do %>
           <%= Enum.map @orders, fn o -> %>
             <tr>
-              <td><%= o.client_id %></td>
-              <td><%= o.venue_id %></td>
-              <td><%= o.credential_id %></td>
-              <td><%= o.product_symbol %></td>
-              <td><%= o.status %></td>
-              <td><%= o.price |> Decimal.to_string(:normal) %></td>
-              <td><%= o.qty |> Decimal.to_string(:normal) %></td>
-              <td><%= o.leaves_qty |> Decimal.to_string(:normal) %></td>
-              <td><%= o.cumulative_qty |> Decimal.to_string(:normal) %></td>
-              <td><%= o.post_only %></td>
-              <td><%= o.close %></td>
-              <td><%= relative_time(o.enqueued_at) %></td>
-              <td><%= o.updated_at && relative_time(o.updated_at) %></td>
-              <td><%= o.last_received_at && relative_time(o.last_received_at) %></td>
-              <td><%= o.last_venue_timestamp && relative_time(o.last_venue_timestamp) %></td>
+              <td class="align-middle"><%= o.client_id %></td>
+              <td class="align-middle"><%= o.venue_id %></td>
+              <td class="align-middle"><%= o.credential_id %></td>
+              <td class="align-middle"><%= o.product_symbol %></td>
+              <td class="align-middle"><%= o.status %></td>
+              <td class="align-middle"><%= o.price |> Decimal.to_string(:normal) %></td>
+              <td class="align-middle"><%= o.qty |> Decimal.to_string(:normal) %></td>
+              <td class="align-middle"><%= o.leaves_qty |> Decimal.to_string(:normal) %></td>
+              <td class="align-middle"><%= o.cumulative_qty |> Decimal.to_string(:normal) %></td>
+              <td class="align-middle"><%= o.post_only %></td>
+              <td class="align-middle"><%= o.close %></td>
+              <td class="align-middle"><%= relative_time(o.enqueued_at) %></td>
+              <td class="align-middle"><%= o.updated_at && relative_time(o.updated_at) %></td>
+              <td class="align-middle"><%= o.last_received_at && relative_time(o.last_received_at) %></td>
+              <td class="align-middle"><%= o.last_venue_timestamp && relative_time(o.last_venue_timestamp) %></td>
             </tr>
           <% end %>
         <% else %>

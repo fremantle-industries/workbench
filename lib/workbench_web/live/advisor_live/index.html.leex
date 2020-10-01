@@ -28,7 +28,7 @@
   <article class="column">
     <h3>Groups</h3>
 
-    <table>
+    <table class="table table-hover border mt-3 ">
       <thead>
         <th>Group</th>
         <th>Total</th>
@@ -40,11 +40,11 @@
         <%= if Enum.any?(@groups) do %>
           <%= Enum.map @groups, fn g -> %>
             <tr>
-              <td><%= g.id %></td>
-              <td><%= g.total %></td>
-              <td><%= g.running %></td>
-              <td><%= g.stopped %></td>
-              <td>
+              <td class="align-middle"><%= g.id %></td>
+              <td class="align-middle"><%= g.total %></td>
+              <td class="align-middle"><%= g.running %></td>
+              <td class="align-middle"><%= g.stopped %></td>
+              <td class="align-middle">
                 <%= if g.running == g.total do %>
                   <button
                     phx-click="start-group"
@@ -97,7 +97,7 @@
   <article class="column">
     <h3>Advisors</h3>
 
-    <table>
+    <table class="table table-hover border mt-3 ">
       <thead>
         <th>Group ID</th>
         <th>Advisor ID</th>
@@ -109,11 +109,11 @@
         <%= if Enum.any?(@instances) do %>
           <%= Enum.map @instances, fn a -> %>
             <tr>
-              <td><%= a.group_id %></td>
-              <td><%= a.advisor_id %></td>
-              <td><%= a.status %></td>
-              <td><%= a.pid |> format %></td>
-              <td>
+              <td class="align-middle"><%= a.group_id %></td>
+              <td class="align-middle"><%= a.advisor_id %></td>
+              <td class="align-middle"><%= a.status %></td>
+              <td class="align-middle"><%= a.pid |> format %></td>
+              <td class="align-middle">
                 <%= if a.status == :running do %>
                   <button
                     phx-click="stop-advisor"

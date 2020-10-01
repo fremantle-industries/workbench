@@ -11,7 +11,7 @@
     </nav>
 
     <table class="table table-hover border mt-3">
-      <thead class="thead-dark x-bg-secondary">
+      <thead>
         <tr>
           <th scope="col">Start Time</th>
           <th scope="col">Finish Time</th>
@@ -30,17 +30,17 @@
         <%= if Enum.any?(@balances) do %>
           <%= for b <- @balances do %>
             <tr>
-              <td ><%= format_timestamp(b.start_time) %></td>
-              <td><%= format_timestamp(b.finish_time) %></td>
-              <td><%= b.btc_usd_venue %></td>
-              <td><%= b.btc_usd_symbol %></td>
-              <td><%= b.usd_quote_venue %></td>
-              <td><%= b.usd_quote_asset %></td>
+              <td class="align-middle"><%= format_timestamp(b.start_time) %></td>
+              <td class="align-middle"><%= format_timestamp(b.finish_time) %></td>
+              <td class="align-middle"><%= b.btc_usd_venue %></td>
+              <td class="align-middle"><%= b.btc_usd_symbol %></td>
+              <td class="align-middle"><%= b.usd_quote_venue %></td>
+              <td class="align-middle"><%= b.usd_quote_asset %></td>
 
-              <td class="text-right"><%= number_to_currency(b.btc_usd_price) %></td>
-              <td class="text-right"><%= number_to_currency(b.usd) %></td>
+              <td class="text-right align-middle"><%= number_to_currency(b.btc_usd_price) %></td>
+              <td class="text-right align-middle"><%= number_to_currency(b.usd) %></td>
 
-              <td>
+              <td class="align-middle">
                 <button
                   class="btn btn-danger btn-sm"
                   phx-click="delete"
