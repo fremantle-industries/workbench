@@ -10,55 +10,56 @@
       <%= link "Config", to: "/balances/config" , class: "nav-link text-primary" %>
     </nav>
 
-    <table class="table table-hover border mt-3">
-      <thead>
-        <tr>
-          <th scope="col">Start Time</th>
-          <th scope="col">Finish Time</th>
-          <th scope="col">Venue</th>
-          <th scope="col">Symbol</th>
-          <th scope="col">Quote Venue</th>
-          <th scope="col">Quote Asset</th>
+    <div class="table-responsive border mt-3 mb-3">
+      <table class="table table-hover mb-0">
+        <thead>
+          <tr>
+            <th scope="col">Start Time</th>
+            <th scope="col">Finish Time</th>
+            <th scope="col">Venue</th>
+            <th scope="col">Symbol</th>
+            <th scope="col">Quote Venue</th>
+            <th scope="col">Quote Asset</th>
 
-          <th scope="col" class="text-right">Price</th>
-          <th scope="col" class="text-right">USD</th>
+            <th scope="col" class="text-right">Price</th>
+            <th scope="col" class="text-right">USD</th>
 
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= if Enum.any?(@balances) do %>
-          <%= for b <- @balances do %>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= if Enum.any?(@balances) do %>
+            <%= for b <- @balances do %>
+              <tr>
+                <td class="align-middle"><%= format_timestamp(b.start_time) %></td>
+                <td class="align-middle"><%= format_timestamp(b.finish_time) %></td>
+                <td class="align-middle"><%= b.btc_usd_venue %></td>
+                <td class="align-middle"><%= b.btc_usd_symbol %></td>
+                <td class="align-middle"><%= b.usd_quote_venue %></td>
+                <td class="align-middle"><%= b.usd_quote_asset %></td>
+
+                <td class="text-right align-middle"><%= number_to_currency(b.btc_usd_price) %></td>
+                <td class="text-right align-middle"><%= number_to_currency(b.usd) %></td>
+
+                <td class="align-middle">
+                  <button
+                    class="btn btn-danger btn-sm"
+                    phx-click="delete"
+                    phx-value-id="<%= b.id %>"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
             <tr>
-              <td class="align-middle"><%= format_timestamp(b.start_time) %></td>
-              <td class="align-middle"><%= format_timestamp(b.finish_time) %></td>
-              <td class="align-middle"><%= b.btc_usd_venue %></td>
-              <td class="align-middle"><%= b.btc_usd_symbol %></td>
-              <td class="align-middle"><%= b.usd_quote_venue %></td>
-              <td class="align-middle"><%= b.usd_quote_asset %></td>
-
-              <td class="text-right align-middle"><%= number_to_currency(b.btc_usd_price) %></td>
-              <td class="text-right align-middle"><%= number_to_currency(b.usd) %></td>
-
-              <td class="align-middle">
-                <button
-                  class="btn btn-danger btn-sm"
-                  phx-click="delete"
-                  phx-value-id="<%= b.id %>"
-                >
-                  Delete
-                </button>
-              </td>
+              <td colspan="9">No balances</td>
             </tr>
           <% end %>
-        <% else %>
-          <tr>
-            <td colspan="9">No balances</td>
-          </tr>
-        <% end %>
-      </tbody>
-      <tfoot></tfoot>
-    </table>
+        </tbody>
+      </table>
+    </div>
 
     <nav aria-label="table page navigation">
       <ul class="pagination">

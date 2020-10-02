@@ -20,41 +20,43 @@
       </form>
     </div>
 
-    <table class="table table-hover border mt-3 ">
-      <thead>
-        <th>Venue</th>
-        <th>Status</th>
-        <th>Credentials</th>
-        <th>Quote Depth</th>
-        <th>Timeout</th>
-        <th>Start On Boot</th>
-        <th>Actions</th>
-      </thead>
-      <tbody>
-        <%= if Enum.any?(@venues) do %>
-          <%= Enum.map @venues, fn v -> %>
+    <div class="table-responsive border mt-3 ">
+      <table class="table table-hover mb-0 ">
+        <thead>
+          <th>Venue</th>
+          <th>Status</th>
+          <th>Credentials</th>
+          <th>Quote Depth</th>
+          <th>Timeout</th>
+          <th>Start On Boot</th>
+          <th>Actions</th>
+        </thead>
+        <tbody>
+          <%= if Enum.any?(@venues) do %>
+            <%= Enum.map @venues, fn v -> %>
+              <tr>
+                <td class="align-middle"><%= v.id %></td>
+                <td class="align-middle"><%= v.status %></td>
+                <td class="align-middle"><%= v.credentials |> Map.keys() |> Enum.join(", ") %></td>
+                <td class="align-middle"><%= v.quote_depth %></td>
+                <td class="align-middle"><%= v.timeout %> ms</td>
+                <td class="align-middle"><%= v.start_on_boot %></td>
+                <td class="align-middle">
+                  <%= if v.status == :running do %>
+                    <button phx-click="stop" phx-value-id="<%= v.id %>" class="btn btn-danger btn-sm">stop</button>
+                  <% else %>
+                    <button phx-click="start" phx-value-id="<%= v.id %>" class="btn btn-primary btn-sm">start</button>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
             <tr>
-              <td class="align-middle"><%= v.id %></td>
-              <td class="align-middle"><%= v.status %></td>
-              <td class="align-middle"><%= v.credentials |> Map.keys() |> Enum.join(", ") %></td>
-              <td class="align-middle"><%= v.quote_depth %></td>
-              <td class="align-middle"><%= v.timeout %> ms</td>
-              <td class="align-middle"><%= v.start_on_boot %></td>
-              <td class="align-middle">
-                <%= if v.status == :running do %>
-                  <button phx-click="stop" phx-value-id="<%= v.id %>" class="btn btn-danger btn-sm">stop</button>
-                <% else %>
-                  <button phx-click="start" phx-value-id="<%= v.id %>" class="btn btn-primary btn-sm">start</button>
-                <% end %>
-              </td>
+              <td colspan="7">No venues</td>
             </tr>
           <% end %>
-        <% else %>
-          <tr>
-            <td colspan="7">No venues</td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </article>
 </section>

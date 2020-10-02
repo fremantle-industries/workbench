@@ -2,37 +2,39 @@
   <article class="column">
     <h2>Positions</h2>
 
-    <table class="table table-hover border mt-3 ">
-      <thead>
-        <th>venue</th>
-        <th>product</th>
-        <th>account</th>
-        <th>side</th>
-        <th>qty</th>
-        <th>entry price</th>
-        <th>leverage</th>
-        <th>margin mode</th>
-      </thead>
-      <tbody>
-        <%= if Enum.any?(@positions) do %>
-          <%= Enum.map @positions, fn p -> %>
+    <div class="table-responsive border mt-3 ">
+      <table class="table table-hover mb-0">
+        <thead>
+          <th>venue</th>
+          <th>product</th>
+          <th>account</th>
+          <th>side</th>
+          <th>qty</th>
+          <th>entry price</th>
+          <th>leverage</th>
+          <th>margin mode</th>
+        </thead>
+        <tbody>
+          <%= if Enum.any?(@positions) do %>
+            <%= Enum.map @positions, fn p -> %>
+              <tr>
+                <td class="align-middle"><%= p.venue_id %></td>
+                <td class="align-middle"><%= p.product_symbol %></td>
+                <td class="align-middle"><%= p.credential_id %></td>
+                <td class="align-middle"><%= p.side %></td>
+                <td class="align-middle"><%= p.qty %></td>
+                <td class="align-middle"><%= p.entry_price %></td>
+                <td class="align-middle"><%= p.leverage %></td>
+                <td class="align-middle"><%= p.margin_mode %></td>
+              </tr>
+            <% end %>
+          <% else %>
             <tr>
-              <td class="align-middle"><%= p.venue_id %></td>
-              <td class="align-middle"><%= p.product_symbol %></td>
-              <td class="align-middle"><%= p.credential_id %></td>
-              <td class="align-middle"><%= p.side %></td>
-              <td class="align-middle"><%= p.qty %></td>
-              <td class="align-middle"><%= p.entry_price %></td>
-              <td class="align-middle"><%= p.leverage %></td>
-              <td class="align-middle"><%= p.margin_mode %></td>
+              <td colspan="8">No positions</td>
             </tr>
           <% end %>
-        <% else %>
-          <tr>
-            <td colspan="8">No positions</td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </article>
 </section>

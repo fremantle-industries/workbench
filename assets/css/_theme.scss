@@ -1,8 +1,27 @@
+// Colors
+$blue: #5c93d4;
+$violet: #727DF5;
+$light-violet: #b6c3fb;
+$red: #ec715d;
+$navy: #252634;
+$light-grey: #f7f7f9;
+$dark-grey: #323A46;
+
+// Default text color
+$body-color: #292929;
+
+// Table header color
+$table-header-text: #686868;
+
+// Background color
+$body-bg: #ffffff; //#F2F5F7;
+
+
 $theme-colors: (
-        "primary": #5c93d4, //#5c7cc9,
-        "secondary": #bac3d4,
-        "danger": #ec7877,
-        "dark": #252634
+        "primary": $violet,
+        "danger": $red,
+        "dark": $dark-grey,
+        "light": $light-violet
 );
 
 $font-size-base: 1rem;
@@ -45,6 +64,24 @@ select:focus {
 }
 
 .table {
+
+  thead {
+    background-color: $light-grey
+  }
+  tbody > tr > th,
+  tfoot > tr > th,
+  tbody > tr > td,
+  tfoot > tr > td,
+  thead > tr > th {
+    border-bottom: none !important;
+  }
+  thead > tr > th {
+    color: $table-header-text;
+  }
+
+  tr {
+    border-bottom: 1px solid $light-grey;
+  }
   th, td {
     overflow: hidden;
     white-space: nowrap;

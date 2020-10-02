@@ -24,122 +24,124 @@
 
 <hr />
 
-<section class="row">
+<section class="row mb-3">
   <article class="column">
     <h3>Groups</h3>
 
-    <table class="table table-hover border mt-3 ">
-      <thead>
-        <th>Group</th>
-        <th>Total</th>
-        <th>Running</th>
-        <th>Stopped</th>
-        <th>Actions</th>
-      </thead>
-      <tbody>
-        <%= if Enum.any?(@groups) do %>
-          <%= Enum.map @groups, fn g -> %>
-            <tr>
-              <td class="align-middle"><%= g.id %></td>
-              <td class="align-middle"><%= g.total %></td>
-              <td class="align-middle"><%= g.running %></td>
-              <td class="align-middle"><%= g.stopped %></td>
-              <td class="align-middle">
-                <%= if g.running == g.total do %>
-                  <button
-                    phx-click="start-group"
-                    phx-value-id="<%= g.id %>"
-                    disabled
-                  >
-                    start all
-                  </button>
-                <% else %>
-                  <button
-                    phx-click="start-group"
-                    phx-value-id="<%= g.id %>"
-                  >
-                    start all
-                  </button>
-                <% end %>
+    <div class="table-responsive border mt-3 ">
+      <table class="table table-hover mb-0 ">
+        <thead>
+          <th>Group</th>
+          <th>Total</th>
+          <th>Running</th>
+          <th>Stopped</th>
+          <th>Actions</th>
+        </thead>
+        <tbody>
+          <%= if Enum.any?(@groups) do %>
+            <%= Enum.map @groups, fn g -> %>
+              <tr>
+                <td class="align-middle"><%= g.id %></td>
+                <td class="align-middle"><%= g.total %></td>
+                <td class="align-middle"><%= g.running %></td>
+                <td class="align-middle"><%= g.stopped %></td>
+                <td class="align-middle">
+                  <%= if g.running == g.total do %>
+                    <button
+                      phx-click="start-group"
+                      phx-value-id="<%= g.id %>"
+                      disabled
+                    >
+                      start all
+                    </button>
+                  <% else %>
+                    <button
+                      phx-click="start-group"
+                      phx-value-id="<%= g.id %>"
+                    >
+                      start all
+                    </button>
+                  <% end %>
 
-                <%= if g.running > 0 do %>
-                  <button
-                    phx-click="stop-group"
-                    phx-value-id="<%= g.id %>"
-                  >
-                    stop all
-                  </button>
-                <% else %>
-                  <button
-                    phx-click="stop-group"
-                    phx-value-id="<%= g.id %>"
-                    disabled
-                  >
-                    stop all
-                  </button>
-                <% end %>
-              </td>
+                  <%= if g.running > 0 do %>
+                    <button
+                      phx-click="stop-group"
+                      phx-value-id="<%= g.id %>"
+                    >
+                      stop all
+                    </button>
+                  <% else %>
+                    <button
+                      phx-click="stop-group"
+                      phx-value-id="<%= g.id %>"
+                      disabled
+                    >
+                      stop all
+                    </button>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="5">No advisor groups</td>
             </tr>
           <% end %>
-        <% else %>
-          <tr>
-            <td colspan="5">No advisor groups</td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </article>
 </section>
-
-<hr />
 
 <section class="row">
   <article class="column">
     <h3>Advisors</h3>
 
-    <table class="table table-hover border mt-3 ">
-      <thead>
-        <th>Group ID</th>
-        <th>Advisor ID</th>
-        <th>Status</th>
-        <th>PID</th>
-        <th>Actions</th>
-      </thead>
-      <tbody>
-        <%= if Enum.any?(@instances) do %>
-          <%= Enum.map @instances, fn a -> %>
+    <div class="table-responsive border mt-3 ">
+      <table class="table table-hover mb-0 ">
+        <thead>
+          <th>Group ID</th>
+          <th>Advisor ID</th>
+          <th>Status</th>
+          <th>PID</th>
+          <th>Actions</th>
+        </thead>
+        <tbody>
+          <%= if Enum.any?(@instances) do %>
+            <%= Enum.map @instances, fn a -> %>
+              <tr>
+                <td class="align-middle"><%= a.group_id %></td>
+                <td class="align-middle"><%= a.advisor_id %></td>
+                <td class="align-middle"><%= a.status %></td>
+                <td class="align-middle"><%= a.pid |> format %></td>
+                <td class="align-middle">
+                  <%= if a.status == :running do %>
+                    <button
+                      phx-click="stop-advisor"
+                      phx-value-group-id="<%= a.group_id %>"
+                      phx-value-advisor-id="<%= a.advisor_id %>"
+                    >
+                      stop
+                    </button>
+                  <% else %>
+                    <button
+                      phx-click="start-advisor"
+                      phx-value-group-id="<%= a.group_id %>"
+                      phx-value-advisor-id="<%= a.advisor_id %>"
+                    >
+                      start
+                    </button>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
             <tr>
-              <td class="align-middle"><%= a.group_id %></td>
-              <td class="align-middle"><%= a.advisor_id %></td>
-              <td class="align-middle"><%= a.status %></td>
-              <td class="align-middle"><%= a.pid |> format %></td>
-              <td class="align-middle">
-                <%= if a.status == :running do %>
-                  <button
-                    phx-click="stop-advisor"
-                    phx-value-group-id="<%= a.group_id %>"
-                    phx-value-advisor-id="<%= a.advisor_id %>"
-                  >
-                    stop
-                  </button>
-                <% else %>
-                  <button
-                    phx-click="start-advisor"
-                    phx-value-group-id="<%= a.group_id %>"
-                    phx-value-advisor-id="<%= a.advisor_id %>"
-                  >
-                    start
-                  </button>
-                <% end %>
-              </td>
+              <td colspan="5">No instances</td>
             </tr>
           <% end %>
-        <% else %>
-          <tr>
-            <td colspan="5">No instances</td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </article>
 </section>
