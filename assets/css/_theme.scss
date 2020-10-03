@@ -1,22 +1,4 @@
-// Colors
-$blue: #5c93d4;
-$green: #50ee61;
-$violet: #727DF5;
-$light-violet: #b6c3fb;
-$red: #ec715d;
-$navy: #252634;
-$light-grey: #f7f7f9;
-$dark-grey: #323A46;
-
-// Default text color
-$body-color: #292929;
-
-// Table header color
-$table-header-text: #686868;
-
-// Background color
-$body-bg: #ffffff; //#F2F5F7;
-
+@import "./variables/colors";
 
 $theme-colors: (
         "primary": $violet,
@@ -27,7 +9,6 @@ $theme-colors: (
 );
 
 $font-size-base: 1rem;
-
 $font-family-base: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Lucida Grande", sans-serif;
 
 .alert:empty {
@@ -45,47 +26,3 @@ a {
   }
 }
 
-select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border: 0.1rem solid #d1d1d1;
-  border-radius: 0.4rem;
-  box-shadow: none;
-  box-sizing: inherit;
-  height: 3.0rem;
-  background: transparent url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="14" viewBox="0 0 29 14" width="29"><path fill="%23d1d1d1" d="M9.37727 3.625l5.08154 6.93523L19.54036 3.625"/></svg>') no-repeat center right;
-  padding: 0.4rem 3rem 0.4rem 1rem;
-}
-select:focus {
-  border-color: #0069d9;
-  outline: 0;
-}
-select:focus {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="14" viewBox="0 0 29 14" width="29"><path fill="%230069d9" d="M9.37727 3.625l5.08154 6.93523L19.54036 3.625"/></svg>');
-}
-
-.table {
-
-  thead {
-    background-color: $light-grey
-  }
-  tbody > tr > th,
-  tfoot > tr > th,
-  tbody > tr > td,
-  tfoot > tr > td,
-  thead > tr > th {
-    border-bottom: none !important;
-  }
-  thead > tr > th {
-    color: $table-header-text;
-  }
-
-  tr {
-    border-bottom: 1px solid $light-grey;
-  }
-  th, td {
-    overflow: hidden;
-    white-space: nowrap;
-  }
-}
