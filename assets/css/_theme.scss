@@ -1,5 +1,6 @@
 // Colors
 $blue: #5c93d4;
+$green: #50ee61;
 $violet: #727DF5;
 $light-violet: #b6c3fb;
 $red: #ec715d;
@@ -21,7 +22,8 @@ $theme-colors: (
         "primary": $violet,
         "danger": $red,
         "dark": $dark-grey,
-        "light": $light-violet
+        "light": $light-violet,
+        "success": $green
 );
 
 $font-size-base: 1rem;
