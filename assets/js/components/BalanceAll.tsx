@@ -28,9 +28,9 @@ const BalanceAll: React.FC<Props> = ({ finishTimes, usdBalances, btcBalances, bt
 };
 
 enum Color {
-  Usd = '#50ee61', //'#02c802',
-  Btc = '#ffc332', //'#ffb326',
-  BtcUsd = '#727DF5' //'#6fafff'
+  Usd = '#50ee61',
+  Btc = '#ffc332',
+  BtcUsd = '#727DF5'
 }
 
 enum AxisId {
