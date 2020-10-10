@@ -3,8 +3,6 @@ version: '3.8'
 services:
   web:
     build: .
-    volumes:
-      - ./:/app
     environment:
       DATABASE_URL: "${DATABASE_URL:-ecto://postgres:password@db:5432/postgres}"
     volumes:
