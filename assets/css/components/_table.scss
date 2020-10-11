@@ -1,0 +1,26 @@
+@import "../variables/colors";
+
+.table {
+
+  thead {
+    background-color: $light-grey
+  }
+  tbody > tr > th,
+  tfoot > tr > th,
+  tbody > tr > td,
+  tfoot > tr > td,
+  thead > tr > th {
+    border-bottom: none !important;
+  }
+  thead > tr > th {
+    color: $table-header-text;
+  }
+
+  tr {
+    border-bottom: 1px solid $light-grey;
+  }
+  th, td {
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}

@@ -20,35 +20,37 @@
       </form>
     </div>
 
-    <table>
-      <thead>
-        <th>Venue</th>
-        <th>Symbol</th>
-        <th>Credential</th>
-        <th>Maker</th>
-        <th>Maker Type</th>
-        <th>Taker</th>
-        <th>Taker Type</th>
-      </thead>
-      <tbody>
-        <%= if Enum.any?(@fees) do %>
-          <%= for f <- @fees do %>
+    <div class="table-responsive border mt-3 ">
+      <table class="table table-hover mb-0">
+        <thead>
+          <th scope="col">Venue</th>
+          <th scope="col">Symbol</th>
+          <th scope="col">Credential</th>
+          <th scope="col">Maker</th>
+          <th scope="col">Maker Type</th>
+          <th scope="col">Taker</th>
+          <th scope="col">Taker Type</th>
+        </thead>
+        <tbody>
+          <%= if Enum.any?(@fees) do %>
+            <%= for f <- @fees do %>
+              <tr>
+                <td class="align-middle"><%= f.venue_id %></td>
+                <td class="align-middle"><%= f.symbol %></td>
+                <td class="align-middle"><%= f.credential_id %></td>
+                <td class="align-middle"><%= f.maker && decimal(f.maker) %></td>
+                <td class="align-middle"><%= f.maker_type %></td>
+                <td class="align-middle"><%= f.taker && decimal(f.taker) %></td>
+                <td class="align-middle"><%= f.taker_type %></td>
+              </tr>
+            <% end %>
+          <% else %>
             <tr>
-              <td><%= f.venue_id %></td>
-              <td><%= f.symbol %></td>
-              <td><%= f.credential_id %></td>
-              <td><%= f.maker && decimal(f.maker) %></td>
-              <td><%= f.maker_type %></td>
-              <td><%= f.taker && decimal(f.taker) %></td>
-              <td><%= f.taker_type %></td>
+              <td colspan="7">No fees</td>
             </tr>
           <% end %>
-        <% else %>
-          <tr>
-            <td colspan="7">No fees</td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </article>
 </section>

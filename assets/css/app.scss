@@ -11,15 +11,15 @@
 /**
  * Setup
  */
-@import "./phoenix";
 @import "./custom_reset";
 
 /**
  * Framework
  */
-@import "./buttons";
-@import "./layout";
 @import "./utility";
+@import "./components/navigation";
+@import "./components/table";
+@import "./components/select";
 
 /**
  * Custom Components
@@ -31,3 +31,10 @@
  */
 @import "./pages/balances";
 @import "./pages/products";
+
+/**
+ * Bootstrap
+ */
+@import "./theme";
+@import "./variables/breakpoints";
+@import "~bootstrap/scss/bootstrap";

@@ -1,0 +1,28 @@
+@import "./variables/colors";
+
+$theme-colors: (
+        "primary": $violet,
+        "danger": $red,
+        "dark": $dark-grey,
+        "light": $light-violet,
+        "success": $green
+);
+
+$font-size-base: 1rem;
+$font-family-base: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Lucida Grande", sans-serif;
+
+.alert:empty {
+  display: none;
+}
+
+.container {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+a {
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
