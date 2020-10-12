@@ -37,7 +37,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.0",
     "sass-loader": "^8.0.2",
     "source-map-loader": "^0.2.4",
-    "ts-loader": "^6.2.1",
+    "ts-loader": "^8.0.4",
     "typescript": "^3.8.3",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "~4.42.0",
