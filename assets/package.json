@@ -6,7 +6,7 @@
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {
-    "@babel/preset-react": "^7.7.0",
+    "@babel/preset-react": "^7.12.1",
     "bootstrap": "^5.0.0-alpha1",
     "chart.js": "^2.9.3",
     "nprogress": "^0.2.0",
