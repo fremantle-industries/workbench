@@ -16,7 +16,7 @@
     "popper.js": "^1.16.1",
     "react": "^16.14.0",
     "react-chartjs-2": "^2.11.1",
-    "react-dom": "^16.13.0",
+    "react-dom": "^16.14.0",
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8"
