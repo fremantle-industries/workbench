@@ -22,7 +22,7 @@
     "redux-devtools-extension": "^2.13.8"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0",
+    "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
     "@types/chart.js": "^2.9.27",
     "@types/phoenix": "^1.4.3",
