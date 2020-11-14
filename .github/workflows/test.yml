@@ -28,32 +28,17 @@ jobs:
     steps:
       - uses: actions/checkout@v1.0.0
 
-      - name: Cache Dependencies
-        uses: actions/cache@v1
+      - name: Cache Elixir
+        uses: actions/cache@v2.1.3
         with:
-          path: deps
-          key: deps-elixir-${{matrix.elixir}}-otp-${{matrix.otp}}-${{runner.os}}-${{hashFiles('mix.lock')}}-${{github.ref}}
+          path: |
+            deps
+            _build/dev
+            _build/test
+          key: cache-elixir-${{runner.os}}-${{hashFiles('mix.lock')}}-${{github.ref}}
           restore-keys: |
-            deps-elixir-${{matrix.elixir}}-otp-${{matrix.otp}}-${{runner.os}}-${{hashFiles('mix.lock')}}-${{github.ref}}
-            deps-elixir-${{matrix.elixir}}-otp-${{matrix.otp}}-${{runner.os}}-${{hashFiles('mix.lock')}}-
-
-      - name: Cache Dev Build
-        uses: actions/cache@v1
-        with:
-          path: _build/dev
-          key: dev-build-elixir-${{matrix.elixir}}-otp-${{matrix.otp}}-${{runner.os}}-${{hashFiles('mix.lock')}}-${{github.ref}}
-          restore-keys: |
-            dev-build-elixir-${{matrix.elixir}}-otp-${{matrix.otp}}-${{runner.os}}-${{hashFiles('mix.lock')}}-${{github.ref}}
-            dev-build-elixir-${{matrix.elixir}}-otp-${{matrix.otp}}-${{runner.os}}-${{hashFiles('mix.lock')}}-
-
-      - name: Cache Test Build
-        uses: actions/cache@v1
-        with:
-          path: _build/test
-          key: test-build-elixir-${{matrix.elixir}}-otp-${{matrix.otp}}-${{runner.os}}-${{hashFiles('mix.lock')}}-${{github.ref}}
-          restore-keys: |
-            test-build-elixir-${{matrix.elixir}}-otp-${{matrix.otp}}-${{runner.os}}-${{hashFiles('mix.lock')}}-${{github.ref}}
-            test-build-elixir-${{matrix.elixir}}-otp-${{matrix.otp}}-${{runner.os}}-${{hashFiles('mix.lock')}}-
+            cache-elixir-${{runner.os}}-${{hashFiles('mix.lock')}}-
+            cache-elixir-${{runner.os}}-
 
       - name: Install Dependencies
         run: |
