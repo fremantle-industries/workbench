@@ -26,7 +26,7 @@
     "@babel/preset-env": "^7.12.1",
     "@types/chart.js": "^2.9.27",
     "@types/phoenix": "^1.4.3",
-    "@types/react": "^16.9.51",
+    "@types/react": "^16.9.56",
     "@types/react-dom": "^16.9.8",
     "@types/react-redux": "^7.1.11",
     "babel-loader": "^8.0.0",
