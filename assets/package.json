@@ -24,7 +24,7 @@
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.12.1",
-    "@types/chart.js": "^2.9.25",
+    "@types/chart.js": "^2.9.27",
     "@types/phoenix": "^1.4.3",
     "@types/react": "^16.9.51",
     "@types/react-dom": "^16.9.8",
