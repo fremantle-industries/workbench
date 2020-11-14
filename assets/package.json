@@ -8,7 +8,7 @@
   "dependencies": {
     "@babel/preset-react": "^7.12.5",
     "bootstrap": "^5.0.0-alpha1",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "nprogress": "^0.2.0",
     "phoenix": "file:../deps/phoenix",
     "phoenix_html": "file:../deps/phoenix_html",
