@@ -26,7 +26,7 @@ services:
       - DATABASE_URL
 
   db:
-    image: postgres:12.3
+    image: postgres:13.1
     volumes:
       - "dbdata:/var/lib/postgresql/data"
     ports:
