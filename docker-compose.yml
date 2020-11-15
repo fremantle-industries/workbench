@@ -1,15 +1,34 @@
 version: '3.8'
 
 services:
-  web:
-    build: .
+  db:
+    image: 'postgres:13.1'
+    restart: always
+    volumes:
+      - 'dbdata:/var/lib/postgresql/data'
     ports:
-      - "${HOST_PORT:-4000}:${PORT:-4000}"
-      - "11000:4369"
-      - "11001:9999"
+      - "5432:5432"
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_HOST_AUTH_METHOD: trust
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder
     depends_on:
       - db
+    env_file:
+      - .env
+    ports:
+      - '4000:4000'
+      - "11000:4369"
+      - "11001:9999"
     environment:
+      - "${MIX_ENV:-dev}"
       - PORT
       - HOST_PORT
       - HOST
@@ -24,15 +43,22 @@ services:
       - BALANCE_SNAPSHOT_USD_QUOTE_VENUE
       - BALANCE_SNAPSHOT_USD_QUOTE_ASSET
       - DATABASE_URL
-
-  db:
-    image: postgres:13.1
     volumes:
-      - "dbdata:/var/lib/postgresql/data"
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_PASSWORD
+      - webbuild:/app/_build
+      - ./.env:/app/.env
+      - ./mix.exs:/app/mix.exs
+      - ./mix.lock:/app/mix.lock
+      - ./assets/css:/app/assets/css
+      - ./assets/js:/app/assets/js
+      - ./assets/static:/app/assets/static
+      - ./assets/package.json:/app/assets/package.json
+      - ./assets/package-lock.json:/app/assets/package-lock.json
+      - ./assets/webpack.config.js:/app/assets/webpack.config.js
+      - ./assets/tsconfig.json:/app/assets/tsconfig.json
+      - ./config:/app/config
+      - ./lib:/app/lib
+    entrypoint: "mix setup.deps && mix phx.server"
 
 volumes:
   dbdata:
+  webbuild:

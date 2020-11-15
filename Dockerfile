@@ -1,4 +1,4 @@
-FROM bitwalker/alpine-elixir-phoenix
+FROM bitwalker/alpine-elixir-phoenix:latest AS builder
 
 WORKDIR /app
 
@@ -11,15 +11,13 @@ COPY ./assets/package.json ./assets/package.json
 COPY ./assets/package-lock.json ./assets/package-lock.json
 COPY ./assets/webpack.config.js ./assets/webpack.config.js
 COPY ./assets/tsconfig.json ./assets/tsconfig.json
-COPY ./assets/tsconfig.cjs.json ./assets/tsconfig.cjs.json
-COPY ./assets/tsconfig.es6.json ./assets/tsconfig.es6.json
 COPY ./config ./config
 COPY ./lib ./lib
-COPY ./priv ./priv
-RUN mix deps.get
-# npm can be flaky, so fetch dependencies & fail fast
-RUN mix setup.assets
-RUN mix deps.compile
-RUN mix compile
+RUN mix setup.deps
+
+FROM bitwalker/alpine-elixir-phoenix:latest
+
+WORKDIR /app
+COPY --from=builder /app .
 
 ENTRYPOINT ["mix phx.server"]

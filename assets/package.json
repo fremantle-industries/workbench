@@ -3,11 +3,13 @@
   "license": "MIT",
   "scripts": {
     "deploy": "webpack --mode production",
-    "watch": "webpack --mode development --watch"
+    "watch": "webpack --mode development --watch",
+    "lint": "eslint -c './.eslintrc' './js/**/*.ts'",
+    "lint:fix": "eslint -c './.eslintrc' --fix './js/**/*.ts'"
   },
   "dependencies": {
     "@babel/preset-react": "^7.12.5",
-    "bootstrap": "^5.0.0-alpha1",
+    "bootstrap": "^5.0.0-alpha3",
     "chart.js": "^2.9.4",
     "nprogress": "^0.2.0",
     "phoenix": "file:../deps/phoenix",

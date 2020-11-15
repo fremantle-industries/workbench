@@ -1,13 +1,19 @@
 use Mix.Config
 
 # Configure your database
+#
+# The MIX_TEST_PARTITION environment variable can be used
+# to provide built-in test partitioning in CI environment.
+# Run `mix help test` for more information.
+partition = System.get_env("MIX_TEST_PARTITION")
+default_database_url = "postgres://postgres:postgres@localhost:5432/workbench_?"
+configured_database_url = System.get_env("DATABASE_URL") || default_database_url
+database_url = "#{String.replace(configured_database_url, "?", "test")}#{partition}"
+
 config :workbench, Workbench.Repo,
-  pool: Ecto.Adapters.SQL.Sandbox,
-  username: "postgres",
-  password: "postgres",
-  database: "workbench_test",
-  hostname: System.get_env("DB_HOST", "localhost"),
+  url: database_url,
   show_sensitive_data_on_connection_error: true,
+  pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 10
 
 # We don't run a server during test. If one is required,

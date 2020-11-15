@@ -11,6 +11,7 @@
     </nav>
 
     <div
+      id="balance-all"
       phx-hook="BalanceAll"
       data-finish-times="<%= Jason.encode!(finish_times(@balances)) %>"
       data-usd-balances="<%= Jason.encode!(usd_balances(@balances)) %>"
