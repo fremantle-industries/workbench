@@ -85,7 +85,7 @@ defmodule Workbench.BalanceSnapshots.SnapshotTest do
       |> Workbench.Wallet.changeset(%{
         name: name,
         asset: asset,
-        amount: Decimal.cast(amount),
+        amount: Tai.Utils.Decimal.cast!(amount),
         address: "-"
       })
       |> Workbench.Repo.insert()
@@ -98,8 +98,8 @@ defmodule Workbench.BalanceSnapshots.SnapshotTest do
          free: free,
          locked: locked
        ) do
-    free = Decimal.cast(free)
-    locked = Decimal.cast(locked)
+    {:ok, free} = Decimal.cast(free)
+    {:ok, locked} = Decimal.cast(locked)
     equity = Decimal.add(free, locked)
 
     {:ok, _} =

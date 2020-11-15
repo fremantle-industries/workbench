@@ -38,7 +38,7 @@ defmodule Workbench.MixProject do
     [
       {:enumerati, "~> 0.0.6"},
       {:stored, "~> 0.0.4"},
-      {:tai, "~> 0.0.55"},
+      {:tai, "~> 0.0.58"},
       {:logger_json, "~> 4.0"},
       {:ecto_sql, "~> 3.1"},
       {:phoenix, "~> 1.5"},

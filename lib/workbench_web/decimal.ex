@@ -8,7 +8,7 @@ defmodule WorkbenchWeb.Decimal do
 
     d
     |> Tai.Utils.Decimal.round_down(p)
-    |> Decimal.reduce()
+    |> Decimal.normalize()
     |> Decimal.to_string(:normal)
   end
 end

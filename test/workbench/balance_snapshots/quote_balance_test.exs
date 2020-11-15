@@ -79,7 +79,7 @@ defmodule Workbench.BalanceSnapshots.QuoteBalanceTest do
     |> Workbench.Wallet.changeset(%{
       name: name,
       asset: asset,
-      amount: Decimal.cast(amount),
+      amount: Tai.Utils.Decimal.cast!(amount),
       address: "-"
     })
     |> Workbench.Repo.insert()

@@ -9,7 +9,7 @@ defmodule Workbench.Accounts do
       if show_zero do
         ab
       else
-        Decimal.cmp(ab.free, @zero) != :eq || Decimal.cmp(ab.locked, @zero) != :eq
+        Decimal.compare(ab.free, @zero) != :eq || Decimal.compare(ab.locked, @zero) != :eq
       end
     end)
   end
