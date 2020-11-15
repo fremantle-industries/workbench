@@ -1,9 +1,10 @@
 use Mix.Config
 
-database_url =
-  System.get_env("DATABASE_URL") || "ecto://postgres:postgres@localhost:5432/postgres"
-
 # Configure your database
+default_database_url = "postgres://postgres:postgres@localhost:5432/workbench_?"
+configured_database_url = System.get_env("DATABASE_URL") || default_database_url
+database_url = String.replace(configured_database_url, "?", "dev")
+
 config :workbench, Workbench.Repo,
   url: database_url,
   show_sensitive_data_on_connection_error: true,
@@ -26,7 +27,7 @@ config :workbench, WorkbenchWeb.Endpoint,
       "node_modules/webpack/bin/webpack.js",
       "--mode",
       "development",
-      "--watch-stdin",
+      "--watch",
       cd: Path.expand("../assets", __DIR__)
     ]
   ]

@@ -87,9 +87,8 @@ defmodule Workbench.MixProject do
 
   defp aliases do
     [
-      "setup.assets": ["cmd npm install --prefix assets"],
-      setup: ["deps.get", "ecto.setup", "cmd npm install --prefix assets"],
-      "docker.phx.server": ["setup.assets", "phx.server"],
+      "setup.deps": ["deps.get", "cmd npm install --prefix assets"],
+      setup: ["setup.deps", "ecto.setup"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]

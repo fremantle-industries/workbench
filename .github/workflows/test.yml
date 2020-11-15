@@ -49,7 +49,7 @@ jobs:
       - name: Test
         env:
           MIX_ENV: test
-          DB_HOST: db
+          DATABASE_URL: postgres://postgres:postgres@db:5432/workbench_?
           SECRET_KEY_BASE: ${{secrets.SECRET_KEY_BASE}}
           LIVE_VIEW_SIGNING_SALT: ${{secrets.LIVE_VIEW_SIGNING_SALT}}
           GUARDIAN_SECRET_KEY: ${{secrets.GUARDIAN_SECRET_KEY}}

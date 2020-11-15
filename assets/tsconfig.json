@@ -1,12 +1,14 @@
 {
-  "extends": "./tsconfig.es6.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "*": ["*", "js/*", "@types/*"]
-    },
-    "outDir": "./dist",
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "module": "es6",
+    "target": "es5",
+    "lib": [
+      "ES2020",
+      "DOM"
+    ],
+    "jsx": "react",
     "allowJs": true
-  },
-  "include": ["js", "@types"]
+  }
 }

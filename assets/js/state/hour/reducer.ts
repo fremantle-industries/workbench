@@ -1,4 +1,4 @@
-import { Actions } from '../actions'
+import { Actions } from "../actions"
 
 export interface State {
   hours: any[],
@@ -12,13 +12,14 @@ const INITIAL_STATE: State = {
   usdMax: [],
 }
 
-export function hour(state: State = INITIAL_STATE, action: Actions) {
+/* eslint-disable-next-line default-param-last */
+export function hour(state: State = INITIAL_STATE, action: Actions): State {
   switch (action.type) {
-    case 'FETCH_BALANCE_HOURS_SUCCEEDED':
+    case "FETCH_BALANCE_HOURS_SUCCEEDED":
       return {
         hours: action.hours,
         usdMin: action.usdMin,
-        usdMax: action.usdMax
+        usdMax: action.usdMax,
       }
     default:
       return state

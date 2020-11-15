@@ -57,23 +57,27 @@ $ git clone https://github.com/fremantle-industries/workbench.git /tmp/workbench
 
 ## Development
 
-### Mac/Linux
+You can run the app natively on the host
 
 ```bash
-# Create database & install dependencies
-$ mix setup
-# Run the app
+$ docker-compose up db
 $ mix phx.server
 ```
 
-### Docker
+Or within `docker-compose`
 
-```bash
-$ docker-compose build
+```
 $ docker-compose up
 ```
 
 Wait a few seconds for the app to boot and you should be able to view the app at `http://workbench.lvh.me:4000`
+
+## Test
+
+```bash
+$ docker-compose up db
+$ mix test
+```
 
 ## Oauth
 
@@ -93,12 +97,6 @@ Under `Authorized redirect URIs` add:
 ```
 
 Save this and re-open workbench in a private tab
-
-## Test
-
-```bash
-$ mix test
-```
 
 ## Help Wanted :)
 
