@@ -57,6 +57,7 @@ services:
       - ./assets/tsconfig.json:/app/assets/tsconfig.json
       - ./config:/app/config
       - ./lib:/app/lib
+      - ./priv/repo:/app/priv/repo
     entrypoint: "mix setup.deps && mix phx.server"
 
 volumes:

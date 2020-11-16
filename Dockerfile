@@ -13,6 +13,7 @@ COPY ./assets/webpack.config.js ./assets/webpack.config.js
 COPY ./assets/tsconfig.json ./assets/tsconfig.json
 COPY ./config ./config
 COPY ./lib ./lib
+COPY ./priv/repo ./priv/repo
 RUN mix setup.deps
 
 FROM bitwalker/alpine-elixir-phoenix:latest
