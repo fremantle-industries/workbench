@@ -61,6 +61,7 @@ You can run the app natively on the host
 
 ```bash
 $ docker-compose up db
+$ mix setup
 $ mix phx.server
 ```
 
