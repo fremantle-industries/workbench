@@ -12,6 +12,7 @@ RUN apt-get install -y \
       inotify-tools \
       nodejs
 
+RUN npm install -g yarn
 RUN update-ca-certificates --fresh
 
 ENV PATH=./node_modules/.bin:$PATH
@@ -35,7 +36,7 @@ RUN mix deps.compile
 
 # Build frontend
 COPY assets assets
-RUN cd assets && npm install && npm run deploy
+RUN cd assets && yarn && yarn run webpack --mode production
 RUN mix phx.digest
 
 # Build release
