@@ -36,6 +36,7 @@ defmodule Workbench.MixProject do
 
   defp deps do
     [
+      {:decimal, "~> 2.0"},
       {:enumerati, "~> 0.0.8"},
       {:stored, "~> 0.0.4"},
       {:tai, "~> 0.0.58"},
