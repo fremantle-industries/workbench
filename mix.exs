@@ -36,7 +36,7 @@ defmodule Workbench.MixProject do
 
   defp deps do
     [
-      {:enumerati, "~> 0.0.6"},
+      {:enumerati, "~> 0.0.8"},
       {:stored, "~> 0.0.4"},
       {:tai, "~> 0.0.58"},
       {:logger_json, "~> 4.0"},
