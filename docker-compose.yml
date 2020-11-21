@@ -58,7 +58,7 @@ services:
       - ./config:/app/config
       - ./lib:/app/lib
       - ./priv/repo:/app/priv/repo
-    entrypoint: "mix setup.deps && mix phx.server"
+    entrypoint: "sh -c 'mix setup.deps && mix phx.server'"
 
 volumes:
   dbdata:
