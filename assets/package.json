@@ -27,7 +27,7 @@
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
     "@types/chart.js": "^2.9.27",
-    "@types/phoenix": "^1.4.3",
+    "@types/phoenix": "^1.5.1",
     "@types/react": "^16.9.56",
     "@types/react-dom": "^16.9.9",
     "@types/react-redux": "^7.1.11",
