@@ -33,7 +33,7 @@
     "@types/react-redux": "^7.1.11",
     "babel-loader": "^8.0.0",
     "copy-webpack-plugin": "^6.4.1",
-    "css-loader": "^3.0.0",
+    "css-loader": "^5.0.1",
     "mini-css-extract-plugin": "^1.3.3",
     "node-sass": "^5.0.0",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
