@@ -16,9 +16,9 @@
     "phoenix_html": "file:../deps/phoenix_html",
     "phoenix_live_view": "file:../deps/phoenix_live_view",
     "popper.js": "^1.16.1",
-    "react": "^16.14.0",
+    "react": "^17.0.1",
     "react-chartjs-2": "^2.11.1",
-    "react-dom": "^16.14.0",
+    "react-dom": "^17.0.1",
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8"
