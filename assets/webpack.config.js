@@ -45,6 +45,10 @@ module.exports = (_env, _options) => ({
   devtool: "source-map",
   plugins: [
     new MiniCssExtractPlugin({filename: "../css/app.css"}),
-    new CopyWebpackPlugin([{from: "static/", to: "../"}])
+    new CopyWebpackPlugin({
+      patterns: [
+        {from: "static/", to: "../"}
+      ]
+    })
   ]
 });
