@@ -26,8 +26,10 @@
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
-    "@types/chart.js": "^2.9.27",
+    "@types/chart.js": "^2.9.29",
+    "@types/nprogress": "^0.2.0",
     "@types/phoenix": "^1.5.1",
+    "@types/phoenix_live_view": "^0.14.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-redux": "^7.1.12",
