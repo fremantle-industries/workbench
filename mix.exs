@@ -29,7 +29,7 @@ defmodule Workbench.MixProject do
   @dotenvs ~w(dev test)a
   defp app_list(env) when env in @dotenvs, do: [:dotenv | app_list()]
   defp app_list(_), do: app_list()
-  defp app_list, do: [:logger, :runtime_tools, :os_mon, :ueberauth_google, :tai]
+  defp app_list, do: [:logger, :runtime_tools, :tai]
 
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
@@ -54,8 +54,6 @@ defmodule Workbench.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.1"},
       {:number, "~> 1.0.0"},
-      {:guardian, "~> 2.0"},
-      {:ueberauth_google, "~> 0.8"},
       {:vex, "~> 0.7"},
       {:deque, "~> 1.0"},
       {:schoolbus, "~> 0.0.3"},

@@ -14,23 +14,18 @@
       <section class="">
         <nav class="navbar navbar-dark bg-dark">
           <a href="/" class="nav-link navbar-brand float-left">Workbench</a>
-          <%= if Guardian.Plug.current_resource(@conn) do %>
-            <nav class="nav">
-              <%= link "Balances", to: Routes.live_path(@conn, WorkbenchWeb.BalanceAllLive.Index), class: "nav-link text-white" %>
-              <%= link "Accounts", to: Routes.live_path(@conn, WorkbenchWeb.AccountLive.Index), class: "nav-link text-white" %>
-              <%= link "Wallets", to: Routes.live_path(@conn, WorkbenchWeb.WalletLive.Index), class: "nav-link text-white" %>
-              <%= link "Orders", to: Routes.live_path(@conn, WorkbenchWeb.OrderLive.Index), class: "nav-link text-white" %>
-              <%= link "Positions", to: Routes.live_path(@conn, WorkbenchWeb.PositionLive.Index), class: "nav-link text-white" %>
-              <%= link "Products", to: Routes.live_path(@conn, WorkbenchWeb.ProductLive.Index), class: "nav-link text-white" %>
-              <%= link "Fees", to: Routes.live_path(@conn, WorkbenchWeb.FeeLive.Index), class: "nav-link text-white" %>
-              <%= link "Venues", to: Routes.live_path(@conn, WorkbenchWeb.VenueLive.Index), class: "nav-link text-white" %>
-              <%= link "Advisors", to: Routes.live_path(@conn, WorkbenchWeb.AdvisorLive.Index), class: "nav-link text-white" %>
-              <%= link "Metrics", to: Routes.live_dashboard_path(@conn, :home), class: "nav-link text-white" %>
-            </nav>
-            <%= form_for @conn, Routes.auth_path(@conn, :delete), fn _f ->%>
-              <%= submit "Logout", class: "btn btn-primary float-right text-dark" %>
-            <% end %>
-          <% end %>
+          <nav class="nav">
+            <%= link "Balances", to: Routes.live_path(@conn, WorkbenchWeb.BalanceAllLive.Index), class: "nav-link text-white" %>
+            <%= link "Accounts", to: Routes.live_path(@conn, WorkbenchWeb.AccountLive.Index), class: "nav-link text-white" %>
+            <%= link "Wallets", to: Routes.live_path(@conn, WorkbenchWeb.WalletLive.Index), class: "nav-link text-white" %>
+            <%= link "Orders", to: Routes.live_path(@conn, WorkbenchWeb.OrderLive.Index), class: "nav-link text-white" %>
+            <%= link "Positions", to: Routes.live_path(@conn, WorkbenchWeb.PositionLive.Index), class: "nav-link text-white" %>
+            <%= link "Products", to: Routes.live_path(@conn, WorkbenchWeb.ProductLive.Index), class: "nav-link text-white" %>
+            <%= link "Fees", to: Routes.live_path(@conn, WorkbenchWeb.FeeLive.Index), class: "nav-link text-white" %>
+            <%= link "Venues", to: Routes.live_path(@conn, WorkbenchWeb.VenueLive.Index), class: "nav-link text-white" %>
+            <%= link "Advisors", to: Routes.live_path(@conn, WorkbenchWeb.AdvisorLive.Index), class: "nav-link text-white" %>
+            <%= link "Metrics", to: Routes.live_dashboard_path(@conn, :home), class: "nav-link text-white" %>
+          </nav>
         </nav>
       </section>
     </header>

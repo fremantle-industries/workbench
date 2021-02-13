@@ -1,7 +1,0 @@
-<section class="row">
-  <article class="column">
-    <a class="btn btn-primary btn-lg" href="/auth/google">
-      Login
-    </a>
-  </article>
-</section>

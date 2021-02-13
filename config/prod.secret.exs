@@ -40,17 +40,6 @@ config :workbench, WorkbenchWeb.Endpoint,
   secret_key_base: secret_key_base,
   live_view: [signing_salt: live_view_signing_salt]
 
-guardian_secret_key =
-  System.get_env("GUARDIAN_SECRET_KEY") ||
-    raise """
-    environment variable GUARDIAN_SECRET_KEY is missing.
-    You can use `mix guardian.gen.secret` to get one
-    """
-
-config :workbench, WorkbenchWeb.Guardian,
-  issuer: "workbench",
-  secret_key: guardian_secret_key
-
 # ## Using releases (Elixir v1.9+)
 #
 # If you are doing OTP releases, you need to instruct Phoenix

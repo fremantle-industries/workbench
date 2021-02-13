@@ -2,14 +2,6 @@ defmodule WorkbenchWeb.Router do
   use WorkbenchWeb, :router
   import Phoenix.LiveDashboard.Router
 
-  pipeline :auth do
-    plug WorkbenchWeb.AuthAccessPipeline
-  end
-
-  pipeline :no_auth do
-    plug WorkbenchWeb.NoAuthAccessPipeline
-  end
-
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -19,21 +11,10 @@ defmodule WorkbenchWeb.Router do
     plug :put_secure_browser_headers
   end
 
-  pipeline :api do
-    plug(:accepts, ["json"])
-  end
-
   scope "/", WorkbenchWeb do
-    pipe_through [:browser, :no_auth]
+    pipe_through [:browser]
 
-    resources "/login", LoginController, only: [:index]
-
-    get "/", Redirector, to: "/login"
-  end
-
-  scope "/", WorkbenchWeb do
-    pipe_through [:browser, :auth]
-
+    get "/", Redirector, to: "/balances/all"
     live "/balances/all", BalanceAllLive.Index
     live "/balances/day", BalanceDayLive.Index
     live "/balances/hour", BalanceHourLive.Index
@@ -51,17 +32,8 @@ defmodule WorkbenchWeb.Router do
   end
 
   scope "/" do
-    pipe_through [:browser, :auth]
+    pipe_through [:browser]
 
     live_dashboard("/metrics", metrics: WorkbenchWeb.Telemetry)
-  end
-
-  scope "/auth", WorkbenchWeb do
-    pipe_through :browser
-
-    get "/:provider", AuthController, :request
-    get "/:provider/callback", AuthController, :callback
-    post "/:provider/callback", AuthController, :callback
-    post "/logout", AuthController, :delete
   end
 end

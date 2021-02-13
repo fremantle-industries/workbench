@@ -80,23 +80,6 @@ $ docker-compose up db
 $ mix test
 ```
 
-## Oauth
-
-Start by following the setup guide [here](https://developers.google.com/adwords/api/docs/guides/authentication)
-
-Once finished setting up GCS Oauth add your Client-ID and Client-Secret to your .env file
-
-In the credentials section of your GCS dashboard select `Create Credentials`
-
-Under `Authorized JavaScript origins` add: 
-```bash
-    http://localhost
-```
-Under `Authorized redirect URIs` add:
-```bash
-    http://localhost:4000/auth/google/callback
-```
-
 Save this and re-open workbench in a private tab
 
 ## Help Wanted :)
