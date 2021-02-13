@@ -49,10 +49,24 @@ productivity and performance benefits from the [Phoenix](https://www.phoenixfram
 
 ## Install
 
-Clone the repository
+Add `workbench` to your list of dependencies in `mix.exs`
 
+```elixir
+def deps do
+  [{:workbench, "~> 0.0.3"}]
+end
 ```
-$ git clone https://github.com/fremantle-industries/workbench.git /tmp/workbench && cd /tmp/workbench
+
+Generate migrations
+
+```bash
+$ mix workbench.gen.migration
+```
+
+Run migrations
+
+```bash
+$ mix ecto.migrate
 ```
 
 ## Development

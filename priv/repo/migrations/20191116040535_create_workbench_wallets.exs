@@ -1,4 +1,4 @@
-defmodule Monitor.Repo.Migrations.CreateWallets do
+defmodule Workbench.Repo.Migrations.CreateWorkbenchWallets do
   use Ecto.Migration
 
   def change do
