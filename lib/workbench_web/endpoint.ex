@@ -49,4 +49,8 @@ defmodule WorkbenchWeb.Endpoint do
   )
 
   plug(WorkbenchWeb.Router)
+
+  if Application.get_env(:workbench, :sql_sandbox) do
+    plug Phoenix.Ecto.SQL.Sandbox
+  end
 end

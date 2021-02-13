@@ -11,9 +11,12 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    name: Test OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
 
-    container:
-      image: elixir:1.10.2-slim
+    strategy:
+      matrix:
+        otp: [21.x, 22.x, 23.x]
+        elixir: [1.9.x, 1.10.x, 1.11.x]
 
     services:
       db:
@@ -26,7 +29,12 @@ jobs:
           options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
-      - uses: actions/checkout@v1.0.0
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-elixir@v1.5
+        with:
+          otp-version: ${{matrix.otp}}
+          elixir-version: ${{matrix.elixir}}
 
       - name: Cache Dependencies
         uses: actions/cache@v2
@@ -46,10 +54,12 @@ jobs:
           mix local.hex --force
           mix deps.get
 
+      - name: Set chromedriver bin path for Wallaby
+        run: echo "CHROMEDRIVER_BIN_PATH=$CHROMEWEBDRIVER/chromedriver" >> $GITHUB_ENV
       - name: Test
         env:
           MIX_ENV: test
-          DATABASE_URL: postgres://postgres:postgres@db:5432/workbench_?
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/workbench_?
           SECRET_KEY_BASE: ${{secrets.SECRET_KEY_BASE}}
           LIVE_VIEW_SIGNING_SALT: ${{secrets.LIVE_VIEW_SIGNING_SALT}}
           GUARDIAN_SECRET_KEY: ${{secrets.GUARDIAN_SECRET_KEY}}
@@ -59,4 +69,4 @@ jobs:
           mix test
 
       - name: Dialyzer
-        run: mix dialyzer --halt-exit-status
+        run: mix dialyzer

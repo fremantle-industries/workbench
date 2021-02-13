@@ -1,5 +1,22 @@
 use Mix.Config
 
+# Enable concurrent feature tests
+#
+# Your version of chromedriver must match the version of chrome to
+# successfully run feature tests.
+config :wallaby, otp_app: :workbench
+
+chromedriver_path =
+  System.get_env("CHROMEDRIVER_BIN_PATH") ||
+    raise """
+    environment variable CHROMEDRIVER_BIN_PATH is missing.
+    You must set it to the matching version of chrome to run feature tests.
+    """
+
+config :wallaby, chromedriver: [path: chromedriver_path, headless: true]
+
+config :workbench, :sql_sandbox, true
+
 # Configure your database
 #
 # The MIX_TEST_PARTITION environment variable can be used
@@ -20,7 +37,7 @@ config :workbench, Workbench.Repo,
 # you can enable the server option below.
 config :workbench, WorkbenchWeb.Endpoint,
   http: [port: 4002],
-  server: false
+  server: true
 
 config :tai, advisor_groups: %{}
 

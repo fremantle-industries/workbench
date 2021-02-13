@@ -37,38 +37,41 @@ defmodule Workbench.MixProject do
   defp deps do
     [
       {:decimal, "~> 2.0"},
+      {:deque, "~> 1.0"},
+      {:ecto_sql, "~> 3.1"},
       {:enumerati, "~> 0.0.8"},
+      {:gettext, "~> 0.18.0"},
+      {:guardian, "~> 2.0"},
+      {:jason, "~> 1.0"},
+      {:libcluster, "~> 3.2"},
+      {:logger_json, "~> 4.0"},
+      {:number, "~> 1.0.0"},
+      {:phoenix, "~> 1.5"},
+      {:phoenix_active_link, "~> 0.3"},
+      {:phoenix_ecto, "~> 4.0"},
+      {:phoenix_html, "~> 2.14"},
+      {:phoenix_live_dashboard, "~> 0.4"},
+      {:phoenix_live_view, "~> 0.15"},
+      {:phoenix_pubsub, "~> 2.0"},
+      {:plug_cowboy, "~> 2.1"},
+      {:vex, "~> 0.7"},
+      {:postgrex, ">= 0.0.0"},
+      {:schoolbus, "~> 0.0.3"},
       {:stored, "~> 0.0.4"},
       {:tai, "~> 0.0.58"},
-      {:logger_json, "~> 4.0"},
-      {:ecto_sql, "~> 3.1"},
-      {:phoenix, "~> 1.5"},
-      {:phoenix_live_view, "~> 0.15"},
-      {:phoenix_live_dashboard, "~> 0.4"},
-      {:phoenix_ecto, "~> 4.0"},
-      {:phoenix_pubsub, "~> 2.0"},
-      {:phoenix_html, "~> 2.14"},
-      {:phoenix_active_link, "~> 0.3"},
-      {:postgrex, ">= 0.0.0"},
-      {:gettext, "~> 0.18.0"},
-      {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.1"},
-      {:number, "~> 1.0.0"},
-      {:vex, "~> 0.7"},
-      {:deque, "~> 1.0"},
-      {:schoolbus, "~> 0.0.3"},
       {:telemetry, "~> 0.4"},
       {:telemetry_metrics, "~> 0.4"},
       {:telemetry_poller, "~> 0.4"},
-      {:libcluster, "~> 3.2"},
-      {:dotenv, "~> 3.1.0", only: [:dev, :test]},
+      # {:dotenv, "~> 3.1.0", only: [:dev, :test]},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:dialyxir, "~> 1.0", only: :dev, runtime: false},
+      {:dotenv, "~> 3.0.0", only: [:dev, :test]},
       {:logger_file_backend_with_formatters, "~> 0.0.1", only: [:dev, :test]},
       {:logger_file_backend_with_formatters_stackdriver, "~> 0.0.4", only: [:dev, :test]},
-      {:mock, "~> 0.3", only: :test},
+      {:ex_doc, ">= 0.0.0", only: :dev},
       {:floki, ">= 0.0.0", only: :test},
-      {:ex_doc, ">= 0.0.0", only: :dev}
+      {:mock, "~> 0.3", only: :test},
+      {:wallaby, "~> 0.28.0", runtime: false, only: :test}
     ]
   end
 
@@ -80,7 +83,7 @@ defmodule Workbench.MixProject do
     %{
       licenses: ["MIT"],
       maintainers: ["Alex Kwiatkowski"],
-      links: %{"GitHub" => "https://github.com/fremantle-industries/workbench"}
+      links: %{"GitHub" => "https://github.com/fremantle-industries/prop"}
     }
   end
 
