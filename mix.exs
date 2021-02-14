@@ -14,7 +14,7 @@ defmodule Workbench.MixProject do
       description: description(),
       package: package(),
       dialyzer: [
-        plt_add_apps: [:tai]
+        plt_add_apps: [:tai, :mix]
       ]
     ]
   end
