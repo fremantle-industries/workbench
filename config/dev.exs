@@ -28,6 +28,7 @@ config :workbench, WorkbenchWeb.Endpoint,
       "--mode",
       "development",
       "--watch",
+      "--watch-options-stdin",
       cd: Path.expand("../assets", __DIR__)
     ]
   ]
