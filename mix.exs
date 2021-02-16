@@ -65,7 +65,7 @@ defmodule Workbench.MixProject do
       # {:dotenv, "~> 3.1.0", only: [:dev, :test]},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:dialyxir, "~> 1.0", only: :dev, runtime: false},
-      {:dotenv, "~> 3.0.0", only: [:dev, :test]},
+      {:dotenv, "~> 3.1.0", only: [:dev, :test]},
       {:logger_file_backend_with_formatters, "~> 0.0.1", only: [:dev, :test]},
       {:logger_file_backend_with_formatters_stackdriver, "~> 0.0.4", only: [:dev, :test]},
       {:ex_doc, ">= 0.0.0", only: :dev},
