@@ -1,5 +1,5 @@
 # Workbench - From Idea to Execution
-[![Build Status](https://github.com/fremantle-industries/workbench/workflows/test/badge.svg)](https://github.com/fremantle-industries/workbench/actions?query=workflow%3Atest)
+[![Build Status](https://github.com/fremantle-industries/workbench/workflows/test/badge.svg?branch=master)](https://github.com/fremantle-industries/workbench/actions?query=workflow%3Atest)
 
 Manage your trading operation across a globally distributed cluster
 
