@@ -69,6 +69,89 @@ Run migrations
 $ mix ecto.migrate
 ```
 
+## Running workbench as a standalone endpoint
+
+Add the workbench phoenix endpoint to your config
+
+```elixir
+config :workbench, WorkbenchWeb.Endpoint,
+  http: [port: 4000],
+  url: [host: "workbench.lvh.me", port: "4000"],
+```
+
+## Embedding workbench in your own Elixir project
+
+There are two options for running `workbench` along side your existing Elixir projects
+
+1. Plug & Phoenix provide the ability to host multiple endpoints
+as servers on different ports
+
+```elixir
+# config/config.exs
+# Phoenix endpoints
+config :my_app, MyAppWeb.Endpoint,
+  pubsub_server: MyApp.PubSub,
+  http: [port: 4000],
+  url: [host: "my-app.lvh.me", port: "4000"],
+  live_view: [signing_salt: "aolmUusQ6//zaa5GZHu7DG2V3YAgOoP/"],
+  secret_key_base: "vKt36v4Gi2Orw8b8iBRg6ZFdzXKLvcRYkk1AaMLYX0+ry7k5XaJXd/LY/itmoxPP",
+  server: true
+
+config :workbench, WorkbenchWeb.Endpoint,
+  pubsub_server: Workbench.PubSub,
+  http: [port: 4001],
+  url: [host: "workbench.lvh.me", port: "4001"],
+  live_view: [signing_salt: "aolmUusQ6//zaa5GZHu7DG2V3YAgOoP/"],
+  secret_key_base: "xKt36v4Gi2Orw8b8iBRg6ZFdzXKLvcRYkk1AaMLYX0+ry7k5XaJXd/LY/itmoxPP",
+  server: true
+```
+
+2. Use a proxy to host multiple endpoints on the same port [https://github.com/jesseshieh/master_proxy](https://github.com/jesseshieh/master_proxy)
+
+```elixir
+# mix.exs
+def deps do
+  [{:master_proxy, "~> 0.1"}]
+end
+```
+
+```elixir
+# config/config.exs
+# Phoenix endpoints
+config :niex, MyAppWeb.Endpoint,
+  pubsub_server: MyApp.PubSub,
+  live_view: [signing_salt: "aolmUusQ6//zaa5GZHu7DG2V3YAgOoP/"],
+  secret_key_base: "vKt36v4Gi2Orw8b8iBRg6ZFdzXKLvcRYkk1AaMLYX0+ry7k5XaJXd/LY/itmoxPP",
+  server: false,
+  debug_errors: true,
+  check_origin: false
+
+config :workbench, WorkbenchWeb.Endpoint,
+  pubsub_server: Workbench.PubSub,
+  live_view: [signing_salt: "polmUusQ6//zaa5GZHu7DG2V3YAgOoP/"],
+  secret_key_base: "xKt36v4Gi2Orw8b8iBRg6ZFdzXKLvcRYkk1AaMLYX0+ry7k5XaJXd/LY/itmoxPP",
+  server: false,
+  debug_errors: true,
+  check_origin: false
+
+
+# Master Proxy
+config :master_proxy,
+  # any Cowboy options are allowed
+  http: [:inet6, port: 4000],
+  # https: [:inet6, port: 4443],
+  backends: [
+    %{
+      host: ~r/my-app.lvh.me/,
+      phoenix_endpoint: MyAppWeb.Endpoint
+    },
+    %{
+      host: ~r/workbench.lvh.me/,
+      phoenix_endpoint: WorkbenchWeb.Endpoint
+    }
+  ]
+```
+
 ## Development
 
 You can run the app natively on the host
