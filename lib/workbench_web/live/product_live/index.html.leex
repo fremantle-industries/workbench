@@ -47,8 +47,8 @@
           <%= if Enum.any?(@products) do %>
             <%= for p <- @products do %>
               <tr>
-                <td class="align-middle"><%= link p.venue_id, to: Routes.product_path(@socket, :show, "#{p.venue_id}-#{p.symbol}") %></td>
-                <td class="align-middle"><%= link p.symbol, to: Routes.product_path(@socket, :show, "#{p.venue_id}-#{p.symbol}") %></td>
+                <td class="align-middle"><%= link p.venue_id, to: Routes.product_path(@socket, :show, p.venue_id, p.symbol) %></td>
+                <td class="align-middle"><%= link p.symbol, to: Routes.product_path(@socket, :show, p.venue_id, p.symbol) %></td>
                 <td class="align-middle"><%= p.alias %></td>
                 <td class="align-middle"><%= p.type %></td>
                 <td class="align-middle"><%= p.status %></td>

@@ -25,7 +25,7 @@ defmodule WorkbenchWeb.Router do
     live "/positions", PositionLive.Index
     live "/orders", OrderLive.Index
     live "/products", ProductLive.Index
-    resources "/products", ProductController, only: [:show]
+    resources "/products/:venue", ProductController, only: [:show]
     live "/fees", FeeLive.Index
     live "/venues", VenueLive.Index
     live "/advisors", AdvisorLive.Index

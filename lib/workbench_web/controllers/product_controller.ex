@@ -1,10 +1,11 @@
 defmodule WorkbenchWeb.ProductController do
   use WorkbenchWeb, :controller
 
-  def show(conn, %{"id" => id}) do
-    [venue, symbol] = id |> String.split("-") |> Enum.map(&String.to_atom/1)
+  def show(conn, %{"venue" => venue, "id" => id}) do
+    venue_id = venue |> String.to_atom()
+    product_symbol = id |> String.to_atom()
 
-    {venue, symbol}
+    {venue_id, product_symbol}
     |> Tai.Venues.ProductStore.find()
     |> case do
       {:ok, product} ->
