@@ -61,6 +61,7 @@ defmodule Workbench.MixProject do
       {:tai, "~> 0.0.59"},
       {:telemetry, "~> 0.4"},
       {:telemetry_metrics, "~> 0.4"},
+      {:telemetry_metrics_prometheus, "~> 1.0"},
       {:telemetry_poller, "~> 0.4"},
       # {:dotenv, "~> 3.1.0", only: [:dev, :test]},
       {:phoenix_live_reload, "~> 1.2", only: :dev},

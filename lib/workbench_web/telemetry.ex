@@ -8,7 +8,8 @@ defmodule WorkbenchWeb.Telemetry do
 
   def init(_arg) do
     children = [
-      {:telemetry_poller, measurements: periodic_measurements(), period: 10_000}
+      {:telemetry_poller, measurements: periodic_measurements(), period: 10_000},
+      {TelemetryMetricsPrometheus, [metrics: metrics(), port: prometheus_metrics_port()]}
     ]
 
     Supervisor.init(children, strategy: :one_for_one)
@@ -17,33 +18,38 @@ defmodule WorkbenchWeb.Telemetry do
   def metrics do
     [
       # Phoenix Metrics
-      summary("phoenix.endpoint.stop.duration",
-        unit: {:native, :millisecond}
-      ),
-      summary("phoenix.endpoint.stop.duration",
+      last_value("phoenix.endpoint.stop.duration",
         tags: [:method, :request_path],
         tag_values: &tag_method_and_request_path/1,
         unit: {:native, :millisecond}
       ),
-      summary("phoenix.router_dispatch.stop.duration",
+      last_value("phoenix.router_dispatch.stop.duration",
         tags: [:controller_action],
         tag_values: &tag_controller_action/1,
         unit: {:native, :millisecond}
       ),
 
       # Database Time Metrics
-      summary("workbench.repo.query.total_time", unit: {:native, :millisecond}),
-      summary("workbench.repo.query.decode_time", unit: {:native, :millisecond}),
-      summary("workbench.repo.query.query_time", unit: {:native, :millisecond}),
-      summary("workbench.repo.query.queue_time", unit: {:native, :millisecond}),
-      summary("workbench.repo.query.idle_time", unit: {:native, :millisecond}),
+      last_value("monitor.repo.query.total_time", unit: {:native, :millisecond}),
+      last_value("monitor.repo.query.decode_time", unit: {:native, :millisecond}),
+      last_value("monitor.repo.query.query_time", unit: {:native, :millisecond}),
+      last_value("monitor.repo.query.queue_time", unit: {:native, :millisecond}),
+      last_value("monitor.repo.query.idle_time", unit: {:native, :millisecond}),
 
       # VM Metrics
-      summary("vm.memory.total", unit: {:byte, :kilobyte}),
-      summary("vm.total_run_queue_lengths.total"),
-      summary("vm.total_run_queue_lengths.cpu"),
-      summary("vm.total_run_queue_lengths.io")
+      last_value("vm.memory.total", unit: {:byte, :kilobyte}),
+      last_value("vm.total_run_queue_lengths.total"),
+      last_value("vm.total_run_queue_lengths.cpu"),
+      last_value("vm.total_run_queue_lengths.io"),
+
+      # Tai Metrics
+      counter("tai.venues.stream.connect.total", tags: [:venue]),
+      counter("tai.venues.stream.disconnect.total", tags: [:venue])
     ]
+  end
+
+  defp prometheus_metrics_port do
+    Application.get_env(:workbench, :prometheus_metrics_port)
   end
 
   defp periodic_measurements do

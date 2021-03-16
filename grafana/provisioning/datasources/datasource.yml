@@ -1,0 +1,48 @@
+apiVersion: 1
+
+deleteDatasources:
+  - name: Prometheus
+    orgId: 1
+  - name: Workbench TimescaleDB
+    orgId: 1
+
+datasources:
+- name: Prometheus
+  type: prometheus
+  access: proxy
+  orgId: 1
+  url: http://prometheus:9090
+  password:
+  user:
+  database:
+  basicAuth: false
+  basicAuthUser:
+  basicAuthPassword:
+  withCredentials:
+  isDefault: true
+  jsonData:
+     graphiteVersion: "1.1"
+     tlsAuth: false
+     tlsAuthWithCACert: false
+  secureJsonData:
+    tlsCACert: "..."
+    tlsClientCert: "..."
+    tlsClientKey: "..."
+  version: 1
+  editable: true
+
+- name: Workbench TimescaleDB
+  type: postgres
+  orgId: 1
+  url: db:5432
+  password:
+  user: postgres
+  database: workbench_dev
+  isDefault: false
+  jsonData:
+    sslmode: "disable"
+    timescaledb: true
+  secureJsonData:
+    password: password
+  version: 1
+  editable: true

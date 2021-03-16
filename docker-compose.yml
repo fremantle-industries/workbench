@@ -2,12 +2,11 @@ version: '3.8'
 
 services:
   db:
-    image: 'postgres:13.1'
-    restart: always
-    volumes:
-      - 'dbdata:/var/lib/postgresql/data'
+    image: timescale/timescaledb:2.1.0-pg13
     ports:
       - "5432:5432"
+    volumes:
+      - "db_data:/var/lib/postgresql/data"
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_PASSWORD: postgres
@@ -17,34 +16,46 @@ services:
   web:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./Dockerfile
       target: builder
+    ports:
+      - "${HOST_PORT:-4000}:${PORT:-4000}"
+      - "${PROMETHEUS_METRICS_PORT:-9568}:${PROMETHEUS_METRICS_PORT:-9568}"
+      - "4369:4369"
+      - "9999:9999"
     depends_on:
       - db
-    env_file:
-      - .env
-    ports:
-      - '4000:4000'
-      - "11000:4369"
-      - "11001:9999"
     environment:
-      - "${MIX_ENV:-dev}"
       - PORT
       - HOST_PORT
       - HOST
+      - REPLACE_OS_VARS=true
+      - NODE_COOKIE
       - SECRET_KEY_BASE
       - LIVE_VIEW_SIGNING_SALT
       - GUARDIAN_SECRET_KEY
       - GOOGLE_OAUTH_CLIENT_ID
       - GOOGLE_OAUTH_CLIENT_SECRET
+      - GOOGLE_CLOUD_PROJECT
+      - GOOGLE_COMPUTE_ENGINE_INSTANCE
+      - GOOGLE_COMPUTE_ENGINE_ZONE
       - BALANCE_SNAPSHOT_ENABLED
       - BALANCE_SNAPSHOT_BTC_USD_VENUE
       - BALANCE_SNAPSHOT_BTC_USD_SYMBOL
       - BALANCE_SNAPSHOT_USD_QUOTE_VENUE
       - BALANCE_SNAPSHOT_USD_QUOTE_ASSET
+      - BITMEX_API_KEY
+      - BITMEX_API_SECRET
+      - BINANCE_API_KEY
+      - BINANCE_API_SECRET
+      - OKEX_API_KEY
+      - OKEX_API_PASSPHRASE
+      - OKEX_API_SECRET
+      - DERIBIT_CLIENT_ID
+      - DERIBIT_CLIENT_SECRET
       - DATABASE_URL
     volumes:
-      - webbuild:/app/_build
+      - web_build:/app/_build
       - ./.env:/app/.env
       - ./mix.exs:/app/mix.exs
       - ./mix.lock:/app/mix.lock
@@ -60,6 +71,38 @@ services:
       - ./priv/repo:/app/priv/repo
     entrypoint: "sh -c 'mix setup.deps && mix phx.server'"
 
+  prometheus:
+    image: 'prom/prometheus:v2.25.0'
+    restart: always
+    ports:
+      - 9090:9090
+    depends_on:
+      - web
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+
+  grafana:
+    image: 'grafana/grafana:7.4.2'
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      - prometheus
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+    env_file:
+      - ./grafana/config.monitoring
+
 volumes:
-  dbdata:
-  webbuild:
+  db_data:
+  web_build:
+  prometheus_data:
+  grafana_data:
