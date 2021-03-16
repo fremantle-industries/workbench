@@ -24,7 +24,7 @@
             <%= link "Fees", to: Routes.live_path(@conn, WorkbenchWeb.FeeLive.Index), class: "nav-link text-white" %>
             <%= link "Venues", to: Routes.live_path(@conn, WorkbenchWeb.VenueLive.Index), class: "nav-link text-white" %>
             <%= link "Advisors", to: Routes.live_path(@conn, WorkbenchWeb.AdvisorLive.Index), class: "nav-link text-white" %>
-            <%= link "Metrics", to: Routes.live_dashboard_path(@conn, :home), class: "nav-link text-white" %>
+            <%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "nav-link text-white" %>
           </nav>
         </nav>
       </section>

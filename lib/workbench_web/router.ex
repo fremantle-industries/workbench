@@ -34,6 +34,6 @@ defmodule WorkbenchWeb.Router do
   scope "/" do
     pipe_through [:browser]
 
-    live_dashboard("/metrics", metrics: WorkbenchWeb.Telemetry)
+    live_dashboard("/live_dashboard", metrics: WorkbenchWeb.Telemetry)
   end
 end
