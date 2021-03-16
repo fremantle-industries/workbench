@@ -45,7 +45,6 @@ productivity and performance benefits from the [Phoenix](https://www.phoenixfram
 - [Phoenix](https://www.phoenixframework.org/)
 - [Tai](https://github.com/fremantle-industries/tai)
 - [Postgres](https://www.postgresql.org/)
-- [Google OAuth 2.0](https://developers.google.com/identity/protocols/OAuth2)
 
 ## Install
 
