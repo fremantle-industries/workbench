@@ -108,6 +108,12 @@ config :tai,
       adapter: Tai.VenueAdapters.OkEx,
       timeout: 60_000,
       products: "btc_usdt btc_usd_swap btc_usdt_swap btc_usd_200626 btc_usdt_200626 usdc_usdt"
+    ],
+    ftx: [
+      enabled: true,
+      adapter: Tai.VenueAdapters.Ftx,
+      timeout: 60_000,
+      products: "btc/usd btc-perp btc-0326 btc-0624"
     ]
   }
 

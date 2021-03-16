@@ -58,7 +58,7 @@ defmodule Workbench.MixProject do
       {:postgrex, ">= 0.0.0"},
       {:schoolbus, "~> 0.0.3"},
       {:stored, "~> 0.0.4"},
-      {:tai, "~> 0.0.58"},
+      {:tai, "~> 0.0.59"},
       {:telemetry, "~> 0.4"},
       {:telemetry_metrics, "~> 0.4"},
       {:telemetry_poller, "~> 0.4"},

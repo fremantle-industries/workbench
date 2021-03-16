@@ -12,6 +12,8 @@ defmodule WorkbenchWeb.ProductView do
     status
     listing
     expiry
+    collateral
+    collateral_weight
     price_increment
     size_increment
     min_price
