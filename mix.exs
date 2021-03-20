@@ -84,7 +84,7 @@ defmodule Workbench.MixProject do
     %{
       licenses: ["MIT"],
       maintainers: ["Alex Kwiatkowski"],
-      links: %{"GitHub" => "https://github.com/fremantle-industries/prop"}
+      links: %{"GitHub" => "https://github.com/fremantle-industries/workbench"}
     }
   end
 
