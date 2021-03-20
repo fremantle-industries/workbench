@@ -22,6 +22,7 @@ defmodule WorkbenchWeb.ProductView do
     max_size
     min_notional
     value
+    value_side
     is_quanto
     is_inverse
     maker_fee
