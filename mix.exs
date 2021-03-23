@@ -77,7 +77,7 @@ defmodule Workbench.MixProject do
   end
 
   defp description do
-    "From Idea to Execution - Manage your trading operation across a globally distributed cluster"
+    "From Idea to Execution - Manage your trading operation across a distributed cluster"
   end
 
   defp package do

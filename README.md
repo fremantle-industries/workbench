@@ -2,7 +2,7 @@
 [![Build Status](https://github.com/fremantle-industries/workbench/workflows/test/badge.svg?branch=main)](https://github.com/fremantle-industries/workbench/actions?query=workflow%3Atest)
 [![hex.pm version](https://img.shields.io/hexpm/v/workbench.svg?style=flat)](https://hex.pm/packages/workbench)
 
-Manage your trading operation across a globally distributed cluster
+Manage your trading operation across a distributed cluster
 
 ## Project Goals
 
@@ -12,7 +12,7 @@ productivity and performance benefits from the [Phoenix](https://www.phoenixfram
 
 ## Features
 
-### Remotely Control Trade Instances in the Cloud
+### Remotely Control Trade Instances in a Cluster
 
 ![remote-control-trade](./docs/remote-control-trade.png)
 
