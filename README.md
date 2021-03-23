@@ -1,5 +1,6 @@
 # Workbench - From Idea to Execution
 [![Build Status](https://github.com/fremantle-industries/workbench/workflows/test/badge.svg?branch=main)](https://github.com/fremantle-industries/workbench/actions?query=workflow%3Atest)
+[![hex.pm version](https://img.shields.io/hexpm/v/workbench.svg?style=flat)](https://hex.pm/packages/workbench)
 
 Manage your trading operation across a globally distributed cluster
 
