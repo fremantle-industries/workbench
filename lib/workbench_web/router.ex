@@ -1,6 +1,5 @@
 defmodule WorkbenchWeb.Router do
   use WorkbenchWeb, :router
-  import Phoenix.LiveDashboard.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -29,11 +28,5 @@ defmodule WorkbenchWeb.Router do
     live "/fees", FeeLive.Index
     live "/venues", VenueLive.Index
     live "/advisors", AdvisorLive.Index
-  end
-
-  scope "/" do
-    pipe_through [:browser]
-
-    live_dashboard("/live_dashboard", metrics: WorkbenchWeb.Telemetry)
   end
 end

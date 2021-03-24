@@ -50,7 +50,6 @@ defmodule Workbench.MixProject do
       {:phoenix_active_link, "~> 0.3"},
       {:phoenix_ecto, "~> 4.0"},
       {:phoenix_html, "~> 2.14"},
-      {:phoenix_live_dashboard, "~> 0.4"},
       {:phoenix_live_view, "~> 0.15"},
       {:phoenix_pubsub, "~> 2.0"},
       {:plug_cowboy, "~> 2.1"},
