@@ -1,70 +1,67 @@
-<section class="row">
-  <article class="column">
-    <h2>Wallets</h2>
+<div class="flex items-center space-x-4">
+  <h2 class="text-3xl">Wallets</h2>
+</div>
 
-    <%= form_for @changeset, "#", [phx_submit: :save], fn f -> %>
-      <div class="table-responsive border mt-3 ">
-        <table class="table table-hover mb-0">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Asset</th>
-              <th>Amount</th>
-              <th>Address</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <%= if Enum.any?(@wallets) do %>
-              <%= for w <- @wallets do %>
-                <tr>
-                  <td class="align-middle"><%= w.name %></td>
-                  <td class="align-middle"><%= w.asset %></td>
-                  <td class="align-middle"><%= number_to_delimited(w.amount) %></td>
-                  <td class="align-middle"><%= w.address %></td>
-                  <td class="align-middle">
-                    <button
-                      class="btn btn-danger btn-sm"
-                      phx-click="delete"
-                      phx-value-wallet-id="<%= w.id %>"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              <% end %>
-            <% else %>
-              <tr>
-                <td colspan="5">No wallets</td>
-              </tr>
-            <% end %>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td>
-                <%= text_input f, :name, placeholder: "bitmex:main", class: "form-control" %>
-                <%= error_tag f, :name %>
-              </td>
-              <td>
-                <%= text_input f, :asset, placeholder: "btc", class: "form-control" %>
-                <%= error_tag f, :asset %>
-              </td>
-              <td>
-                <%= text_input f, :amount, type: :number, min: 0, step: 0.0000000000000000001, placeholder: "1.1", class: "form-control" %>
-              </td>
-              <td>
-                <%= text_input f, :address, placeholder: "bc1q34aq5drpuwy3wgl9lhup9892qp6svr8ldzyy7c", class: "form-control" %>
-              </td>
-              <td></td>
-            </tr>
-            <tr>
-              <td colspan="5">
-                <button class="btn btn-primary">Add</button>
-              </td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-    <% end %>
-  </article>
-</section>
+<%= form_for @changeset, "#", [phx_submit: :save], fn f -> %>
+  <table class="w-full mt-4">
+    <thead>
+      <tr>
+        <th scope="col" class="px-4 py-2">Name</th>
+        <th scope="col" class="px-4 py-2">Asset</th>
+        <th scope="col" class="px-4 py-2">Amount</th>
+        <th scope="col" class="px-4 py-2">Address</th>
+        <th scope="col" class="px-4 py-2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= if Enum.any?(@wallets) do %>
+        <%= for w <- @wallets do %>
+          <tr>
+            <td class="border px-4 py-2"><%= w.name %></td>
+            <td class="border px-4 py-2"><%= w.asset %></td>
+            <td class="border px-4 py-2"><%= number_to_delimited(w.amount) %></td>
+            <td class="border px-4 py-2"><%= w.address %></td>
+            <td class="border px-4 py-2 text-right">
+              <button
+                type="button"
+                class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                phx-click="delete"
+                phx-value-wallet-id="<%= w.id %>"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="5" class="border px-4 py-2">No wallets</td>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td class="border px-4 py-2">
+          <%= text_input f, :name, placeholder: "bitmex:main", class: "form-control" %>
+          <%= error_tag f, :name %>
+        </td>
+        <td class="border px-4 py-2">
+          <%= text_input f, :asset, placeholder: "btc", class: "form-control" %>
+          <%= error_tag f, :asset %>
+        </td>
+        <td class="border px-4 py-2">
+          <%= text_input f, :amount, type: :number, min: 0, step: 0.0000000000000000001, placeholder: "1.1", class: "form-control" %>
+        </td>
+        <td class="border px-4 py-2">
+          <%= text_input f, :address, placeholder: "bc1q34aq5drpuwy3wgl9lhup9892qp6svr8ldzyy7c", class: "form-control" %>
+        </td>
+        <td class="border px-4 py-2"></td>
+      </tr>
+      <tr>
+        <td colspan="5" class="px-4 py-2">
+          <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Add</button>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+<% end %>

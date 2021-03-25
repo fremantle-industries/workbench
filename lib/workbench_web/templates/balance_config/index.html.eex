@@ -1,41 +1,23 @@
-<section class="row">
-  <article class="column">
-    <h3>Daily Balances</h3>
+<div class="flex items-center space-x-4">
+  <h2 class="text-3xl">Balance Config</h2>
+  <%= render WorkbenchWeb.BalanceNavView, "show.html", conn: @conn %>
+</div>
 
-    <nav class="nav nav-pills">
-      <%= link "All", to: "/balances/all" , class: "nav-link text-primary" %>
-      <%= link "Hour", to: "/balances/hour" , class: "nav-link text-primary" %>
-      <%= link "Day", to: "/balances/day" , class: "nav-link text-primary" %>
-      <%= link "Table", to: "/balances/table" , class: "nav-link text-primary" %>
-      <%= link "Config", to: "/balances/config" , class: "nav-link active bg-primary" %>
-    </nav>
-
-    <ul class="u-margin-top-md">
-      <li>
-        <strong>Enabled:</strong> <%= @config.enabled %>
-      </li>
-      <li>
-        <strong>Boot Delay (ms):</strong> <%= @config.boot_delay_ms %>
-      </li>
-      <li>
-        <strong>Every (ms):</strong> <%= @config.every_ms %>
-      </li>
-      <li>
-        <strong>BTC/USD venue:</strong> <%= @config.btc_usd_venue %>
-      </li>
-      <li>
-        <strong>BTC/USD symbol:</strong> <%= @config.btc_usd_symbol %>
-      </li>
-      <li>
-        <strong>USD quote venue:</strong> <%= @config.usd_quote_venue %>
-      </li>
-      <li>
-        <strong>USD quote symbol:</strong> <%= @config.usd_quote_asset %>
-      </li>
-      <li>
-        <strong>Quote Pairs</strong>
-        <%= @config.quote_pairs |> Enum.map(fn {venue, asset} -> "#{venue}.#{asset}" end) |> Enum.join(", ") %>
-      </li>
-    </ul>
-  </article>
-</section>
+<dl class="mt-4 inline-grid grid-cols-2">
+  <dt class="font-bold w-36">Enabled:</dt>
+  <dd><%= @config.enabled %></dd>
+  <dt class="font-bold w-36">Boot Delay (ms):</dt>
+  <dd><%= @config.boot_delay_ms %></dd>
+  <dt class="font-bold w-36">Every (ms):</dt>
+  <dd><%= @config.every_ms %></dd>
+  <dt class="font-bold w-36">BTC/USD venue:</dt>
+  <dd><%= @config.btc_usd_venue %></dd>
+  <dt class="font-bold w-36">BTC/USD symbol:</dt>
+  <dd><%= @config.btc_usd_symbol %></dd>
+  <dt class="font-bold w-36">USD quote venue:</dt>
+  <dd><%= @config.usd_quote_venue %></dd>
+  <dt class="font-bold w-36">USD quote symbol:</dt>
+  <dd><%= @config.usd_quote_asset %></dd>
+  <dt class="font-bold w-36">Quote Pairs</dt>
+  <dd><%= @config.quote_pairs |> Enum.map(fn {venue, asset} -> "#{venue}.#{asset}" end) |> Enum.join(", ") %></dd>
+</dl>

@@ -1,13 +1,10 @@
-<section class="product__show row">
-  <article class="column">
-    <h2><%= @product.venue_id %>: <%= @product.symbol %></h2>
+<div class="flex items-center space-x-4">
+  <h2 class="text-3xl">Product - <%= @product.venue_id %>:<%= @product.symbol %></h2>
+</div>
 
-    <ul class="pair-list">
-      <%= for key <- attrs() do %>
-        <li>
-          <strong><%= key %></strong> <%= key |> pluck(@product) %>
-        </li>
-      <% end %>
-    </ul>
-  </article>
-</section>
+<dl class="mt-4 inline-grid grid-cols-2">
+  <%= for key <- attrs() do %>
+    <dt class="font-bold w-36"><%= key %></dt>
+    <dd><%= key |> pluck(@product) %></dd>
+  <% end %>
+</dl>

@@ -1,56 +1,50 @@
-<section class="row">
-  <article class="column">
-    <div>
-      <h2>Fees</h2>
+<div class="flex items-center space-x-4">
+  <h2 class="text-3xl">Fees</h2>
 
-      <form
-        phx-change="node_selected"
-      >
-        <select name="node" id="select_nodes" phx-update="ignore">
-          <%= content_tag :option, value: Node.self() do %>
-            <%= Node.self() %>
-          <% end %>
+  <form
+    phx-change="node_selected"
+  >
+    <select name="node" id="select_nodes" phx-update="ignore">
+      <%= content_tag :option, value: Node.self() do %>
+        <%= Node.self() %>
+      <% end %>
 
-          <%= for n <- Node.list do %>
-            <%= content_tag :option, value: n, selected: @node == Atom.to_string(n) do %>
-              <%= n %>
-            <% end %>
-          <% end %>
-        </select>
-      </form>
-    </div>
+      <%= for n <- Node.list do %>
+        <%= content_tag :option, value: n, selected: @node == Atom.to_string(n) do %>
+          <%= n %>
+        <% end %>
+      <% end %>
+    </select>
+  </form>
+</div>
 
-    <div class="table-responsive border mt-3 ">
-      <table class="table table-hover mb-0">
-        <thead>
-          <th scope="col">Venue</th>
-          <th scope="col">Symbol</th>
-          <th scope="col">Credential</th>
-          <th scope="col">Maker</th>
-          <th scope="col">Maker Type</th>
-          <th scope="col">Taker</th>
-          <th scope="col">Taker Type</th>
-        </thead>
-        <tbody>
-          <%= if Enum.any?(@fees) do %>
-            <%= for f <- @fees do %>
-              <tr>
-                <td class="align-middle"><%= f.venue_id %></td>
-                <td class="align-middle"><%= f.symbol %></td>
-                <td class="align-middle"><%= f.credential_id %></td>
-                <td class="align-middle"><%= f.maker && decimal(f.maker) %></td>
-                <td class="align-middle"><%= f.maker_type %></td>
-                <td class="align-middle"><%= f.taker && decimal(f.taker) %></td>
-                <td class="align-middle"><%= f.taker_type %></td>
-              </tr>
-            <% end %>
-          <% else %>
-            <tr>
-              <td colspan="7">No fees</td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  </article>
-</section>
+<table class="w-full mt-4">
+  <thead>
+    <th scope="col" class="px-4 py-2">Venue</th>
+    <th scope="col" class="px-4 py-2">Symbol</th>
+    <th scope="col" class="px-4 py-2">Credential</th>
+    <th scope="col" class="px-4 py-2">Maker</th>
+    <th scope="col" class="px-4 py-2">Maker Type</th>
+    <th scope="col" class="px-4 py-2">Taker</th>
+    <th scope="col" class="px-4 py-2">Taker Type</th>
+  </thead>
+  <tbody>
+    <%= if Enum.any?(@fees) do %>
+      <%= for f <- @fees do %>
+        <tr>
+          <td class="border px-4 py-2"><%= f.venue_id %></td>
+          <td class="border px-4 py-2"><%= f.symbol %></td>
+          <td class="border px-4 py-2"><%= f.credential_id %></td>
+          <td class="border px-4 py-2"><%= f.maker && decimal(f.maker) %></td>
+          <td class="border px-4 py-2"><%= f.maker_type %></td>
+          <td class="border px-4 py-2"><%= f.taker && decimal(f.taker) %></td>
+          <td class="border px-4 py-2"><%= f.taker_type %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="7" class="border px-4 py-2">No fees</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

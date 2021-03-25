@@ -1,46 +1,41 @@
-<section class="row">
-  <article class="column">
-    <div>
-      <h2>Accounts</h2>
+  <div class="flex items-center space-x-4">
+    <h2 class="text-3xl">Accounts</h2>
 
-      <%= if @show_zero do %>
-        <%= live_redirect "hide zero balances", to: Routes.live_path(@socket, WorkbenchWeb.AccountLive.Index, %{}) %>
+    <%= if @show_zero do %>
+      <%= live_redirect "hide zero balances", to: Routes.live_path(@socket, WorkbenchWeb.AccountLive.Index, %{}) %>
+    <% else %>
+      <%= live_redirect "show zero balances", to: Routes.live_path(@socket, WorkbenchWeb.AccountLive.Index, %{show_zero: true}), class: "text-primary" %>
+    <% end %>
+  </div>
+
+  <table class="w-full mt-4">
+    <thead>
+      <th scope="col" class="px-4 py-2">Venue</th>
+      <th scope="col" class="px-4 py-2">Asset</th>
+      <th scope="col" class="px-4 py-2">Type</th>
+      <th scope="col" class="px-4 py-2">Credential</th>
+      <th scope="col" class="px-4 py-2">Equity</th>
+      <th scope="col" class="px-4 py-2">Free</th>
+      <th scope="col" class="px-4 py-2">Locked</th>
+    </thead>
+    <tbody>
+      <%= if Enum.any?(@accounts) do %>
+        <%= Enum.map @accounts, fn a -> %>
+          <tr>
+            <td class="border px-4 py-2"><%= a.venue_id %></td>
+            <td class="border px-4 py-2"><%= a.asset %></td>
+            <td class="border px-4 py-2"><%= a.type %></td>
+            <td class="border px-4 py-2"><%= a.credential_id %></td>
+            <td class="border px-4 py-2"><%= a.equity %></td>
+            <td class="border px-4 py-2"><%= a.free %></td>
+            <td class="border px-4 py-2"><%= a.locked %></td>
+          </tr>
+        <% end %>
       <% else %>
-        <%= live_redirect "show zero balances", to: Routes.live_path(@socket, WorkbenchWeb.AccountLive.Index, %{show_zero: true}), class: "text-primary" %>
+        <tr>
+          <td colspan="7" class="border px-4 py-2">No accounts</td>
+        </tr>
       <% end %>
-    </div>
-
-    <div class="table-responsive border mt-3 ">
-      <table class="table table-hover mb-0 ">
-        <thead>
-          <th>Venue</th>
-          <th>Asset</th>
-          <th>Type</th>
-          <th>Credential</th>
-          <th>Equity</th>
-          <th>Free</th>
-          <th>Locked</th>
-        </thead>
-        <tbody>
-          <%= if Enum.any?(@accounts) do %>
-            <%= Enum.map @accounts, fn a -> %>
-              <tr>
-                <td class="align-middle"><%= a.venue_id %></td>
-                <td class="align-middle"><%= a.asset %></td>
-                <td class="align-middle"><%= a.type %></td>
-                <td class="align-middle"><%= a.credential_id %></td>
-                <td class="align-middle"><%= a.equity %></td>
-                <td class="align-middle"><%= a.free %></td>
-                <td class="align-middle"><%= a.locked %></td>
-              </tr>
-            <% end %>
-          <% else %>
-            <tr>
-              <td colspan="7">No accounts</td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  </article>
-</section>
+    </tbody>
+  </table>
+</div>

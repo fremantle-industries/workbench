@@ -1,0 +1,36 @@
+<header class="bg-gray-50 py-4">
+  <div class="container mx-auto">
+    <nav class="flex flex-row items-center space-x-4">
+      <%= link "Workbench", to: "/", class: "text-4xl" %>
+      <ul class="flex flex-row space-x-4">
+        <li>
+          <%= link "Balances", to: Routes.live_path(@conn, WorkbenchWeb.BalanceAllLive.Index), class: "text-black hover:text-opacity-75" %>
+        </li>
+        <li>
+          <%= link "Accounts", to: Routes.live_path(@conn, WorkbenchWeb.AccountLive.Index), class: "text-black hover:text-opacity-75" %>
+        </li>
+        <li>
+          <%= link "Wallets", to: Routes.live_path(@conn, WorkbenchWeb.WalletLive.Index), class: "text-black hover:text-opacity-75" %>
+        </li>
+        <li>
+          <%= link "Orders", to: Routes.live_path(@conn, WorkbenchWeb.OrderLive.Index), class: "text-black hover:text-opacity-75" %>
+        </li>
+        <li>
+          <%= link "Positions", to: Routes.live_path(@conn, WorkbenchWeb.PositionLive.Index), class: "text-black hover:text-opacity-75" %>
+        </li>
+        <li>
+          <%= link "Products", to: Routes.live_path(@conn, WorkbenchWeb.ProductLive.Index), class: "text-black hover:text-opacity-75" %>
+        </li>
+        <li>
+          <%= link "Fees", to: Routes.live_path(@conn, WorkbenchWeb.FeeLive.Index), class: "text-black hover:text-opacity-75" %>
+        </li>
+        <li>
+          <%= link "Venues", to: Routes.live_path(@conn, WorkbenchWeb.VenueLive.Index), class: "text-black hover:text-opacity-75" %>
+        </li>
+        <li>
+          <%= link "Advisors", to: Routes.live_path(@conn, WorkbenchWeb.AdvisorLive.Index), class: "text-black hover:text-opacity-75" %>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

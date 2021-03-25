@@ -1,62 +1,56 @@
-<section class="row">
-  <article class="column">
-    <div>
-      <h2>Venues</h2>
+<div class="flex items-center space-x-4">
+  <h2 class="text-3xl">Venues</h2>
 
-      <form
-        phx-change="node_selected"
-      >
-        <select name="node" id="select_nodes" phx-update="ignore">
-          <%= content_tag :option, value: Node.self() do %>
-            <%= Node.self() %>
-          <% end %>
+  <form
+    phx-change="node_selected"
+  >
+    <select name="node" id="select_nodes" phx-update="ignore">
+      <%= content_tag :option, value: Node.self() do %>
+        <%= Node.self() %>
+      <% end %>
 
-          <%= for n <- Node.list do %>
-            <%= content_tag :option, value: n, selected: @node == Atom.to_string(n) do %>
-              <%= n %>
+      <%= for n <- Node.list do %>
+        <%= content_tag :option, value: n, selected: @node == Atom.to_string(n) do %>
+          <%= n %>
+        <% end %>
+      <% end %>
+    </select>
+  </form>
+</div>
+
+<table class="w-full mt-4">
+  <thead>
+    <th scope="col" class="px-4 py-2">Venue</th>
+    <th scope="col" class="px-4 py-2">Status</th>
+    <th scope="col" class="px-4 py-2">Credentials</th>
+    <th scope="col" class="px-4 py-2">Quote Depth</th>
+    <th scope="col" class="px-4 py-2">Timeout</th>
+    <th scope="col" class="px-4 py-2">Start On Boot</th>
+    <th scope="col" class="px-4 py-2">Actions</th>
+  </thead>
+  <tbody>
+    <%= if Enum.any?(@venues) do %>
+      <%= Enum.map @venues, fn v -> %>
+        <tr>
+          <td scope="row" class="border px-4 py-2"><%= v.id %></td>
+          <td class="border px-4 py-2"><%= v.status %></td>
+          <td class="border px-4 py-2"><%= v.credentials |> Map.keys() |> Enum.join(", ") %></td>
+          <td class="border px-4 py-2"><%= v.quote_depth %></td>
+          <td class="border px-4 py-2"><%= v.timeout %> ms</td>
+          <td class="border px-4 py-2"><%= v.start_on_boot %></td>
+          <td class="border px-4 py-2 text-right">
+            <%= if v.status == :running do %>
+              <button phx-click="stop" phx-value-id="<%= v.id %>" type="button" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">stop</button>
+            <% else %>
+              <button phx-click="start" phx-value-id="<%= v.id %>" type="button" class="bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded">start</button>
             <% end %>
-          <% end %>
-        </select>
-      </form>
-    </div>
-
-    <div class="table-responsive border mt-3 ">
-      <table class="table table-hover mb-0 ">
-        <thead>
-          <th>Venue</th>
-          <th>Status</th>
-          <th>Credentials</th>
-          <th>Quote Depth</th>
-          <th>Timeout</th>
-          <th>Start On Boot</th>
-          <th>Actions</th>
-        </thead>
-        <tbody>
-          <%= if Enum.any?(@venues) do %>
-            <%= Enum.map @venues, fn v -> %>
-              <tr>
-                <td class="align-middle"><%= v.id %></td>
-                <td class="align-middle"><%= v.status %></td>
-                <td class="align-middle"><%= v.credentials |> Map.keys() |> Enum.join(", ") %></td>
-                <td class="align-middle"><%= v.quote_depth %></td>
-                <td class="align-middle"><%= v.timeout %> ms</td>
-                <td class="align-middle"><%= v.start_on_boot %></td>
-                <td class="align-middle">
-                  <%= if v.status == :running do %>
-                    <button phx-click="stop" phx-value-id="<%= v.id %>" class="btn btn-danger btn-sm">stop</button>
-                  <% else %>
-                    <button phx-click="start" phx-value-id="<%= v.id %>" class="btn btn-primary btn-sm">start</button>
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>
-          <% else %>
-            <tr>
-              <td colspan="7">No venues</td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  </article>
-</section>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="7" class="border px-4 py-2">No venues</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

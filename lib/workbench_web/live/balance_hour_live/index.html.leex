@@ -1,24 +1,16 @@
-<section class="row">
-  <article class="column">
-    <h3>Hourly Balances</h3>
+<div class="flex items-center space-x-4">
+  <h2 class="text-3xl">Hourly Balances</h2>
+  <%= render WorkbenchWeb.BalanceNavView, "show.html", conn: @socket %>
+</div>
 
-    <nav class="nav nav-pills">
-      <%= link "All", to: "/balances/all" , class: "nav-link text-primary" %>
-      <%= link "Hour", to: "/balances/hour" , class: "nav-link active bg-primary" %>
-      <%= link "Day", to: "/balances/day" , class: "nav-link text-primary" %>
-      <%= link "Table", to: "/balances/table" , class: "nav-link text-primary" %>
-      <%= link "Config", to: "/balances/config" , class: "nav-link text-primary" %>
-    </nav>
-
-    <div
-      id="balance-hour"
-      phx-hook="BalanceHour"
-      data-hours="<%= Jason.encode!(hours(@balances)) %>"
-      data-usd-min="<%= Jason.encode!(usd_min(@balances)) %>"
-      data-usd-max="<%= Jason.encode!(usd_max(@balances)) %>"
-    >
-      <div phx-update="ignore">
-      </div>
+  <div
+    id="balance-hour"
+    phx-hook="BalanceHour"
+    data-hours="<%= Jason.encode!(hours(@balances)) %>"
+    data-usd-min="<%= Jason.encode!(usd_min(@balances)) %>"
+    data-usd-max="<%= Jason.encode!(usd_max(@balances)) %>"
+    class="mt-4"
+  >
+    <div phx-update="ignore">
     </div>
-  </article>
-</section>
+  </div>

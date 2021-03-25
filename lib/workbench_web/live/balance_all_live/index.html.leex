@@ -1,25 +1,17 @@
-<section class="row">
-  <article class="column">
-    <h3>All Balances</h3>
+<div class="flex items-center space-x-4">
+  <h2 class="text-3xl">All Balances</h2>
+  <%= render WorkbenchWeb.BalanceNavView, "show.html", conn: @socket %>
+</div>
 
-    <nav class="nav nav-pills">
-      <%= link "All", to: "/balances/all" , class: "nav-link active bg-primary" %>
-      <%= link "Hour", to: "/balances/hour" , class: "nav-link text-primary" %>
-      <%= link "Day", to: "/balances/day" , class: "nav-link text-primary" %>
-      <%= link "Table", to: "/balances/table" , class: "nav-link text-primary" %>
-      <%= link "Config", to: "/balances/config" , class: "nav-link text-primary" %>
-    </nav>
-
-    <div
-      id="balance-all"
-      phx-hook="BalanceAll"
-      data-finish-times="<%= Jason.encode!(finish_times(@balances)) %>"
-      data-usd-balances="<%= Jason.encode!(usd_balances(@balances)) %>"
-      data-btc-balances="<%= Jason.encode!(btc_balances(@balances)) %>"
-      data-btc-usd-prices="<%= Jason.encode!(btc_usd_prices(@balances)) %>"
-    >
-      <div phx-update="ignore">
-      </div>
-    </div>
-  </article>
-</section>
+<div
+  id="balance-all"
+  phx-hook="BalanceAll"
+  data-finish-times="<%= Jason.encode!(finish_times(@balances)) %>"
+  data-usd-balances="<%= Jason.encode!(usd_balances(@balances)) %>"
+  data-btc-balances="<%= Jason.encode!(btc_balances(@balances)) %>"
+  data-btc-usd-prices="<%= Jason.encode!(btc_usd_prices(@balances)) %>"
+  class="mt-4"
+>
+  <div phx-update="ignore">
+  </div>
+</div>

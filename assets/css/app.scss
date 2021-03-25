@@ -1,40 +1,5 @@
-/**
- * Dependency Setup
- */
-@import "~nprogress/nprogress.css";
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
-/**
- * Variables
- */
-@import "./variables/spacing";
-
-/**
- * Setup
- */
-@import "./custom_reset";
-
-/**
- * Framework
- */
-@import "./utility";
-@import "./components/navigation";
-@import "./components/table";
-@import "./components/select";
-
-/**
- * Custom Components
- */
-@import "./components/pair_list";
-
-/**
- * Pages
- */
-@import "./pages/balances";
-@import "./pages/products";
-
-/**
- * Bootstrap
- */
-@import "./theme";
-@import "./variables/breakpoints";
-@import "~bootstrap/scss/bootstrap";
+@import "../node_modules/nprogress/nprogress.css";

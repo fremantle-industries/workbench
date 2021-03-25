@@ -1,72 +1,64 @@
-<section class="row">
-  <article class="column">
-    <div>
-      <h2>Orders</h2>
+<div class="flex items-center space-x-4">
+  <h2 class="text-3xl">Orders</h2>
 
-      <form
-        phx-change="node_selected"
-      >
-        <select name="node" id="select_nodes" phx-update="ignore">
-          <%= content_tag :option, value: Node.self() do %>
-            <%= Node.self() %>
-          <% end %>
+  <form phx-change="node_selected">
+    <select name="node" id="select_nodes" phx-update="ignore">
+      <%= content_tag :option, value: Node.self() do %>
+        <%= Node.self() %>
+      <% end %>
 
-          <%= for n <- Node.list do %>
-            <%= content_tag :option, value: n, selected: @node == Atom.to_string(n) do %>
-              <%= n %>
-            <% end %>
-          <% end %>
-        </select>
-      </form>
-    </div>
+      <%= for n <- Node.list do %>
+        <%= content_tag :option, value: n, selected: @node == Atom.to_string(n) do %>
+          <%= n %>
+        <% end %>
+      <% end %>
+    </select>
+  </form>
+</div>
 
-    <div class="table-responsive border mt-3 ">
-      <table class="table table-hover mb-0">
-        <thead>
-          <th>Client ID</th>
-          <th>Venue</th>
-          <th>Credential</th>
-          <th>Symbol</th>
-          <th>Status</th>
-          <th>Price</th>
-          <th>Qty</th>
-          <th>Leaves Qty</th>
-          <th>Cumulative Qty</th>
-          <th>Post Only?</th>
-          <th>Close?</th>
-          <th>Enqueued</th>
-          <th>Updated</th>
-          <th>Last Received</th>
-          <th>Last Venue</th>
-        </thead>
-        <tbody>
-          <%= if Enum.any?(@orders) do %>
-            <%= Enum.map @orders, fn o -> %>
-              <tr>
-                <td class="align-middle"><%= o.client_id %></td>
-                <td class="align-middle"><%= o.venue_id %></td>
-                <td class="align-middle"><%= o.credential_id %></td>
-                <td class="align-middle"><%= o.product_symbol %></td>
-                <td class="align-middle"><%= o.status %></td>
-                <td class="align-middle"><%= o.price |> Decimal.to_string(:normal) %></td>
-                <td class="align-middle"><%= o.qty |> Decimal.to_string(:normal) %></td>
-                <td class="align-middle"><%= o.leaves_qty |> Decimal.to_string(:normal) %></td>
-                <td class="align-middle"><%= o.cumulative_qty |> Decimal.to_string(:normal) %></td>
-                <td class="align-middle"><%= o.post_only %></td>
-                <td class="align-middle"><%= o.close %></td>
-                <td class="align-middle"><%= relative_time(o.enqueued_at) %></td>
-                <td class="align-middle"><%= o.updated_at && relative_time(o.updated_at) %></td>
-                <td class="align-middle"><%= o.last_received_at && relative_time(o.last_received_at) %></td>
-                <td class="align-middle"><%= o.last_venue_timestamp && relative_time(o.last_venue_timestamp) %></td>
-              </tr>
-            <% end %>
-          <% else %>
-            <tr>
-              <td colspan="15">No orders</td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  </article>
-</section>
+<table class="w-full mt-4">
+  <thead>
+    <th scope="col" class="px-4 py-2">Client ID</th>
+    <th scope="col" class="px-4 py-2">Venue</th>
+    <th scope="col" class="px-4 py-2">Credential</th>
+    <th scope="col" class="px-4 py-2">Symbol</th>
+    <th scope="col" class="px-4 py-2">Status</th>
+    <th scope="col" class="px-4 py-2">Price</th>
+    <th scope="col" class="px-4 py-2">Qty</th>
+    <th scope="col" class="px-4 py-2">Leaves Qty</th>
+    <th scope="col" class="px-4 py-2">Cumulative Qty</th>
+    <th scope="col" class="px-4 py-2">Post Only?</th>
+    <th scope="col" class="px-4 py-2">Close?</th>
+    <th scope="col" class="px-4 py-2">Enqueued</th>
+    <th scope="col" class="px-4 py-2">Updated</th>
+    <th scope="col" class="px-4 py-2">Last Received</th>
+    <th scope="col" class="px-4 py-2">Last Venue</th>
+  </thead>
+  <tbody>
+    <%= if Enum.any?(@orders) do %>
+      <%= Enum.map @orders, fn o -> %>
+        <tr>
+          <td scope="row" class="border px-4 py-2"><%= o.client_id %></td>
+          <td class="border px-4 py-2"><%= o.venue_id %></td>
+          <td class="border px-4 py-2"><%= o.credential_id %></td>
+          <td class="border px-4 py-2"><%= o.product_symbol %></td>
+          <td class="border px-4 py-2"><%= o.status %></td>
+          <td class="border px-4 py-2"><%= o.price |> Decimal.to_string(:normal) %></td>
+          <td class="border px-4 py-2"><%= o.qty |> Decimal.to_string(:normal) %></td>
+          <td class="border px-4 py-2"><%= o.leaves_qty |> Decimal.to_string(:normal) %></td>
+          <td class="border px-4 py-2"><%= o.cumulative_qty |> Decimal.to_string(:normal) %></td>
+          <td class="border px-4 py-2"><%= o.post_only %></td>
+          <td class="border px-4 py-2"><%= o.close %></td>
+          <td class="border px-4 py-2"><%= relative_time(o.enqueued_at) %></td>
+          <td class="border px-4 py-2"><%= o.updated_at && relative_time(o.updated_at) %></td>
+          <td class="border px-4 py-2"><%= o.last_received_at && relative_time(o.last_received_at) %></td>
+          <td class="border px-4 py-2"><%= o.last_venue_timestamp && relative_time(o.last_venue_timestamp) %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="15" class="border px-4 py-2">No orders</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

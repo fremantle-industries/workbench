@@ -1,85 +1,59 @@
-<section class="balances row">
-  <article class="column">
-    <h3>All Balances</h3>
+<div class="flex items-center space-x-4">
+  <h2 class="text-3xl">All Balances</h2>
+  <%= render WorkbenchWeb.BalanceNavView, "show.html", conn: @socket %>
+</div>
 
-    <nav class="nav nav-pills">
-      <%= link "All", to: "/balances/all" , class: "nav-link text-primary" %>
-      <%= link "Hour", to: "/balances/hour" , class: "nav-link text-primary" %>
-      <%= link "Day", to: "/balances/day" , class: "nav-link text-primary" %>
-      <%= link "Table", to: "/balances/table" , class: "nav-link active bg-primary" %>
-      <%= link "Config", to: "/balances/config" , class: "nav-link text-primary" %>
-    </nav>
+<table class="w-full mt-4">
+  <thead>
+    <tr>
+      <th scope="col" class="px-4 py-2">Start Time</th>
+      <th scope="col" class="px-4 py-2">Finish Time</th>
+      <th scope="col" class="px-4 py-2">Venue</th>
+      <th scope="col" class="px-4 py-2">Symbol</th>
+      <th scope="col" class="px-4 py-2">Quote Venue</th>
+      <th scope="col" class="px-4 py-2">Quote Asset</th>
+      <th scope="col" class="px-4 py-2">Price</th>
+      <th scope="col" class="px-4 py-2">USD</th>
 
-    <div class="table-responsive border mt-3 mb-3">
-      <table class="table table-hover mb-0">
-        <thead>
-          <tr>
-            <th scope="col">Start Time</th>
-            <th scope="col">Finish Time</th>
-            <th scope="col">Venue</th>
-            <th scope="col">Symbol</th>
-            <th scope="col">Quote Venue</th>
-            <th scope="col">Quote Asset</th>
+      <th scope="col" class="px-4 py-2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= if Enum.any?(@balances) do %>
+      <%= for b <- @balances do %>
+        <tr>
+          <td scope="row" class="border px-4 py-2"><%= format_timestamp(b.start_time) %></td>
+          <td class="border px-4 py-2"><%= format_timestamp(b.finish_time) %></td>
+          <td class="border px-4 py-2"><%= b.btc_usd_venue %></td>
+          <td class="border px-4 py-2"><%= b.btc_usd_symbol %></td>
+          <td class="border px-4 py-2"><%= b.usd_quote_venue %></td>
+          <td class="border px-4 py-2"><%= b.usd_quote_asset %></td>
+          <td class="border px-4 py-2"><%= number_to_currency(b.btc_usd_price) %></td>
+          <td class="border px-4 py-2"><%= number_to_currency(b.usd) %></td>
 
-            <th scope="col" class="text-right">Price</th>
-            <th scope="col" class="text-right">USD</th>
+          <td class="border px-4 py-2 text-right">
+            <button
+              class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+              phx-click="delete"
+              phx-value-id="<%= b.id %>"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="9" class="border px-4 py-2">No balances</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <%= if Enum.any?(@balances) do %>
-            <%= for b <- @balances do %>
-              <tr>
-                <td class="align-middle"><%= format_timestamp(b.start_time) %></td>
-                <td class="align-middle"><%= format_timestamp(b.finish_time) %></td>
-                <td class="align-middle"><%= b.btc_usd_venue %></td>
-                <td class="align-middle"><%= b.btc_usd_symbol %></td>
-                <td class="align-middle"><%= b.usd_quote_venue %></td>
-                <td class="align-middle"><%= b.usd_quote_asset %></td>
-
-                <td class="text-right align-middle"><%= number_to_currency(b.btc_usd_price) %></td>
-                <td class="text-right align-middle"><%= number_to_currency(b.usd) %></td>
-
-                <td class="align-middle">
-                  <button
-                    class="btn btn-danger btn-sm"
-                    phx-click="delete"
-                    phx-value-id="<%= b.id %>"
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            <% end %>
-          <% else %>
-            <tr>
-              <td colspan="9">No balances</td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-
-    <nav aria-label="table page navigation">
-      <ul class="pagination">
-        <li class="page-item">
-          <%= live_redirect "first", to: Routes.live_path(@socket, WorkbenchWeb.BalanceTableLive.Index, %{page: first_page(), page_size: @page_size}), class: "page-link text-primary" %>
-        </li>
-        <li class="page-item">
-          <%= live_redirect "previous", to: Routes.live_path(@socket, WorkbenchWeb.BalanceTableLive.Index, %{page: previous_page(@page), page_size: @page_size}), class: "page-link text-primary" %>
-        </li>
-        <li class="page-item">
-          <%= live_redirect @page, to: Routes.live_path(@socket, WorkbenchWeb.BalanceTableLive.Index, %{}), class: "page-link text-primary" %>
-        </li>
-        <li class="page-item">
-          <%= live_redirect "next", to: Routes.live_path(@socket, WorkbenchWeb.BalanceTableLive.Index, %{page: next_page(@page), page_size: @page_size}), class: "page-link text-primary" %>
-        </li>
-        <li class="page-item">
-          <%= live_redirect "last", to: Routes.live_path(@socket, WorkbenchWeb.BalanceTableLive.Index, %{page: last_page(@page_count, @page_size), page_size: @page_size}), class: "page-link text-primary" %>
-        </li>
-      </ul>
-    </nav>
-
-  </article>
-</section>
+<nav class="flex space-x-4 mt-4">
+  <%= live_redirect "first", to: Routes.live_path(@socket, WorkbenchWeb.BalanceTableLive.Index, %{page: first_page(), page_size: @page_size}), class: "text-black hover:text-opacity-75" %>
+  <%= live_redirect "previous", to: Routes.live_path(@socket, WorkbenchWeb.BalanceTableLive.Index, %{page: previous_page(@page), page_size: @page_size}), class: "text-black hover:text-opacity-75" %>
+  <%= live_redirect @page, to: Routes.live_path(@socket, WorkbenchWeb.BalanceTableLive.Index, %{}), class: "text-black hover:text-opacity-75" %>
+  <%= live_redirect "next", to: Routes.live_path(@socket, WorkbenchWeb.BalanceTableLive.Index, %{page: next_page(@page), page_size: @page_size}), class: "text-black hover:text-opacity-75" %>
+  <%= live_redirect "last", to: Routes.live_path(@socket, WorkbenchWeb.BalanceTableLive.Index, %{page: last_page(@page_count, @page_size), page_size: @page_size}), class: "text-black hover:text-opacity-75" %>
+</nav>

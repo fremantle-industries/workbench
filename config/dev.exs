@@ -101,13 +101,13 @@ config :tai,
       enabled: true,
       adapter: Tai.VenueAdapters.Bitmex,
       timeout: 60_000,
-      products: "xbtu20 ethu20 ltcu20"
+      products: "xbtu21 ethu21 ltcu21"
     ],
     okex: [
       enabled: true,
       adapter: Tai.VenueAdapters.OkEx,
       timeout: 60_000,
-      products: "btc_usdt btc_usd_swap btc_usdt_swap btc_usd_200626 btc_usdt_200626 usdc_usdt"
+      products: "btc_usdt btc_usd_swap btc_usdt_swap btc_usd_210626 btc_usdt_210626 usdc_usdt"
     ],
     ftx: [
       enabled: true,
