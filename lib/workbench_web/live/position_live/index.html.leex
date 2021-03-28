@@ -1,5 +1,19 @@
 <div class="flex items-center space-x-4">
   <h2 class="text-3xl">Positions</h2>
+
+  <form phx-change="node_selected">
+    <select name="node" id="select_nodes" phx-update="ignore">
+      <%= content_tag :option, value: Node.self() do %>
+        <%= Node.self() %>
+      <% end %>
+
+      <%= for n <- Node.list do %>
+        <%= content_tag :option, value: n, selected: @node == Atom.to_string(n) do %>
+          <%= n %>
+        <% end %>
+      <% end %>
+    </select>
+  </form>
 </div>
 
 <table class="w-full mt-4">
