@@ -38,6 +38,74 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id, :config_url]
 
+# Navigation
+config :navigator,
+  links: %{
+    workbench: [
+      %{
+        label: "Workbench",
+        link:
+          {WorkbenchWeb.Router.Helpers, :live_path,
+           [WorkbenchWeb.Endpoint, WorkbenchWeb.BalanceAllLive.Index]},
+        class: "text-4xl"
+      },
+      %{
+        label: "Balances",
+        link:
+          {WorkbenchWeb.Router.Helpers, :live_path,
+           [WorkbenchWeb.Endpoint, WorkbenchWeb.BalanceAllLive.Index]}
+      },
+      %{
+        label: "Accounts",
+        link:
+          {WorkbenchWeb.Router.Helpers, :live_path,
+           [WorkbenchWeb.Endpoint, WorkbenchWeb.AccountLive.Index]}
+      },
+      %{
+        label: "Wallets",
+        link:
+          {WorkbenchWeb.Router.Helpers, :live_path,
+           [WorkbenchWeb.Endpoint, WorkbenchWeb.WalletLive.Index]}
+      },
+      %{
+        label: "Orders",
+        link:
+          {WorkbenchWeb.Router.Helpers, :live_path,
+           [WorkbenchWeb.Endpoint, WorkbenchWeb.OrderLive.Index]}
+      },
+      %{
+        label: "Positions",
+        link:
+          {WorkbenchWeb.Router.Helpers, :live_path,
+           [WorkbenchWeb.Endpoint, WorkbenchWeb.PositionLive.Index]}
+      },
+      %{
+        label: "Products",
+        link:
+          {WorkbenchWeb.Router.Helpers, :live_path,
+           [WorkbenchWeb.Endpoint, WorkbenchWeb.ProductLive.Index]}
+      },
+      %{
+        label: "Fees",
+        link:
+          {WorkbenchWeb.Router.Helpers, :live_path,
+           [WorkbenchWeb.Endpoint, WorkbenchWeb.FeeLive.Index]}
+      },
+      %{
+        label: "Venues",
+        link:
+          {WorkbenchWeb.Router.Helpers, :live_path,
+           [WorkbenchWeb.Endpoint, WorkbenchWeb.VenueLive.Index]}
+      },
+      %{
+        label: "Advisors",
+        link:
+          {WorkbenchWeb.Router.Helpers, :live_path,
+           [WorkbenchWeb.Endpoint, WorkbenchWeb.AdvisorLive.Index]}
+      }
+    ]
+  }
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

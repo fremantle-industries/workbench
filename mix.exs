@@ -45,6 +45,7 @@ defmodule Workbench.MixProject do
       {:jason, "~> 1.0"},
       {:libcluster, "~> 3.2"},
       {:logger_json, "~> 4.0"},
+      {:navigator, "~> 0.0.2"},
       {:number, "~> 1.0.0"},
       {:phoenix, "~> 1.5"},
       {:phoenix_active_link, "~> 0.3"},
