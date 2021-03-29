@@ -16,9 +16,7 @@ config :workbench, Workbench.Repo,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
 
 host = System.get_env("HOST") || "workbench.lvh.me"
-
-s_port = System.get_env("PORT") || "80"
-i_port = s_port |> String.to_integer()
+http_port = "PORT" |> System.get_env("80") |> String.to_integer()
 
 secret_key_base =
   System.get_env("SECRET_KEY_BASE") ||
@@ -35,8 +33,8 @@ live_view_signing_salt =
     """
 
 config :workbench, WorkbenchWeb.Endpoint,
-  http: [:inet6, port: i_port],
-  url: [host: host, port: s_port],
+  http: [:inet6, port: http_port],
+  url: [host: host, port: http_port],
   secret_key_base: secret_key_base,
   live_view: [signing_salt: live_view_signing_salt]
 
