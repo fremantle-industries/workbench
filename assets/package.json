@@ -16,7 +16,7 @@
     "phoenix_live_view": "file:../deps/phoenix_live_view",
     "react": "^17.0.1",
     "react-chartjs-2": "^2.11.1",
-    "react-dom": "^17.0.1",
+    "react-dom": "^17.0.2",
     "react-redux": "^7.2.2",
     "redux": "^4.0.5"
   },
@@ -30,7 +30,7 @@
     "@types/phoenix": "^1.5.1",
     "@types/phoenix_live_view": "^0.14.0",
     "@types/react": "^17.0.3",
-    "@types/react-dom": "^17.0.2",
+    "@types/react-dom": "^17.0.3",
     "@types/react-redux": "^7.1.16",
     "autoprefixer": "^10.2.4",
     "babel-loader": "^8.2.2",
@@ -47,7 +47,7 @@
     "source-map-loader": "^2.0.1",
     "tailwindcss": "^2.0.2",
     "terser-webpack-plugin": "^5.1.1",
-    "ts-loader": "^8.0.18",
+    "ts-loader": "^8.1.0",
     "typescript": "^4.2.3",
     "webpack": "~5.27.1",
     "webpack-cli": "^4.5.0"
