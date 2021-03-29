@@ -1,5 +1,5 @@
 <header class="bg-gray-50 py-4">
-  <div class="container mx-auto">
+  <div class="mx-4">
     <nav class="flex flex-row items-center space-x-4">
       <%= link "Workbench", to: "/", class: "text-4xl" %>
       <ul class="flex flex-row space-x-4">

@@ -11,7 +11,7 @@
   </head>
   <body>
     <%= render "_header.html", conn: @conn %>
-    <main role="main" class="container mx-auto py-4">
+    <main role="main" class="mx-4 py-4">
       <%= @inner_content %>
     </main>
   </body>
