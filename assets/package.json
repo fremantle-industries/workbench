@@ -30,7 +30,7 @@
     "@types/phoenix": "^1.5.1",
     "@types/phoenix_live_view": "^0.14.0",
     "@types/react": "^17.0.3",
-    "@types/react-dom": "^17.0.2",
+    "@types/react-dom": "^17.0.3",
     "@types/react-redux": "^7.1.16",
     "autoprefixer": "^10.2.4",
     "babel-loader": "^8.2.2",
