@@ -10,7 +10,12 @@ defmodule WorkbenchWeb.Telemetry do
     children = [
       {:telemetry_poller, measurements: periodic_measurements(), period: 10_000},
       {TelemetryMetricsPrometheus,
-       [metrics: metrics(), name: prometheus_metrics_name(), port: prometheus_metrics_port()]}
+       [
+         metrics: metrics(),
+         name: prometheus_metrics_name(),
+         port: prometheus_metrics_port(),
+         options: [ref: :"TelemetryMetricsPrometheus.Router.HTTP_#{prometheus_metrics_port()}"]
+       ]}
     ]
 
     Supervisor.init(children, strategy: :one_for_one)
