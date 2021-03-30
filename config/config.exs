@@ -21,12 +21,6 @@ config :workbench, WorkbenchWeb.Endpoint,
   pubsub_server: Workbench.PubSub,
   live_view: [signing_salt: "TolmUusQ6//zaa5GZHu7DG2V3YAgOoP/"]
 
-# Prometheus metrics server
-prometheus_metrics_port =
-  "PROMETHEUS_METRICS_PORT" |> System.get_env("9568") |> String.to_integer()
-
-config :workbench, :prometheus_metrics_port, prometheus_metrics_port
-
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 

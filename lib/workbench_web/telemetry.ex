@@ -9,7 +9,8 @@ defmodule WorkbenchWeb.Telemetry do
   def init(_arg) do
     children = [
       {:telemetry_poller, measurements: periodic_measurements(), period: 10_000},
-      {TelemetryMetricsPrometheus, [metrics: metrics(), port: prometheus_metrics_port()]}
+      {TelemetryMetricsPrometheus,
+       [metrics: metrics(), name: prometheus_metrics_name(), port: prometheus_metrics_port()]}
     ]
 
     Supervisor.init(children, strategy: :one_for_one)
@@ -48,8 +49,12 @@ defmodule WorkbenchWeb.Telemetry do
     ]
   end
 
+  defp prometheus_metrics_name do
+    Application.get_env(:workbench, :prometheus_metrics_name, :workbench_prometheus_metrics)
+  end
+
   defp prometheus_metrics_port do
-    Application.get_env(:workbench, :prometheus_metrics_port)
+    Application.get_env(:workbench, :prometheus_metrics_port, 9568)
   end
 
   defp periodic_measurements do
