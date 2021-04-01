@@ -13,6 +13,10 @@ defmodule WorkbenchWeb.PositionLive.Index do
     {:ok, socket}
   end
 
+  def handle_params(_params, _uri, socket) do
+    {:noreply, socket}
+  end
+
   def handle_event("node_selected", params, socket) do
     sorted_node = params |> Map.get("node", Atom.to_string(node()))
     params = %{node: sorted_node}
