@@ -5,7 +5,7 @@ defmodule Workbench.MixProject do
     [
       app: :workbench,
       version: "0.0.7",
-      elixir: "~> 1.9",
+      elixir: "~> 1.10",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,

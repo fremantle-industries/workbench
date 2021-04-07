@@ -15,8 +15,8 @@ jobs:
 
     strategy:
       matrix:
-        otp: [21.x, 22.x, 23.x]
-        elixir: [1.9.x, 1.10.x, 1.11.x]
+        otp: [22.x, 23.x]
+        elixir: [1.10.x, 1.11.x]
 
     services:
       db:
