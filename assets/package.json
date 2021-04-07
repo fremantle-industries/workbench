@@ -46,7 +46,7 @@
     "redux-devtools-extension": "^2.13.9",
     "sass-loader": "^11.0.1",
     "source-map-loader": "^2.0.1",
-    "tailwindcss": "^2.0.2",
+    "tailwindcss": "^2.1.1",
     "terser-webpack-plugin": "^5.1.1",
     "ts-loader": "^8.1.0",
     "typescript": "^4.2.3",
