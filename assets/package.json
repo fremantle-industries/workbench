@@ -8,7 +8,7 @@
     "lint:fix": "eslint -c './.eslintrc' --fix './js/**/*.ts'"
   },
   "dependencies": {
-    "@popperjs/core": "^2.9.1",
+    "@popperjs/core": "^2.9.2",
     "chart.js": "^2.9.4",
     "nprogress": "^0.2.0",
     "phoenix": "file:../deps/phoenix",
