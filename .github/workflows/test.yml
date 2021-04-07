@@ -43,16 +43,16 @@ jobs:
             deps
             _build/dev
             _build/test
-          key: elixir-cache-${{secrets.CACHE_VERSION}}-${{matrix.elixir}}-otp-${{matrix.otp}}-${{runner.os}}-${{hashFiles('mix.lock')}}-${{github.ref}}
+          key: elixir-cache-${{secrets.CACHE_VERSION}}-${{matrix.elixir}}-otp-${{matrix.otp}}-${{runner.os}}-${{hashFiles('mix.lock')}}-${{hashFiles('assets/package-lock.json')}}-${{github.ref}}
           restore-keys: |
-            elixir-cache-${{secrets.CACHE_VERSION}}-${{matrix.elixir}}-otp-${{matrix.otp}}-${{runner.os}}-${{hashFiles('mix.lock')}}-
+            elixir-cache-${{secrets.CACHE_VERSION}}-${{matrix.elixir}}-otp-${{matrix.otp}}-${{runner.os}}-${{hashFiles('mix.lock')}}-${{hashFiles('assets/package-lock.json')}}-
             elixir-cache-${{secrets.CACHE_VERSION}}-${{matrix.elixir}}-otp-${{matrix.otp}}-${{runner.os}}-
 
       - name: Install Dependencies
         run: |
           mix local.rebar --force
           mix local.hex --force
-          mix deps.get
+          mix setup.deps
 
       - name: Set chromedriver bin path for Wallaby
         run: echo "CHROMEDRIVER_BIN_PATH=$CHROMEWEBDRIVER/chromedriver" >> $GITHUB_ENV
