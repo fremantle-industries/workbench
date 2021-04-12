@@ -10,7 +10,7 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :workbench, WorkbenchWeb.Endpoint,
-  url: [host: "workbench.lvh.me", port: 80],
+  url: [host: "workbench.localhost", port: 80],
   cache_static_manifest: "priv/static/workbench_cache_manifest.json"
 
 # Logger

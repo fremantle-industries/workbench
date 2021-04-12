@@ -18,7 +18,7 @@ config :workbench, Workbench.Repo,
 # with webpack to recompile .js and .css sources.
 config :workbench, WorkbenchWeb.Endpoint,
   http: [port: 4000],
-  url: [host: "workbench.lvh.me", port: "4000"],
+  url: [host: "workbench.localhost", port: "4000"],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,

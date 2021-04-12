@@ -81,7 +81,7 @@ Add the workbench phoenix endpoint to your config
 ```elixir
 config :workbench, WorkbenchWeb.Endpoint,
   http: [port: 4000],
-  url: [host: "workbench.lvh.me", port: "4000"],
+  url: [host: "workbench.localhost", port: "4000"],
 ```
 
 ## Embedding workbench in your own Elixir project
@@ -97,7 +97,7 @@ as servers on different ports
 config :my_app, MyAppWeb.Endpoint,
   pubsub_server: MyApp.PubSub,
   http: [port: 4000],
-  url: [host: "my-app.lvh.me", port: "4000"],
+  url: [host: "my-app.localhost", port: "4000"],
   live_view: [signing_salt: "aolmUusQ6//zaa5GZHu7DG2V3YAgOoP/"],
   secret_key_base: "vKt36v4Gi2Orw8b8iBRg6ZFdzXKLvcRYkk1AaMLYX0+ry7k5XaJXd/LY/itmoxPP",
   server: true
@@ -105,7 +105,7 @@ config :my_app, MyAppWeb.Endpoint,
 config :workbench, WorkbenchWeb.Endpoint,
   pubsub_server: Workbench.PubSub,
   http: [port: 4001],
-  url: [host: "workbench.lvh.me", port: "4001"],
+  url: [host: "workbench.localhost", port: "4001"],
   live_view: [signing_salt: "aolmUusQ6//zaa5GZHu7DG2V3YAgOoP/"],
   secret_key_base: "xKt36v4Gi2Orw8b8iBRg6ZFdzXKLvcRYkk1AaMLYX0+ry7k5XaJXd/LY/itmoxPP",
   server: true
@@ -147,11 +147,11 @@ config :master_proxy,
   # https: [:inet6, port: 4443],
   backends: [
     %{
-      host: ~r/my-app.lvh.me/,
+      host: ~r/my-app.localhost/,
       phoenix_endpoint: MyAppWeb.Endpoint
     },
     %{
-      host: ~r/workbench.lvh.me/,
+      host: ~r/workbench.localhost/,
       phoenix_endpoint: WorkbenchWeb.Endpoint
     }
   ]
@@ -181,8 +181,8 @@ trading operation.
 
 | Service    | Endpoint                       |
 | ---------- | :----------------------------: |
-| Grafana    | http://grafana.lvh.me:3000/    |
-| Prometheus | http://prometheus.lvh.me:9090/ |
+| Grafana    | http://grafana.localhost:3000/    |
+| Prometheus | http://prometheus.localhost:9090/ |
 
 It includes a grafana dashboard for balances and trade performance
 
@@ -208,7 +208,7 @@ Or within `docker-compose`
 $ docker-compose up
 ```
 
-Wait a few seconds for the app to boot and you should be able to view the app at `http://workbench.lvh.me:4000`
+Wait a few seconds for the app to boot and you should be able to view the app at `http://workbench.localhost:4000`
 
 ## Test
 
