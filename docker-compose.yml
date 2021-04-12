@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   db:
-    image: timescale/timescaledb:2.1.0-pg13
+    image: timescale/timescaledb:2.1.1-pg13
     ports:
       - "5432:5432"
     volumes:
