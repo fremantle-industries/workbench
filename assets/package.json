@@ -35,7 +35,7 @@
     "autoprefixer": "^10.2.4",
     "babel-loader": "^8.2.2",
     "copy-webpack-plugin": "^8.1.1",
-    "css-loader": "^5.2.1",
+    "css-loader": "^5.2.3",
     "css-minimizer-webpack-plugin": "^2.0.0",
     "mini-css-extract-plugin": "^1.4.0",
     "node-sass": "^5.0.0",
