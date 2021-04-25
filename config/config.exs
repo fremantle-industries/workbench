@@ -15,7 +15,7 @@ config :workbench, ecto_repos: [Workbench.Repo]
 
 # Configures the endpoint
 config :workbench, WorkbenchWeb.Endpoint,
-  url: [host: "localhost"],
+  url: [host: "workbench.localhost"],
   secret_key_base: "vJP36v4Gi2Orw8b8iBRg6ZFdzXKLvcRYkk1AaMLYX0+ry7k5XaJXd/LY/itmoxPP",
   render_errors: [view: WorkbenchWeb.ErrorView, accepts: ~w(html json)],
   pubsub_server: Workbench.PubSub,
