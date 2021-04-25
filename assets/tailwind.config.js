@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
   purge: [
     '../lib/**/*.ex',
@@ -10,7 +12,12 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        // Free Proxima Nova alternative
+        sans: ['Montserrat', ...defaultTheme.fontFamily.sans],
+      },
+    },
   },
   variants: {
     display: ['responsive', 'empty'],

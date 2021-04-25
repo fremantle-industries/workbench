@@ -7,6 +7,8 @@
     <%= csrf_meta_tag() %>
     <%= live_title_tag assigns[:page_title] || "Workbench", suffix: " · Fremantle Industries" %>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
   <body>
