@@ -25,7 +25,7 @@ defmodule WorkbenchWeb.PositionLive.Index do
       socket
       |> assign(:node, sorted_node)
       |> assign(:positions, sorted_positions(sorted_node))
-      |> push_patch(to: Routes.live_path(socket, WorkbenchWeb.PositionLive.Index, params))
+      |> push_patch(to: Routes.position_path(socket, :index, params))
 
     {:noreply, socket}
   end

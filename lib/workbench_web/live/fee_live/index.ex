@@ -25,7 +25,7 @@ defmodule WorkbenchWeb.FeeLive.Index do
       socket
       |> assign(:node, selected_node)
       |> assign(:fees, sorted_fees(selected_node))
-      |> push_patch(to: Routes.live_path(socket, WorkbenchWeb.FeeLive.Index, params))
+      |> push_patch(to: Routes.fee_path(socket, :index, params))
 
     {:noreply, socket}
   end

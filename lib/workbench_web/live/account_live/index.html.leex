@@ -2,9 +2,9 @@
     <h2 class="text-3xl">Accounts</h2>
 
     <%= if @show_zero do %>
-      <%= live_redirect "hide zero balances", to: Routes.live_path(@socket, WorkbenchWeb.AccountLive.Index, %{}) %>
+      <%= live_redirect "hide zero balances", to: Routes.account_path(@socket, :index, %{}) %>
     <% else %>
-      <%= live_redirect "show zero balances", to: Routes.live_path(@socket, WorkbenchWeb.AccountLive.Index, %{show_zero: true}), class: "text-primary" %>
+      <%= live_redirect "show zero balances", to: Routes.account_path(@socket, :index, %{show_zero: true}), class: "text-primary" %>
     <% end %>
 
     <form phx-change="node_selected">

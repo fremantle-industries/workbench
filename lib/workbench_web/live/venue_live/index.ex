@@ -25,7 +25,7 @@ defmodule WorkbenchWeb.VenueLive.Index do
       socket
       |> assign(:node, sorted_node)
       |> assign(:venues, sorted_venues(sorted_node))
-      |> push_patch(to: Routes.live_path(socket, WorkbenchWeb.VenueLive.Index, params))
+      |> push_patch(to: Routes.venue_path(socket, :index, params))
 
     {:noreply, socket}
   end

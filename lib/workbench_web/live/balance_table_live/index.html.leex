@@ -51,9 +51,9 @@
 </table>
 
 <nav class="flex space-x-4 mt-4">
-  <%= live_redirect "first", to: Routes.live_path(@socket, WorkbenchWeb.BalanceTableLive.Index, %{page: first_page(), page_size: @page_size}), class: "text-black hover:text-opacity-75" %>
-  <%= live_redirect "previous", to: Routes.live_path(@socket, WorkbenchWeb.BalanceTableLive.Index, %{page: previous_page(@page), page_size: @page_size}), class: "text-black hover:text-opacity-75" %>
-  <%= live_redirect @page, to: Routes.live_path(@socket, WorkbenchWeb.BalanceTableLive.Index, %{}), class: "text-black hover:text-opacity-75" %>
-  <%= live_redirect "next", to: Routes.live_path(@socket, WorkbenchWeb.BalanceTableLive.Index, %{page: next_page(@page), page_size: @page_size}), class: "text-black hover:text-opacity-75" %>
-  <%= live_redirect "last", to: Routes.live_path(@socket, WorkbenchWeb.BalanceTableLive.Index, %{page: last_page(@page_count, @page_size), page_size: @page_size}), class: "text-black hover:text-opacity-75" %>
+  <%= live_redirect "first", to: Routes.balance_table_path(@socket, :index, %{page: first_page(), page_size: @page_size}), class: "text-black hover:text-opacity-75" %>
+  <%= live_redirect "previous", to: Routes.balance_table_path(@socket, :index, %{page: previous_page(@page), page_size: @page_size}), class: "text-black hover:text-opacity-75" %>
+  <%= live_redirect @page, to: Routes.balance_table_path(@socket, :index, %{}), class: "text-black hover:text-opacity-75" %>
+  <%= live_redirect "next", to: Routes.balance_table_path(@socket, :index, %{page: next_page(@page), page_size: @page_size}), class: "text-black hover:text-opacity-75" %>
+  <%= live_redirect "last", to: Routes.balance_table_path(@socket, :index, %{page: last_page(@page_count, @page_size), page_size: @page_size}), class: "text-black hover:text-opacity-75" %>
 </nav>

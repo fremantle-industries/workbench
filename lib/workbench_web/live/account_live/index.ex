@@ -34,7 +34,7 @@ defmodule WorkbenchWeb.AccountLive.Index do
       socket
       |> assign(:node, sorted_node)
       |> assign(:accounts, accounts(sorted_node, show_zero: socket.assigns.show_zero))
-      |> push_patch(to: Routes.live_path(socket, WorkbenchWeb.AccountLive.Index, params))
+      |> push_patch(to: Routes.account_path(socket, :index, params))
 
     {:noreply, socket}
   end

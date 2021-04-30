@@ -38,28 +38,20 @@ config :navigator,
     workbench: [
       %{
         label: "Workbench",
-        link:
-          {WorkbenchWeb.Router.Helpers, :live_path,
-           [WorkbenchWeb.Endpoint, WorkbenchWeb.BalanceAllLive.Index]},
+        link: {WorkbenchWeb.Router.Helpers, :balance_all_path, [WorkbenchWeb.Endpoint, :index]},
         class: "text-4xl"
       },
       %{
         label: "Balances",
-        link:
-          {WorkbenchWeb.Router.Helpers, :live_path,
-           [WorkbenchWeb.Endpoint, WorkbenchWeb.BalanceAllLive.Index]}
+        link: {WorkbenchWeb.Router.Helpers, :balance_day_path, [WorkbenchWeb.Endpoint, :index]}
       },
       %{
         label: "Accounts",
-        link:
-          {WorkbenchWeb.Router.Helpers, :live_path,
-           [WorkbenchWeb.Endpoint, WorkbenchWeb.AccountLive.Index]}
+        link: {WorkbenchWeb.Router.Helpers, :account_path, [WorkbenchWeb.Endpoint, :index]}
       },
       %{
         label: "Wallets",
-        link:
-          {WorkbenchWeb.Router.Helpers, :live_path,
-           [WorkbenchWeb.Endpoint, WorkbenchWeb.WalletLive.Index]}
+        link: {WorkbenchWeb.Router.Helpers, :wallet_path, [WorkbenchWeb.Endpoint, :index]}
       },
       %{
         label: "Orders",
@@ -69,33 +61,23 @@ config :navigator,
       },
       %{
         label: "Positions",
-        link:
-          {WorkbenchWeb.Router.Helpers, :live_path,
-           [WorkbenchWeb.Endpoint, WorkbenchWeb.PositionLive.Index]}
+        link: {WorkbenchWeb.Router.Helpers, :position_path, [WorkbenchWeb.Endpoint, :index]}
       },
       %{
         label: "Products",
-        link:
-          {WorkbenchWeb.Router.Helpers, :live_path,
-           [WorkbenchWeb.Endpoint, WorkbenchWeb.ProductLive.Index]}
+        link: {WorkbenchWeb.Router.Helpers, :product_path, [WorkbenchWeb.Endpoint, :index]}
       },
       %{
         label: "Fees",
-        link:
-          {WorkbenchWeb.Router.Helpers, :live_path,
-           [WorkbenchWeb.Endpoint, WorkbenchWeb.FeeLive.Index]}
+        link: {WorkbenchWeb.Router.Helpers, :fee_path, [WorkbenchWeb.Endpoint, :index]}
       },
       %{
         label: "Venues",
-        link:
-          {WorkbenchWeb.Router.Helpers, :live_path,
-           [WorkbenchWeb.Endpoint, WorkbenchWeb.VenueLive.Index]}
+        link: {WorkbenchWeb.Router.Helpers, :venue_path, [WorkbenchWeb.Endpoint, :index]}
       },
       %{
         label: "Advisors",
-        link:
-          {WorkbenchWeb.Router.Helpers, :live_path,
-           [WorkbenchWeb.Endpoint, WorkbenchWeb.AdvisorLive.Index]}
+        link: {WorkbenchWeb.Router.Helpers, :advisor_path, [WorkbenchWeb.Endpoint, :index]}
       }
     ]
   }

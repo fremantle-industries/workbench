@@ -27,7 +27,7 @@ defmodule WorkbenchWeb.AdvisorLive.Index do
       |> assign(:node, sorted_node)
       |> assign(:groups, sorted_groups(sorted_node))
       |> assign(:instances, sorted_instances(sorted_node))
-      |> push_patch(to: Routes.live_path(socket, WorkbenchWeb.AdvisorLive.Index, params))
+      |> push_patch(to: Routes.advisor_path(socket, :index, params))
 
     {:noreply, socket}
   end

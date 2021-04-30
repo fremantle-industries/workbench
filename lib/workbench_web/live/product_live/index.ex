@@ -25,7 +25,7 @@ defmodule WorkbenchWeb.ProductLive.Index do
       socket
       |> assign(:node, selected_node)
       |> assign(:products, sorted_products(selected_node))
-      |> push_patch(to: Routes.live_path(socket, WorkbenchWeb.ProductLive.Index, params))
+      |> push_patch(to: Routes.product_path(socket, :index, params))
 
     {:noreply, socket}
   end
