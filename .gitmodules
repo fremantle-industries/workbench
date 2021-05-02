@@ -1,6 +1,0 @@
-[submodule "vendor/tai"]
-	path = vendor/tai
-	url = https://github.com/fremantle-industries/tai.git
-[submodule "vendor/tai_monorepo"]
-	path = vendor/tai_monorepo
-	url = https://github.com/fremantle-industries/tai.git

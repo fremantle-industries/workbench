@@ -19,17 +19,17 @@ module.exports = (_env, options) => {
     entry: {
       'app': glob.sync('./vendor/**/*.js').concat(['./js/app.ts'])
     },
+    output: {
+      filename: '[name].js',
+      path: path.resolve(__dirname, '../priv/static/js'),
+      publicPath: '/js/'
+    },
     resolve: {
       extensions: [".js", ".ts", ".tsx"],
       alias: {
         react: path.resolve(__dirname, './node_modules/react'),
         'react-dom': path.resolve(__dirname, './node_modules/react-dom')
       }
-    },
-    output: {
-      filename: '[name].js',
-      path: path.resolve(__dirname, '../priv/static/js'),
-      publicPath: '/js/'
     },
     devtool: devMode ? 'eval-cheap-module-source-map' : undefined,
     module: {

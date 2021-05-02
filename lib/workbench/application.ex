@@ -8,6 +8,7 @@ defmodule Workbench.Application do
     {:ok, snapshot_config} = Workbench.BalanceSnapshots.Config.parse()
 
     children = [
+      Workbench.Notifications,
       Workbench.Cluster.Supervisor,
       Workbench.Repo,
       Workbench.SelectedNode,

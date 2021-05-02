@@ -64,7 +64,7 @@ defmodule Workbench.MixProject do
       # {:stylish, github: "fremantle-industries/stylish", branch: "ping"},
       {:stylish, "~> 0.0.2"},
       # {:tai, "~> 0.0.66"},
-      # {:tai, path: "vendor/tai_monorepo/apps/tai"},
+      # {:tai, github: "fremantle-industries/tai", sparse: "apps/tai", branch: "orders-ecto-repo-with-converted-venue-adapters"},
       {:tai, github: "fremantle-industries/tai", sparse: "apps/tai", branch: "main"},
       {:telemetry, "~> 0.4"},
       {:telemetry_metrics, "~> 0.4"},
