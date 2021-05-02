@@ -1,33 +1,32 @@
 defmodule WorkbenchWeb.AdvisorLive.Index do
   use WorkbenchWeb, :live_view
-  alias WorkbenchWeb.Router.Helpers, as: Routes
+  import WorkbenchWeb.ViewHelpers.NodeHelper, only: [assign_node: 2]
 
-  def mount(params, _session, socket) do
-    sorted_node = Map.get(params, "node", Atom.to_string(node()))
-
-    socket =
-      socket
-      |> assign(:node, sorted_node)
-      |> assign(:groups, sorted_groups(sorted_node))
-      |> assign(:instances, sorted_instances(sorted_node))
-
+  def mount(_params, _session, socket) do
     {:ok, socket}
   end
 
-  def handle_params(_params, _uri, socket) do
+  def handle_params(params, _uri, socket) do
+    socket_with_node = assign_node(socket, params)
+
+    socket =
+      socket_with_node
+      |> assign(:groups, sorted_groups(socket_with_node.assigns.node))
+      |> assign(:instances, sorted_instances(socket_with_node.assigns.node))
+
     {:noreply, socket}
   end
 
   def handle_event("node_selected", params, socket) do
-    sorted_node = Map.get(params, "node", Atom.to_string(node()))
-    params = %{node: sorted_node}
+    socket_with_node = assign_node(socket, params)
 
     socket =
-      socket
-      |> assign(:node, sorted_node)
-      |> assign(:groups, sorted_groups(sorted_node))
-      |> assign(:instances, sorted_instances(sorted_node))
-      |> push_patch(to: Routes.advisor_path(socket, :index, params))
+      socket_with_node
+      |> assign(:groups, sorted_groups(socket_with_node.assigns.node))
+      |> assign(:instances, sorted_instances(socket_with_node.assigns.node))
+      |> push_patch(
+        to: Routes.advisor_path(socket, :index, %{node: socket_with_node.assigns.node})
+      )
 
     {:noreply, socket}
   end

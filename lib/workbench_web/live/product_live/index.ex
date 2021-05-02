@@ -1,31 +1,30 @@
 defmodule WorkbenchWeb.ProductLive.Index do
   use WorkbenchWeb, :live_view
-  alias WorkbenchWeb.Router.Helpers, as: Routes
+  import WorkbenchWeb.ViewHelpers.NodeHelper, only: [assign_node: 2]
 
-  def mount(params, _session, socket) do
-    selected_node = params |> Map.get("node", Atom.to_string(node()))
-
-    socket =
-      socket
-      |> assign(:node, selected_node)
-      |> assign(:products, sorted_products(selected_node))
-
+  def mount(_params, _session, socket) do
     {:ok, socket}
   end
 
-  def handle_params(_params, _uri, socket) do
+  def handle_params(params, _uri, socket) do
+    socket_with_node = assign_node(socket, params)
+
+    socket =
+      socket_with_node
+      |> assign(:products, sorted_products(socket_with_node.assigns.node))
+
     {:noreply, socket}
   end
 
   def handle_event("node_selected", params, socket) do
-    selected_node = params |> Map.get("node", Atom.to_string(node()))
-    params = %{node: selected_node}
+    socket_with_node = assign_node(socket, params)
 
     socket =
-      socket
-      |> assign(:node, selected_node)
-      |> assign(:products, sorted_products(selected_node))
-      |> push_patch(to: Routes.product_path(socket, :index, params))
+      socket_with_node
+      |> assign(:products, sorted_products(socket.assigns.node))
+      |> push_patch(
+        to: Routes.product_path(socket, :index, %{node: socket_with_node.assigns.node})
+      )
 
     {:noreply, socket}
   end

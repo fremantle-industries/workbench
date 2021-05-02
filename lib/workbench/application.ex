@@ -11,6 +11,7 @@ defmodule Workbench.Application do
     children = [
       {Cluster.Supervisor, [topologies, [name: Workbench.ClusterSupervisor]]},
       Workbench.Repo,
+      Workbench.SelectedNode,
       {Phoenix.PubSub, name: Workbench.PubSub},
       {Workbench.Schoolbus, [topics: [:balance_snapshot]]},
       {Workbench.BalanceSnapshots.Scheduler, [config: snapshot_config]},
