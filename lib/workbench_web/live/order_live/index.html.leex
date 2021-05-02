@@ -1,62 +1,95 @@
-<div>
-  <h2 class="text-3xl">Orders</h2>
+<h2 class="text-3xl">Orders</h2>
 
-  <div class="mt-4 flex items-center space-x-2">
-    <form phx-change="node_selected">
-      <input type="text" placeholder="Search" disabled title="coming soon..." class="bg-gray-100 opacity-25" />
+<div class="flex items-center mt-4 space-x-4">
+  <form phx-change="search" phx-submit="search">
+    <input type="text" name="query" value="<%= @query %>" placeholder="Search" autocomplete="off"/>
+  </form>
 
-      <select name="node" id="select_nodes" phx-update="ignore">
-        <%= content_tag :option, value: Node.self() do %>
-          <%= Node.self() %>
+  <form phx-change="node-selected">
+    <select name="node" id="select_nodes" phx-update="ignore">
+      <%= content_tag :option, value: Node.self() do %>
+        <%= Node.self() %>
+      <% end %>
+
+      <%= for n <- Node.list do %>
+        <%= content_tag :option, value: n, selected: @node == Atom.to_string(n) do %>
+          <%= n %>
         <% end %>
+      <% end %>
+    </select>
+  </form>
 
-        <%= for n <- Node.list do %>
-          <%= content_tag :option, value: n, selected: @node == Atom.to_string(n) do %>
-            <%= n %>
-          <% end %>
-        <% end %>
-      </select>
-    </form>
-  </div>
+  <form>
+    <span class="relative inline-flex rounded-md shadow-sm">
+      <button
+        type="button"
+        phx-click="toggle-follow"
+        class="inline-flex items-center px-4 py-2 border border-blue-400 rounded-md text-blue-800 bg-white hover:text-blue-700 hover:border-blue-700 focus:border-blue-300 transition ease-in-out duration-150"
+      >
+        Follow
+      </button>
+      <%= render_ping(@follow) %>
+    </span>
+  </form>
 </div>
 
-<table class="w-full mt-4">
+<table class="w-full table-fixed mt-4">
   <thead>
-    <th scope="col" class="px-4 py-2">Client ID</th>
-    <th scope="col" class="px-4 py-2">Venue</th>
-    <th scope="col" class="px-4 py-2">Credential</th>
-    <th scope="col" class="px-4 py-2">Symbol</th>
-    <th scope="col" class="px-4 py-2">Status</th>
-    <th scope="col" class="px-4 py-2">Price</th>
-    <th scope="col" class="px-4 py-2">Qty</th>
-    <th scope="col" class="px-4 py-2">Leaves Qty</th>
-    <th scope="col" class="px-4 py-2">Cumulative Qty</th>
-    <th scope="col" class="px-4 py-2">Post Only?</th>
-    <th scope="col" class="px-4 py-2">Close?</th>
-    <th scope="col" class="px-4 py-2">Enqueued</th>
-    <th scope="col" class="px-4 py-2">Updated</th>
-    <th scope="col" class="px-4 py-2">Last Received</th>
-    <th scope="col" class="px-4 py-2">Last Venue</th>
+    <th scope="col" class="w-5/36 text-left px-4 py-2">Client ID</th>
+    <th scope="col" class="w-3/36 text-left px-4 py-2">Venue</th>
+    <th scope="col" class="w-3/36 text-left px-4 py-2">Credential</th>
+    <th scope="col" class="w-3/36 text-left px-4 py-2">Symbol</th>
+    <th scope="col" class="w-3/36 text-left px-4 py-2">Status</th>
+    <th scope="col" class="w-3/36 text-left px-4 py-2">Price</th>
+    <th scope="col" class="w-2/36 text-left px-4 py-2">Qty</th>
+    <th scope="col" class="w-2/36 text-left px-4 py-2">Leaves Qty</th>
+    <th scope="col" class="w-2/36 text-left px-4 py-2">Cumulative Qty</th>
+    <th scope="col" class="w-1/36 text-left px-4 py-2">Post Only?</th>
+    <th scope="col" class="w-1/36 text-left px-4 py-2">Close?</th>
+    <th scope="col" class="w-2/36 text-left px-4 py-2">Enqueued</th>
+    <th scope="col" class="w-2/36 text-left px-4 py-2">Updated</th>
+    <th scope="col" class="w-2/36 text-left px-4 py-2">Received</th>
+    <th scope="col" class="w-2/36 text-left px-4 py-2">Venue Timestamp</th>
   </thead>
   <tbody>
     <%= if Enum.any?(@orders) do %>
       <%= Enum.map @orders, fn o -> %>
-        <tr>
-          <td scope="row" class="border px-4 py-2"><%= o.client_id %></td>
-          <td class="border px-4 py-2"><%= o.venue_id %></td>
-          <td class="border px-4 py-2"><%= o.credential_id %></td>
-          <td class="border px-4 py-2"><%= o.product_symbol %></td>
-          <td class="border px-4 py-2"><%= o.status %></td>
-          <td class="border px-4 py-2"><%= o.price |> Decimal.to_string(:normal) %></td>
-          <td class="border px-4 py-2"><%= o.qty |> Decimal.to_string(:normal) %></td>
-          <td class="border px-4 py-2"><%= o.leaves_qty |> Decimal.to_string(:normal) %></td>
-          <td class="border px-4 py-2"><%= o.cumulative_qty |> Decimal.to_string(:normal) %></td>
-          <td class="border px-4 py-2"><%= o.post_only %></td>
-          <td class="border px-4 py-2"><%= o.close %></td>
-          <td class="border px-4 py-2"><%= relative_time(o.enqueued_at) %></td>
-          <td class="border px-4 py-2"><%= o.updated_at && relative_time(o.updated_at) %></td>
-          <td class="border px-4 py-2"><%= o.last_received_at && relative_time(o.last_received_at) %></td>
-          <td class="border px-4 py-2"><%= o.last_venue_timestamp && relative_time(o.last_venue_timestamp) %></td>
+        <tr class="<%= if o.client_id == @last_order_updated, do: "animate-pulse bg-blue-50" %>">
+          <td scope="row" class="border px-4 py-2">
+            <%= link(
+              o.client_id |> Tai.Utils.String.truncate(24),
+              to: Routes.order_transition_path(@socket, :index, o.client_id),
+              title: o.client_id,
+              class: "hover:opacity-75") %>
+          </td>
+          <td class="border px-4 py-2"><%= o.venue || "..." %></td>
+          <td class="border px-4 py-2"><%= o.credential || "..." %></td>
+          <td class="border px-4 py-2"><%= o.product_symbol || "..." %></td>
+          <td class="border px-4 py-2">
+            <%= render WorkbenchWeb.OrderView, "_status.html", status: o.status %>
+          </td>
+          <td class="border px-4 py-2"><%= (o.price && o.price |> Decimal.to_string(:normal)) || "..." %></td>
+          <td class="border px-4 py-2"><%= (o.qty && o.qty |> Decimal.to_string(:normal)) || "..." %></td>
+          <td class="border px-4 py-2"><%= (o.leaves_qty && o.leaves_qty |> Decimal.to_string(:normal)) || "..." %></td>
+          <td class="border px-4 py-2"><%= (o.cumulative_qty && o.cumulative_qty |> Decimal.to_string(:normal)) || "..." %></td>
+          <td class="border px-4 py-2">
+            <%= if o.post_only do %>
+              <%= render WorkbenchWeb.IconView, "_check_circle.html", title: o.post_only %>
+            <% else %>
+              <%= render WorkbenchWeb.IconView, "_minus_circle.html", title: o.post_only %>
+            <% end %>
+          </td>
+          <td class="border px-4 py-2">
+            <%= if o.close do %>
+              <%= render WorkbenchWeb.IconView, "_check_circle.html", title: o.close %>
+            <% else %>
+              <%= render WorkbenchWeb.IconView, "_minus_circle.html", title: o.close %>
+            <% end %>
+          </td>
+          <td class="border px-4 py-2 text-xs"><%= (o.inserted_at && relative_time(o.inserted_at)) || "..." %></td>
+          <td class="border px-4 py-2 text-xs"><%= (o.updated_at && relative_time(o.updated_at)) || "-" %></td>
+          <td class="border px-4 py-2 text-xs"><%= (o.last_received_at && relative_time(o.last_received_at)) || "-" %></td>
+          <td class="border px-4 py-2 text-xs"><%= (o.last_venue_timestamp && relative_time(o.last_venue_timestamp)) || "-" %></td>
         </tr>
       <% end %>
     <% else %>
@@ -65,4 +98,17 @@
       </tr>
     <% end %>
   </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="15" class="py-4 text-right">
+        <%= render(
+          Stylish.Table,
+          "navigation.html",
+          to: fn socket, page -> to(socket, page, @current_page, @follow) end,
+          conn: @socket,
+          current_page: @current_page,
+          last_page: @last_page) %>
+      </td>
+    </tr>
+  </tfoot>
 </table>

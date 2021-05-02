@@ -11,3 +11,4 @@
 # and so on) as they will fail if something goes wrong.
 
 Code.require_file("seeds/wallets.exs", __DIR__)
+Code.require_file("seeds/orders.exs", __DIR__)

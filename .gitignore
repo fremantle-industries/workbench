@@ -28,3 +28,6 @@ npm-debug.log
 
 # Secrets
 secrets/*
+
+# Tai SQLite3 databases
+/priv/tai
