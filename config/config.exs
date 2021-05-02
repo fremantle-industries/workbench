@@ -11,7 +11,7 @@ use Mix.Config
 config :telemetry_poller, :default, period: 1_000
 
 # Datastore
-config :workbench, ecto_repos: [Workbench.Repo]
+config :workbench, ecto_repos: [Tai.NewOrders.OrderRepo, Workbench.Repo]
 
 # Configures the endpoint
 config :workbench, WorkbenchWeb.Endpoint,
@@ -91,6 +91,10 @@ config :notified,
 
 config :notified_phoenix,
   to_list: {WorkbenchWeb.Router.Helpers, :notification_path, [WorkbenchWeb.Endpoint, :index]}
+
+# Tai
+config :tai, order_repo_adapter: Ecto.Adapters.SQLite3
+config :tai, Tai.NewOrders.OrderRepo, database: "./priv/tai/orders_#{Mix.env()}.db"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

@@ -1,0 +1,77 @@
+<h2 class="text-3xl">
+  <%= link "Orders", to: Routes.order_path(@socket, :index), class: "opacity-70 hover:opacity-50" %>/<%= @client_id %>/failed_transitions
+</h2>
+
+<div class="mt-8">
+  <%= if @order != nil do %>
+    <%= render WorkbenchWeb.OrderView, "_summary.html", order: @order %>
+
+    <div class="mt-8">
+      <div class="flex items-center space-x-4">
+        <%= link "Applied Transitions", to: Routes.order_transition_path(@socket, :index, @client_id) %>
+        <span>|</span>
+        <h3 class="text-2xl">Failed Transitions</h3>
+      </div>
+
+      <div class="flex items-center mt-4 space-x-4">
+        <form phx-change="search" phx-submit="search">
+          <input type="text" name="query" value="<%= @query %>" placeholder="Search" autocomplete="off"/>
+        </form>
+
+        <form phx-change="node_selected">
+          <select name="node" id="select_nodes" phx-update="ignore">
+            <%= content_tag :option, value: Node.self() do %>
+              <%= Node.self() %>
+            <% end %>
+
+            <%= for n <- Node.list do %>
+              <%= content_tag :option, value: n, selected: @node == Atom.to_string(n) do %>
+                <%= n %>
+              <% end %>
+            <% end %>
+          </select>
+        </form>
+      </div>
+
+      <table class="mt-4 w-full table-auto">
+        <thead>
+          <th scope="col" class="px-4 py-2">Created At</th>
+          <th scope="col" class="px-4 py-2">Type</th>
+          <th scope="col" class="px-4 py-2">Error</th>
+        </thead>
+        <tbody>
+          <%= if Enum.any?(@failed_order_transitions) do %>
+            <%= Enum.map @failed_order_transitions, fn f -> %>
+              <tr>
+                <td scope="row" class="border px-4 py-2"><%= f.inserted_at %></td>
+                <td scope="row" class="border px-4 py-2"><%= f.type %></td>
+                <td scope="row" class="border px-4 py-2"><%= f.error |> inspect %></td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="3" class="border px-4 py-2">No failed transitions</td>
+            </tr>
+          <% end %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3" class="py-4 text-right">
+              <%= render(
+                Stylish.Table,
+                "navigation.html",
+                to: &Routes.failed_order_transition_path(&1, :index, @client_id, page: &2),
+                conn: @socket,
+                previous_page: @previous_page,
+                current_page: @current_page,
+                next_page: @next_page,
+                last_page: @last_page) %>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  <% else %>
+    <p>Order not found on <strong><%= @node %></strong></p>
+  <% end %>
+</div>

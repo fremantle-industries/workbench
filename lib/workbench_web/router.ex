@@ -23,6 +23,12 @@ defmodule WorkbenchWeb.Router do
     live("/wallets", WalletLive.Index, :index, as: :wallet)
     live("/positions", PositionLive.Index, :index, as: :position)
     live("/orders", OrderLive.Index, :index, as: :order)
+    live("/orders/:client_id", OrderTransitionLive.Index, :index, as: :order_transition)
+
+    live("/orders/:client_id/failed_transitions", FailedOrderTransitionLive.Index, :index,
+      as: :failed_order_transition
+    )
+
     live("/products", ProductLive.Index, :index, as: :product)
     resources("/products/:venue", ProductController, only: [:show])
     live("/fees", FeeLive.Index, :index, as: :fee)
