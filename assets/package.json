@@ -39,7 +39,7 @@
     "css-minimizer-webpack-plugin": "^2.0.0",
     "mini-css-extract-plugin": "^1.6.0",
     "node-sass": "^5.0.0",
-    "postcss": "^8.2.13",
+    "postcss": "^8.2.14",
     "postcss-import": "^14.0.1",
     "postcss-loader": "^5.2.0",
     "postcss-preset-env": "^6.7.0",
