@@ -20,6 +20,7 @@ module.exports = {
     },
   },
   variants: {
+    visibility: ['group-hover'],
     display: ['responsive', 'empty'],
     extend: {},
   },

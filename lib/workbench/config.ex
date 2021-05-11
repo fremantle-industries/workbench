@@ -28,4 +28,8 @@ defmodule Workbench.Config do
       {:error, errors}
     end
   end
+
+  def libcluster_topologies do
+    Confex.get_env(:libcluster, :topologies, [])
+  end
 end

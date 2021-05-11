@@ -5,11 +5,10 @@ defmodule Workbench.Application do
 
   def start(_type, _args) do
     Confex.resolve_env!(:workbench)
-    topologies = Application.get_env(:libcluster, :topologies, [])
     {:ok, snapshot_config} = Workbench.BalanceSnapshots.Config.parse()
 
     children = [
-      {Cluster.Supervisor, [topologies, [name: Workbench.ClusterSupervisor]]},
+      Workbench.Cluster.Supervisor,
       Workbench.Repo,
       Workbench.SelectedNode,
       {Phoenix.PubSub, name: Workbench.PubSub},

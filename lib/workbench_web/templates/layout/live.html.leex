@@ -1,13 +1,13 @@
 <p class="empty:hidden p-4 bg-blue-50 text-blue-500 border border-blue-400" role="alert"
-  phx-click="lv:clear-flash"
-  phx-value-key="info"><%= live_flash(@flash, :info) %></p>
+                                                                            phx-click="lv:clear-flash"
+                                                                            phx-value-key="info"><%= live_flash(@flash, :info) %></p>
 
 <p class="empty:hidden mb-4 p-4 bg-yellow-50 text-yellow-500 border border-yellow-400" role="alert"
-  phx-click="lv:clear-flash"
-  phx-value-key="warn"><%= live_flash(@flash, :warn) %></p>
+                                                                                       phx-click="lv:clear-flash"
+                                                                                       phx-value-key="warn"><%= live_flash(@flash, :warn) %></p>
 
 <p class="empty:hidden p-4 bg-red-50 text-red-500 border border-red-400" role="alert"
-  phx-click="lv:clear-flash"
-  phx-value-key="error"><%= live_flash(@flash, :error) %></p>
+                                                                         phx-click="lv:clear-flash"
+                                                                         phx-value-key="error"><%= live_flash(@flash, :error) %></p>
 
 <%= @inner_content %>
