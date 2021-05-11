@@ -29,4 +29,11 @@ defmodule WorkbenchWeb.Router do
     live("/venues", VenueLive.Index, :index, as: :venue)
     live("/advisors", AdvisorLive.Index, :index, as: :advisor)
   end
+
+  scope "/", NotifiedPhoenix do
+    live("/notifications", ListLive, :index,
+      as: :notification,
+      layout: {WorkbenchWeb.LayoutView, :root}
+    )
+  end
 end

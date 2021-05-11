@@ -82,6 +82,13 @@ config :navigator,
     ]
   }
 
+# Notifications
+config :notified, pubsub_server: Workbench.PubSub
+config :notified, receivers: []
+
+config :notified_phoenix,
+  to_list: {WorkbenchWeb.Router.Helpers, :notification_path, [WorkbenchWeb.Endpoint, :index]}
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

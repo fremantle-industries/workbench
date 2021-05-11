@@ -82,7 +82,10 @@ config :phoenix, :plug_init_mode, :runtime
 config :libcluster,
   topologies: [
     gossip: [
-      strategy: Cluster.Strategy.Gossip
+      strategy: Cluster.Strategy.Gossip,
+      connect: {Workbench.Cluster.Nodes, :connect_node, []},
+      disconnect: {Workbench.Cluster.Nodes, :disconnect_node, []},
+      list_nodes: {Workbench.Cluster.Nodes, :nodes, [:connected]}
     ]
   ]
 
