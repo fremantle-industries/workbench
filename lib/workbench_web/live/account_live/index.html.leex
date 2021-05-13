@@ -1,25 +1,29 @@
-  <div class="flex items-center space-x-4">
+  <div>
     <h2 class="text-3xl">Accounts</h2>
 
-    <%= if @show_zero do %>
-      <%= live_redirect "hide zero balances", to: Routes.account_path(@socket, :index, %{}) %>
-    <% else %>
-      <%= live_redirect "show zero balances", to: Routes.account_path(@socket, :index, %{show_zero: true}), class: "text-primary" %>
-    <% end %>
+    <div class="mt-4 flex items-center space-x-2">
+      <form phx-change="node_selected" class="space-x-2">
+        <input type="text" placeholder="Search" disabled class="bg-gray-100 bg-opacity-50" />
 
-    <form phx-change="node_selected">
-      <select name="node" id="select_nodes" phx-update="ignore">
-        <%= content_tag :option, value: Node.self() do %>
-          <%= Node.self() %>
-        <% end %>
-
-        <%= for n <- Node.list do %>
-          <%= content_tag :option, value: n, selected: @node == Atom.to_string(n) do %>
-            <%= n %>
+        <select name="node" id="select_nodes" phx-update="ignore">
+          <%= content_tag :option, value: Node.self() do %>
+            <%= Node.self() %>
           <% end %>
-        <% end %>
-      </select>
-    </form>
+
+          <%= for n <- Node.list do %>
+            <%= content_tag :option, value: n, selected: @node == Atom.to_string(n) do %>
+              <%= n %>
+            <% end %>
+          <% end %>
+        </select>
+      </form>
+
+      <%= if @show_zero do %>
+        <%= live_redirect "hide zero balances", to: Routes.account_path(@socket, :index, %{}) %>
+      <% else %>
+        <%= live_redirect "show zero balances", to: Routes.account_path(@socket, :index, %{show_zero: true}), class: "text-primary" %>
+      <% end %>
+    </div>
   </div>
 
   <table class="w-full mt-4">
