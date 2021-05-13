@@ -1,22 +1,26 @@
-<div class="flex items-center space-x-4 pb-4">
+<div>
   <h2 class="text-3xl">Groups & Advisors</h2>
 
-  <form phx-change="node_selected">
-    <select name="node" id="select_nodes" phx-update="ignore">
-      <%= content_tag :option, value: Node.self() do %>
-        <%= Node.self() %>
-      <% end %>
+  <div class="mt-4 flex items-center space-x-2">
+    <input type="text" placeholder="Search" disabled class="bg-gray-100 bg-opacity-50" />
 
-      <%= for n <- Node.list do %>
-        <%= content_tag :option, value: n, selected: @node == Atom.to_string(n) do %>
-          <%= n %>
+    <form phx-change="node_selected" class="space-x-2">
+      <select name="node" id="select_nodes" phx-update="ignore">
+        <%= content_tag :option, value: Node.self() do %>
+          <%= Node.self() %>
         <% end %>
-      <% end %>
-    </select>
-  </form>
+
+        <%= for n <- Node.list do %>
+          <%= content_tag :option, value: n, selected: @node == Atom.to_string(n) do %>
+            <%= n %>
+          <% end %>
+        <% end %>
+      </select>
+    </form>
+  </div>
 </div>
 
-<hr />
+<hr class="mt-4" />
 
 <div class="mt-4 mb-4">
   <h3 class="text-2xl">Groups</h3>
