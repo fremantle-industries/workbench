@@ -1,21 +1,23 @@
-<div class="flex items-center space-x-4">
+<div>
   <h2 class="text-3xl">Products</h2>
 
-  <form
-      phx-change="node_selected"
-      >
+  <div class="mt-4 flex items-center space-x-2">
+    <form phx-change="node_selected" class="space-x-2">
+      <input type="text" placeholder="Search" disabled class="bg-gray-100 bg-opacity-50" />
+
       <select name="node" id="select_nodes" phx-update="ignore">
         <%= content_tag :option, value: Node.self() do %>
-      <%= Node.self() %>
-    <% end %>
+          <%= Node.self() %>
+        <% end %>
 
-    <%= for n <- Node.list do %>
-      <%= content_tag :option, value: n, selected: @node == Atom.to_string(n) do %>
-        <%= n %>
-      <% end %>
-    <% end %>
+        <%= for n <- Node.list do %>
+          <%= content_tag :option, value: n, selected: @node == Atom.to_string(n) do %>
+            <%= n %>
+          <% end %>
+        <% end %>
       </select>
-  </form>
+    </form>
+  </div>
 </div>
 
 <table class="w-full mt-4">
