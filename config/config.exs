@@ -46,12 +46,12 @@ config :navigator,
         link: {WorkbenchWeb.Router.Helpers, :balance_day_path, [WorkbenchWeb.Endpoint, :index]}
       },
       %{
-        label: "Accounts",
-        link: {WorkbenchWeb.Router.Helpers, :account_path, [WorkbenchWeb.Endpoint, :index]}
-      },
-      %{
         label: "Wallets",
         link: {WorkbenchWeb.Router.Helpers, :wallet_path, [WorkbenchWeb.Endpoint, :index]}
+      },
+      %{
+        label: "Accounts",
+        link: {WorkbenchWeb.Router.Helpers, :account_path, [WorkbenchWeb.Endpoint, :index]}
       },
       %{
         label: "Orders",
