@@ -4,6 +4,8 @@
 
 Manage your trading operation across a distributed cluster
 
+[Install](./README.md#install) | [Features](./docs/FEATURES.md) | [Requirements](./docs/REQUIREMENTS.md)
+
 ## Project Goals
 
 `workbench` strives to provide a first class development environment that brings the same 
@@ -58,26 +60,6 @@ $ mix ecto.migrate
 
 ![products-index](./docs/products-index.png)
 ![products-show](./docs/products-show.png)
-
-## Planned Features
-
-- [x] Notifications
-- [ ] Trade Execution Reports
-- [ ] Data Warehouse
-- [ ] Backtester
-
-## Requirements
-
-- [Erlang OTP](https://www.erlang.org/)
-- [Elixir](https://elixir-lang.org/)
-- [Phoenix](https://www.phoenixframework.org/)
-- [Tai](https://github.com/fremantle-industries/tai)
-- [TimescaleDB](https://www.timescale.com/)
-
-## Optional Tools
-
-- [Prometheus](https://prometheus.io/)
-- [Grafana](https://grafana.com/)
 
 ## Running workbench as a standalone endpoint
 
