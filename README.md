@@ -4,7 +4,7 @@
 
 Manage your trading operation across a distributed cluster
 
-[Install](#install) | [Usage](#usage) | [Features](./docs/FEATURES.md) | [Requirements](./docs/REQUIREMENTS.md) | [Observability](./docs/OBSERVABILITY.md)
+[Install](#install) | [Usage](#usage) | [Features](./docs/FEATURES.md) | [Requirements](./docs/REQUIREMENTS.md) | [Configuration](./docs/CONFIGURATION.md) | [Observability](./docs/OBSERVABILITY.md)
 
 ## Project Goals
 
