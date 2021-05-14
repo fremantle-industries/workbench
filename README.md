@@ -12,6 +12,10 @@ productivity and performance benefits from the [Phoenix](https://www.phoenixfram
 
 ## Features
 
+### Notifications
+
+[![notifications](./docs/notifications.png)](https://youtu.be/NJS0YTsKoiQ)
+
 ### Remotely Control Trade Instances in a Cluster
 
 ![remote-control-trade](./docs/remote-control-trade.png)
@@ -35,9 +39,10 @@ productivity and performance benefits from the [Phoenix](https://www.phoenixfram
 
 ## Planned Features
 
-- Notifications
-- Backtester
-- Trade Execution Reports
+- [x] Notifications
+- [ ] Trade Execution Reports
+- [ ] Data Warehouse
+- [ ] Backtester
 
 ## Requirements
 
