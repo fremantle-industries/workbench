@@ -10,6 +10,28 @@ Manage your trading operation across a distributed cluster
 productivity and performance benefits from the [Phoenix](https://www.phoenixframework.org/) 
 & [Elixir](https://elixir-lang.org/) community to real time algorithmic and quant workflows.
 
+## Install
+
+Add `workbench` to your list of dependencies in `mix.exs`
+
+```elixir
+def deps do
+  [{:workbench, "~> 0.0.9"}]
+end
+```
+
+Generate migrations
+
+```bash
+$ mix workbench.gen.migration
+```
+
+Run migrations
+
+```bash
+$ mix ecto.migrate
+```
+
 ## Features
 
 ### Notifications
@@ -56,28 +78,6 @@ productivity and performance benefits from the [Phoenix](https://www.phoenixfram
 
 - [Prometheus](https://prometheus.io/)
 - [Grafana](https://grafana.com/)
-
-## Install
-
-Add `workbench` to your list of dependencies in `mix.exs`
-
-```elixir
-def deps do
-  [{:workbench, "~> 0.0.9"}]
-end
-```
-
-Generate migrations
-
-```bash
-$ mix workbench.gen.migration
-```
-
-Run migrations
-
-```bash
-$ mix ecto.migrate
-```
 
 ## Running workbench as a standalone endpoint
 
