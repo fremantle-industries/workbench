@@ -22,12 +22,7 @@ defmodule WorkbenchWeb.OrderLive.Index do
     socket =
       socket_with_node
       |> assign(:orders, sorted_orders(socket_with_node.assigns.node))
-      |> push_patch(
-        to:
-          Routes.live_path(socket, WorkbenchWeb.OrderLive.Index, %{
-            node: socket_with_node.assigns.node
-          })
-      )
+      |> push_patch(to: Routes.order_path(socket, :index, %{node: socket_with_node.assigns.node}))
 
     {:noreply, socket}
   end

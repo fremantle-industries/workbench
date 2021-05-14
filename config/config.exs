@@ -55,9 +55,7 @@ config :navigator,
       },
       %{
         label: "Orders",
-        link:
-          {WorkbenchWeb.Router.Helpers, :live_path,
-           [WorkbenchWeb.Endpoint, WorkbenchWeb.OrderLive.Index]}
+        link: {WorkbenchWeb.Router.Helpers, :order_path, [WorkbenchWeb.Endpoint, :index]}
       },
       %{
         label: "Positions",
