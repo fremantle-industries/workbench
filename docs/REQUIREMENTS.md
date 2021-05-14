@@ -1,6 +1,6 @@
 # Requirements
 
-[Install](../README.md#install) | [Features](./FEATURES.md) | [Requirements](./REQUIREMENTS.md)
+[Install](../README.md#install) | [Usage](../README.md#usage) | [Features](./FEATURES.md) | [Requirements](./REQUIREMENTS.md)
 
 - [Erlang OTP](https://www.erlang.org/)
 - [Elixir](https://elixir-lang.org/)

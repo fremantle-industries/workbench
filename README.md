@@ -4,7 +4,7 @@
 
 Manage your trading operation across a distributed cluster
 
-[Install](./README.md#install) | [Features](./docs/FEATURES.md) | [Requirements](./docs/REQUIREMENTS.md)
+[Install](#install) | [Usage](#usage) | [Features](./docs/FEATURES.md) | [Requirements](./docs/REQUIREMENTS.md)
 
 ## Project Goals
 
@@ -61,7 +61,9 @@ $ mix ecto.migrate
 ![products-index](./docs/products-index.png)
 ![products-show](./docs/products-show.png)
 
-## Running workbench as a standalone endpoint
+## Usage
+
+### Running workbench as a standalone endpoint
 
 Add the workbench phoenix endpoint to your config
 
@@ -71,7 +73,7 @@ config :workbench, WorkbenchWeb.Endpoint,
   url: [host: "workbench.localhost", port: "4000"],
 ```
 
-## Embedding workbench in your own Elixir project
+### Embedding workbench in your own Elixir project
 
 There are two options for running `workbench` along side your existing Elixir projects
 
