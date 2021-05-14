@@ -4,7 +4,7 @@ defmodule Workbench.MixProject do
   def project do
     [
       app: :workbench,
-      version: "0.0.9",
+      version: "0.0.10",
       elixir: "~> 1.10",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
@@ -45,11 +45,7 @@ defmodule Workbench.MixProject do
       {:jason, "~> 1.0"},
       {:libcluster, "~> 3.2"},
       {:logger_json, "~> 4.0"},
-      # {:navigator, "~> 0.0.2"},
-      {:navigator, github: "fremantle-industries/navigator", branch: "take-socket-or-conn"},
-      # {:notified, github: "fremantle-industries/notified", branch: "main", override: true},
-      # {:notified, "~> 0.0.2"},
-      # {:notified_phoenix, github: "fremantle-industries/notified_phoenix", branch: "main"},
+      {:navigator, "~> 0.0.2"},
       {:notified_phoenix, "~> 0.0.2"},
       {:number, "~> 1.0.0"},
       {:phoenix, "~> 1.5"},
