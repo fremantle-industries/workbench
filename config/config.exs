@@ -82,7 +82,12 @@ config :navigator,
 
 # Notifications
 config :notified, pubsub_server: Workbench.PubSub
-config :notified, receivers: []
+
+config :notified,
+  receivers: [
+    {NotifiedPhoenix.Receivers.Speech, []},
+    {NotifiedPhoenix.Receivers.BrowserNotification, []}
+  ]
 
 config :notified_phoenix,
   to_list: {WorkbenchWeb.Router.Helpers, :notification_path, [WorkbenchWeb.Endpoint, :index]}
