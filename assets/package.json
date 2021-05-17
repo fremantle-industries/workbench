@@ -44,7 +44,7 @@
     "postcss-loader": "^5.2.0",
     "postcss-preset-env": "^6.7.0",
     "redux-devtools-extension": "^2.13.9",
-    "sass-loader": "^11.0.1",
+    "sass-loader": "^11.1.1",
     "source-map-loader": "^2.0.1",
     "tailwindcss": "^2.1.2",
     "tailwindcss-empty-pseudo-class": "^1.0.0",
