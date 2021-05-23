@@ -18,7 +18,7 @@ Add `workbench` to your list of dependencies in `mix.exs`
 
 ```elixir
 def deps do
-  [{:workbench, "~> 0.0.10"}]
+  [{:workbench, "~> 0.0.11"}]
 end
 ```
 
