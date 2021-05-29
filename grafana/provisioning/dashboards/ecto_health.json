@@ -73,7 +73,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "workbenc_repo_query_queue_time",
+          "expr": "workbench_repo_query_queue_time",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
