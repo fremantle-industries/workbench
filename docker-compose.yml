@@ -17,19 +17,15 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-      target: builder
     ports:
       - "${HOST_PORT:-4000}:${PORT:-4000}"
       - "${PROMETHEUS_METRICS_PORT:-9568}:${PROMETHEUS_METRICS_PORT:-9568}"
-      - "4369:4369"
-      - "9999:9999"
     depends_on:
       - db
     environment:
       - PORT
       - HOST_PORT
       - HOST
-      - REPLACE_OS_VARS=true
       - NODE_COOKIE
       - SECRET_KEY_BASE
       - LIVE_VIEW_SIGNING_SALT
@@ -54,30 +50,12 @@ services:
       - DERIBIT_CLIENT_ID
       - DERIBIT_CLIENT_SECRET
       - DATABASE_URL
-    volumes:
-      - web_build:/app/_build
-      - ./.env:/app/.env
-      - ./mix.exs:/app/mix.exs
-      - ./mix.lock:/app/mix.lock
-      - ./assets/css:/app/assets/css
-      - ./assets/js:/app/assets/js
-      - ./assets/static:/app/assets/static
-      - ./assets/package.json:/app/assets/package.json
-      - ./assets/package-lock.json:/app/assets/package-lock.json
-      - ./assets/webpack.config.js:/app/assets/webpack.config.js
-      - ./assets/tsconfig.json:/app/assets/tsconfig.json
-      - ./config:/app/config
-      - ./lib:/app/lib
-      - ./priv/repo:/app/priv/repo
-    entrypoint: "sh -c 'mix setup.deps && mix phx.server'"
 
   prometheus:
     image: 'prom/prometheus:v2.25.0'
     restart: always
     ports:
       - 9090:9090
-    depends_on:
-      - web
     volumes:
       - ./prometheus/:/etc/prometheus/
       - prometheus_data:/prometheus
@@ -92,9 +70,6 @@ services:
     restart: always
     ports:
       - "3000:3000"
-    depends_on:
-      - db
-      - prometheus
     volumes:
       - grafana_data:/var/lib/grafana
       - ./grafana/provisioning/:/etc/grafana/provisioning/

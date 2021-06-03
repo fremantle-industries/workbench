@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      target: builder
+    volumes:
+      - web_build:/app/_build
+      - ./.env:/app/.env
+      - ./mix.exs:/app/mix.exs
+      - ./mix.lock:/app/mix.lock
+      - ./assets/css:/app/assets/css
+      - ./assets/js:/app/assets/js
+      - ./assets/static:/app/assets/static
+      - ./assets/package.json:/app/assets/package.json
+      - ./assets/package-lock.json:/app/assets/package-lock.json
+      - ./assets/webpack.config.js:/app/assets/webpack.config.js
+      - ./assets/tsconfig.json:/app/assets/tsconfig.json
+      - ./config:/app/config
+      - ./lib:/app/lib
+      - ./priv/repo:/app/priv/repo
+    entrypoint: "sh -c 'mix setup.deps && mix phx.server'"
