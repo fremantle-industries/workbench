@@ -2,6 +2,7 @@ defmodule Workbench.SmokeTest do
   use ExUnit.Case, async: false
   use Wallaby.Feature
 
+  @tag :skip
   feature "users have names", %{session: session} do
     session
     |> visit("/")
