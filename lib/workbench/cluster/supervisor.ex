@@ -9,6 +9,7 @@ defmodule Workbench.Cluster.Supervisor do
   @impl true
   def init(_) do
     children = [
+      Workbench.Cluster.Observer,
       {Cluster.Supervisor, [Workbench.Config.libcluster_topologies(), []]}
     ]
 

@@ -82,10 +82,7 @@ Workbench integrates with libcluster to send notifications when a node connects 
 config :libcluster,
   topologies: [
     gossip: [
-      strategy: Cluster.Strategy.Gossip,
-      connect: {Workbench.Cluster.Nodes, :connect_node, []},
-      disconnect: {Workbench.Cluster.Nodes, :disconnect_node, []},
-      list_nodes: {Workbench.Cluster.Nodes, :nodes, [:connected]}
+      strategy: Cluster.Strategy.Gossip
     ]
   ]
 ```
