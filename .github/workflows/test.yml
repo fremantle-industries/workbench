@@ -64,6 +64,7 @@ jobs:
           LIVE_VIEW_SIGNING_SALT: ${{secrets.LIVE_VIEW_SIGNING_SALT}}
           GUARDIAN_SECRET_KEY: ${{secrets.GUARDIAN_SECRET_KEY}}
         run: |
+          mix tai.gen.migration
           mix ecto.create
           mix ecto.migrate
           mix test
