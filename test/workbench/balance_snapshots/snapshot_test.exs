@@ -1,5 +1,5 @@
 defmodule Workbench.BalanceSnapshots.SnapshotTest do
-  use ExUnit.Case, async: false
+  use Workbench.DataCase, async: false
   import TestSupport.Quotes
   alias Workbench.BalanceSnapshots
 
@@ -13,17 +13,6 @@ defmodule Workbench.BalanceSnapshots.SnapshotTest do
             usd_quote_asset: @usd_quote_asset,
             quote_pairs: [{@venue, @usd_quote_asset}]
           )
-
-  setup do
-    on_exit(fn ->
-      :ok = Application.stop(:tai)
-      {:ok, _} = Application.ensure_all_started(:tai)
-    end)
-
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Workbench.Repo)
-
-    :ok
-  end
 
   test "creates a balance snapshot with the value of wallets & accounts in the quote pair asset" do
     btc_usdt_quote =

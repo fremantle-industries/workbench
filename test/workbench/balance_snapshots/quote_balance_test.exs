@@ -1,18 +1,7 @@
 defmodule Workbench.BalanceSnapshots.QuoteBalanceTest do
-  use ExUnit.Case, async: false
+  use Workbench.DataCase, async: false
   import TestSupport.Quotes
   alias Workbench.BalanceSnapshots
-
-  setup do
-    on_exit(fn ->
-      :ok = Application.stop(:tai)
-      {:ok, _} = Application.ensure_all_started(:tai)
-    end)
-
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Workbench.Repo)
-
-    :ok
-  end
 
   test "calculates the usd value of the assets" do
     btc_usd_quote = build_quote(venue: :venue_b, symbol: :btc_usd, bid: {9000, 1}, ask: {9001, 2})
