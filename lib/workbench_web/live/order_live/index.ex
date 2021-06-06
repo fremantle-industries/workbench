@@ -202,7 +202,9 @@ defmodule WorkbenchWeb.OrderLive.Index do
     # visible in the current page then we don't need to do anything.
     if visible_updated_order do
       %transition_mod{} = transition
-      updated_attrs = transition |> transition_mod.attrs() |> Map.new()
+      attrs = transition |> transition_mod.attrs() |> Map.new()
+      new_status = transition_mod.status(visible_updated_order.status)
+      updated_attrs = Map.put(attrs, :status, new_status)
 
       updated_orders =
         Enum.map(orders, fn o ->
