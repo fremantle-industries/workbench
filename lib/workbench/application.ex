@@ -12,7 +12,6 @@ defmodule Workbench.Application do
       Workbench.Cluster.Supervisor,
       Workbench.Repo,
       Workbench.SelectedNode,
-      {Phoenix.PubSub, name: Workbench.PubSub},
       {Workbench.Schoolbus, [topics: [:balance_snapshot]]},
       {Workbench.BalanceSnapshots.Scheduler, [config: snapshot_config]},
       WorkbenchWeb.Telemetry,

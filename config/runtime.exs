@@ -29,7 +29,7 @@ config :workbench, WorkbenchWeb.Endpoint,
   http: [port: http_port],
   url: [host: host, port: http_port],
   render_errors: [view: WorkbenchWeb.ErrorView, accepts: ~w(html json)],
-  pubsub_server: Workbench.PubSub,
+  pubsub_server: Tai.PubSub,
   secret_key_base: secret_key_base,
   live_view: [signing_salt: live_view_signing_salt]
 
@@ -101,7 +101,7 @@ config :navigator,
   }
 
 # Notifications
-config :notified, pubsub_server: Workbench.PubSub
+config :notified, pubsub_server: Tai.PubSub
 
 config :notified,
   receivers: [

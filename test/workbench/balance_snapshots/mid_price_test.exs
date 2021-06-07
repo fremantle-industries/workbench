@@ -1,16 +1,7 @@
 defmodule Workbench.BalanceSnapshots.MidPriceTest do
-  use ExUnit.Case, async: false
+  use Workbench.DataCase, async: false
   import TestSupport.Quotes
   alias Workbench.BalanceSnapshots
-
-  setup do
-    on_exit(fn ->
-      :ok = Application.stop(:tai)
-      {:ok, _} = Application.ensure_all_started(:tai)
-    end)
-
-    :ok
-  end
 
   test "returns the mid price for the first pair with a quote" do
     market_quote = build_quote(venue: :venue_b, symbol: :btc_usdt, bid: {9005, 1}, ask: {9006, 2})

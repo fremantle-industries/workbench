@@ -100,7 +100,7 @@ config :my_app, MyAppWeb.Endpoint,
   server: true
 
 config :workbench, WorkbenchWeb.Endpoint,
-  pubsub_server: Workbench.PubSub,
+  pubsub_server: Tai.PubSub,
   http: [port: 4001],
   url: [host: "workbench.localhost", port: "4001"],
   live_view: [signing_salt: "aolmUusQ6//zaa5GZHu7DG2V3YAgOoP/"],
@@ -121,7 +121,7 @@ end
 # config/config.exs
 # Phoenix endpoints
 config :niex, MyAppWeb.Endpoint,
-  pubsub_server: MyApp.PubSub,
+  pubsub_server: Tai.PubSub,
   live_view: [signing_salt: "aolmUusQ6//zaa5GZHu7DG2V3YAgOoP/"],
   secret_key_base: "vKt36v4Gi2Orw8b8iBRg6ZFdzXKLvcRYkk1AaMLYX0+ry7k5XaJXd/LY/itmoxPP",
   server: false,
@@ -129,7 +129,7 @@ config :niex, MyAppWeb.Endpoint,
   check_origin: false
 
 config :workbench, WorkbenchWeb.Endpoint,
-  pubsub_server: Workbench.PubSub,
+  pubsub_server: Tai.PubSub,
   live_view: [signing_salt: "polmUusQ6//zaa5GZHu7DG2V3YAgOoP/"],
   secret_key_base: "xKt36v4Gi2Orw8b8iBRg6ZFdzXKLvcRYkk1AaMLYX0+ry7k5XaJXd/LY/itmoxPP",
   server: false,

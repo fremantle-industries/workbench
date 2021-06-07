@@ -29,7 +29,7 @@ defmodule Workbench.MixProject do
   @dotenvs ~w(dev test)a
   defp app_list(env) when env in @dotenvs, do: [:dotenv | app_list()]
   defp app_list(_), do: app_list()
-  defp app_list, do: [:logger, :runtime_tools, :tai]
+  defp app_list, do: [:logger, :runtime_tools, :tai, :notified]
 
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
@@ -60,7 +60,6 @@ defmodule Workbench.MixProject do
       # {:stylish, github: "fremantle-industries/stylish", branch: "ping"},
       {:stylish, "~> 0.0.2"},
       # {:tai, "~> 0.0.66"},
-      # {:tai, github: "fremantle-industries/tai", sparse: "apps/tai", branch: "orders-ecto-repo-with-converted-venue-adapters"},
       {:tai, github: "fremantle-industries/tai", sparse: "apps/tai", branch: "main"},
       {:telemetry, "~> 0.4"},
       {:telemetry_metrics, "~> 0.4"},

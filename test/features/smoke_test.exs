@@ -3,7 +3,7 @@ defmodule Workbench.SmokeTest do
   use Wallaby.Feature
 
   @tag :skip
-  feature "users have names", %{session: session} do
+  feature "workbench loads", %{session: session} do
     session
     |> visit("/")
     |> assert_has(Query.css("h2", text: "All Balances"))

@@ -69,7 +69,7 @@ referring to the [notified](https://github.com/fremantle-industries/notified#con
 documentation.
 
 ```elixir
-config :notified, pubsub_server: Workbench.PubSub
+config :notified, pubsub_server: Tai.PubSub
 config :notified, receivers: []
 
 config :notified_phoenix,
