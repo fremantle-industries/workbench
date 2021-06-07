@@ -18,19 +18,7 @@
           <input type="text" name="query" value="<%= @query %>" placeholder="Search" autocomplete="off"/>
         </form>
 
-        <form phx-change="node_selected">
-          <select name="node" id="select_nodes" phx-update="ignore">
-            <%= content_tag :option, value: Node.self() do %>
-              <%= Node.self() %>
-            <% end %>
-
-            <%= for n <- Node.list do %>
-              <%= content_tag :option, value: n, selected: @node == Atom.to_string(n) do %>
-                <%= n %>
-              <% end %>
-            <% end %>
-          </select>
-        </form>
+        <%= live_component @socket, WorkbenchWeb.SharedLive.SelectNodeComponent, id: :select_node, class: "ml-4" %>
       </div>
 
       <table class="mt-4 w-full table-auto">

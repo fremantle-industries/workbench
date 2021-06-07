@@ -31,24 +31,6 @@ defmodule WorkbenchWeb.OrderLive.Index do
   end
 
   @impl true
-  def handle_event("node-selected", params, socket) do
-    socket_with_node = assign_node(socket, params)
-
-    socket =
-      socket_with_node
-      |> assign_search()
-      |> push_patch(
-        to:
-          Routes.order_path(socket_with_node, :index, %{
-            node: socket_with_node.assigns.node,
-            query: socket_with_node.assigns.query
-          })
-      )
-
-    {:noreply, socket}
-  end
-
-  @impl true
   def handle_event("search", params, socket) do
     socket =
       socket
@@ -90,6 +72,16 @@ defmodule WorkbenchWeb.OrderLive.Index do
     else
       {:noreply, socket_with_follow}
     end
+  end
+
+  @impl true
+  def handle_info({:node_selected, _selected_node}, socket) do
+    socket =
+      socket
+      |> assign_search()
+      |> push_patch(to: Routes.order_path(socket, :index, %{query: socket.assigns.query}))
+
+    {:noreply, socket}
   end
 
   @impl true

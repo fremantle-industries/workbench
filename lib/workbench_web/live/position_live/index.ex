@@ -7,26 +7,26 @@ defmodule WorkbenchWeb.PositionLive.Index do
   end
 
   def handle_params(params, _uri, socket) do
-    socket_with_node = assign_node(socket, params)
-
     socket =
-      socket_with_node
-      |> assign(:positions, sorted_positions(socket_with_node.assigns.node))
+      socket
+      |> assign_node(params)
+      |> assign_positions()
 
     {:noreply, socket}
   end
 
-  def handle_event("node_selected", params, socket) do
-    socket_with_node = assign_node(socket, params)
-
+  def handle_info({:node_selected, _selected_node}, socket) do
     socket =
-      socket_with_node
-      |> assign(:positions, sorted_positions(socket.assigns.node))
-      |> push_patch(
-        to: Routes.position_path(socket, :index, %{node: socket_with_node.assigns.node})
-      )
+      socket
+      |> assign_positions()
+      |> push_patch(to: Routes.position_path(socket, :index))
 
     {:noreply, socket}
+  end
+
+  defp assign_positions(socket) do
+    socket
+    |> assign(:positions, sorted_positions(socket.assigns.node))
   end
 
   @order ~w[venue_id symbol credential_id]a

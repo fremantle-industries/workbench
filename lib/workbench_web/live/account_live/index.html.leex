@@ -1,59 +1,46 @@
-  <div>
-    <h2 class="text-3xl">Accounts</h2>
+<h2 class="text-3xl">Accounts</h2>
 
-    <div class="mt-4 flex items-center space-x-2">
-      <form phx-change="node_selected" class="space-x-2">
-        <input type="text" placeholder="Search" disabled title="coming soon..." class="bg-gray-100 opacity-25" />
+<div class="flex items-center mt-4">
+  <form>
+    <input type="text" placeholder="Search" disabled title="coming soon..." class="bg-gray-100 opacity-25" />
+  </form>
 
-        <select name="node" id="select_nodes" phx-update="ignore">
-          <%= content_tag :option, value: Node.self() do %>
-            <%= Node.self() %>
-          <% end %>
+  <%= live_component @socket, WorkbenchWeb.SharedLive.SelectNodeComponent, id: :select_node, class: "ml-4 mr-4" %>
 
-          <%= for n <- Node.list do %>
-            <%= content_tag :option, value: n, selected: @node == Atom.to_string(n) do %>
-              <%= n %>
-            <% end %>
-          <% end %>
-        </select>
-      </form>
+  <%= if @show_zero do %>
+    <%= live_redirect "hide zero balances", to: Routes.account_path(@socket, :index, %{}) %>
+  <% else %>
+    <%= live_redirect "show zero balances", to: Routes.account_path(@socket, :index, %{show_zero: true}), class: "text-primary" %>
+  <% end %>
+</div>
 
-      <%= if @show_zero do %>
-        <%= live_redirect "hide zero balances", to: Routes.account_path(@socket, :index, %{}) %>
-      <% else %>
-        <%= live_redirect "show zero balances", to: Routes.account_path(@socket, :index, %{show_zero: true}), class: "text-primary" %>
-      <% end %>
-    </div>
-  </div>
-
-  <table class="w-full mt-8">
-    <thead class="bg-gray-200 border-t-2 border-gray-400">
-      <th scope="col" class="px-4 py-3 text-left text-gray-700">Venue</th>
-      <th scope="col" class="px-4 py-3 text-left text-gray-700">Asset</th>
-      <th scope="col" class="px-4 py-3 text-left text-gray-700">Type</th>
-      <th scope="col" class="px-4 py-3 text-left text-gray-700">Credential</th>
-      <th scope="col" class="px-4 py-3 text-left text-gray-700">Equity</th>
-      <th scope="col" class="px-4 py-3 text-left text-gray-700">Free</th>
-      <th scope="col" class="px-4 py-3 text-left text-gray-700">Locked</th>
-    </thead>
-    <tbody>
-      <%= if Enum.any?(@accounts) do %>
-        <%= Enum.map @accounts, fn a -> %>
-          <tr class="hover:bg-gray-50 border-t border-b group">
-            <td class="border px-4 py-3"><%= a.venue_id %></td>
-            <td class="border px-4 py-3"><%= a.asset %></td>
-            <td class="border px-4 py-3"><%= a.type %></td>
-            <td class="border px-4 py-3"><%= a.credential_id %></td>
-            <td class="border px-4 py-3"><%= a.equity %></td>
-            <td class="border px-4 py-3"><%= a.free %></td>
-            <td class="border px-4 py-3"><%= a.locked %></td>
-          </tr>
-        <% end %>
-      <% else %>
+<table class="w-full mt-8">
+  <thead class="bg-gray-200 border-t-2 border-gray-400">
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Venue</th>
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Asset</th>
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Type</th>
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Credential</th>
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Equity</th>
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Free</th>
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Locked</th>
+  </thead>
+  <tbody>
+    <%= if Enum.any?(@accounts) do %>
+      <%= Enum.map @accounts, fn a -> %>
         <tr class="hover:bg-gray-50 border-t border-b group">
-          <td colspan="7" class="px-4 py-3">No accounts</td>
+          <td class="border px-4 py-3"><%= a.venue_id %></td>
+          <td class="border px-4 py-3"><%= a.asset %></td>
+          <td class="border px-4 py-3"><%= a.type %></td>
+          <td class="border px-4 py-3"><%= a.credential_id %></td>
+          <td class="border px-4 py-3"><%= a.equity %></td>
+          <td class="border px-4 py-3"><%= a.free %></td>
+          <td class="border px-4 py-3"><%= a.locked %></td>
         </tr>
       <% end %>
-    </tbody>
-  </table>
-</div>
+    <% else %>
+      <tr class="hover:bg-gray-50 border-t border-b group">
+        <td colspan="7" class="px-4 py-3">No accounts</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

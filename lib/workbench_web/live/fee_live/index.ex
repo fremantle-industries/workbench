@@ -7,22 +7,19 @@ defmodule WorkbenchWeb.FeeLive.Index do
   end
 
   def handle_params(params, _uri, socket) do
-    socket_with_node = assign_node(socket, params)
-
     socket =
-      socket_with_node
-      |> assign(:fees, sorted_fees(socket_with_node.assigns.node))
+      socket
+      |> assign_node(params)
+      |> assign_fees()
 
     {:noreply, socket}
   end
 
-  def handle_event("node_selected", params, socket) do
-    socket_with_node = assign_node(socket, params)
-
+  def handle_info({:node_selected, _selected_node}, socket) do
     socket =
-      socket_with_node
-      |> assign(:fees, sorted_fees(socket.assigns.node))
-      |> push_patch(to: Routes.fee_path(socket, :index, %{node: socket_with_node.assigns.node}))
+      socket
+      |> assign_fees()
+      |> push_patch(to: Routes.fee_path(socket, :index))
 
     {:noreply, socket}
   end
@@ -44,6 +41,11 @@ defmodule WorkbenchWeb.FeeLive.Index do
   def format(%Decimal{} = val), do: val |> decimal()
   def format(%DateTime{} = val), do: val |> relative_time()
   def format(val) when is_binary(val) or is_atom(val), do: val
+
+  defp assign_fees(socket) do
+    socket
+    |> assign(:fees, sorted_fees(socket.assigns.node))
+  end
 
   @order ~w[venue_id symbol credential_id]a
   defp sorted_fees(node_param) do

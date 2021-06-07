@@ -30,34 +30,26 @@ defmodule WorkbenchWeb.FailedOrderTransitionLive.Index do
   end
 
   @impl true
-  def handle_event("node_selected", params, socket) do
-    socket_with_node = assign_node(socket, params)
-
-    socket =
-      socket_with_node
-      |> assign_search()
-      |> push_patch(
-        to:
-          Routes.failed_order_transition_path(
-            socket_with_node,
-            :index,
-            socket_with_node.assigns.client_id,
-            %{
-              node: socket_with_node.assigns.node,
-              query: socket_with_node.assigns.query
-            }
-          )
-      )
-
-    {:noreply, socket}
-  end
-
-  @impl true
   def handle_event("search", params, socket) do
     socket =
       socket
       |> assign_search_query(params)
       |> assign_search()
+
+    {:noreply, socket}
+  end
+
+  @impl true
+  def handle_info({:node_selected, _selected_node}, socket) do
+    socket =
+      socket
+      |> assign_search()
+      |> push_patch(
+        to:
+          Routes.failed_order_transition_path(socket, :index, socket.assigns.client_id, %{
+            query: socket.assigns.query
+          })
+      )
 
     {:noreply, socket}
   end

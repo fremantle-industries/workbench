@@ -153,6 +153,13 @@ if config_env() == :dev do
       ]
     ]
 
+  config :libcluster,
+    topologies: [
+      gossip: [
+        strategy: Cluster.Strategy.Gossip
+      ]
+    ]
+
   config :tai, Tai.NewOrders.OrderRepo, show_sensitive_data_on_connection_error: true
 end
 

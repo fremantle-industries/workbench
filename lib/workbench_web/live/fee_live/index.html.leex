@@ -1,23 +1,11 @@
-<div>
-  <h2 class="text-3xl">Fees</h2>
+<h2 class="text-3xl">Fees</h2>
 
-  <div class="mt-4 flex items-center space-x-2">
-    <form phx-change="node_selected" class="space-x-2">
-      <input type="text" placeholder="Search" disabled title="coming soon..." class="bg-gray-100 opacity-25" />
+<div class="flex items-center mt-4">
+  <form>
+    <input type="text" placeholder="Search" disabled title="coming soon..." class="bg-gray-100 opacity-25" />
+  </form>
 
-      <select name="node" id="select_nodes" phx-update="ignore">
-        <%= content_tag :option, value: Node.self() do %>
-          <%= Node.self() %>
-        <% end %>
-
-        <%= for n <- Node.list do %>
-          <%= content_tag :option, value: n, selected: @node == Atom.to_string(n) do %>
-            <%= n %>
-          <% end %>
-        <% end %>
-      </select>
-    </form>
-  </div>
+  <%= live_component @socket, WorkbenchWeb.SharedLive.SelectNodeComponent, id: :select_node, class: "ml-4" %>
 </div>
 
 <table class="w-full mt-8">

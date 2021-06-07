@@ -25,21 +25,6 @@ defmodule WorkbenchWeb.AdvisorLive.Index do
   end
 
   @impl true
-  def handle_event("node_selected", params, socket) do
-    socket_with_node = assign_node(socket, params)
-
-    socket =
-      socket_with_node
-      |> assign_groups()
-      |> assign_instances()
-      |> push_patch(
-        to: Routes.advisor_path(socket, :index, %{node: socket_with_node.assigns.node})
-      )
-
-    {:noreply, socket}
-  end
-
-  @impl true
   def handle_event("search", params, socket) do
     socket =
       socket
@@ -106,6 +91,17 @@ defmodule WorkbenchWeb.AdvisorLive.Index do
       socket
       |> assign_groups()
       |> assign_instances()
+
+    {:noreply, socket}
+  end
+
+  @impl true
+  def handle_info({:node_selected, _selected_node}, socket) do
+    socket =
+      socket
+      |> assign_groups()
+      |> assign_instances()
+      |> push_patch(to: Routes.advisor_path(socket, :index))
 
     {:noreply, socket}
   end

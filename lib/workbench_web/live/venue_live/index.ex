@@ -2,31 +2,22 @@ defmodule WorkbenchWeb.VenueLive.Index do
   use WorkbenchWeb, :live_view
   import WorkbenchWeb.ViewHelpers.NodeHelper, only: [assign_node: 2]
 
+  @impl true
   def mount(_params, _session, socket) do
     {:ok, socket}
   end
 
+  @impl true
   def handle_params(params, _uri, socket) do
-    socket_with_node = assign_node(socket, params)
-
     socket =
-      socket_with_node
-      |> assign(:venues, sorted_venues(socket_with_node.assigns.node))
+      socket
+      |> assign_node(params)
+      |> assign_venues()
 
     {:noreply, socket}
   end
 
-  def handle_event("node_selected", params, socket) do
-    socket_with_node = assign_node(socket, params)
-
-    socket =
-      socket_with_node
-      |> assign(:venues, sorted_venues(socket.assigns.node))
-      |> push_patch(to: Routes.venue_path(socket, :index, %{node: socket_with_node.assigns.node}))
-
-    {:noreply, socket}
-  end
-
+  @impl true
   def handle_event("start", %{"id" => id}, socket) do
     id
     |> String.to_atom()
@@ -34,11 +25,12 @@ defmodule WorkbenchWeb.VenueLive.Index do
 
     socket =
       socket
-      |> assign(:venues, sorted_venues(socket.assigns.node))
+      |> assign_venues()
 
     {:noreply, socket}
   end
 
+  @impl true
   def handle_event("stop", %{"id" => id}, socket) do
     id
     |> String.to_atom()
@@ -46,9 +38,24 @@ defmodule WorkbenchWeb.VenueLive.Index do
 
     socket =
       socket
-      |> assign(:venues, sorted_venues(socket.assigns.node))
+      |> assign_venues()
 
     {:noreply, socket}
+  end
+
+  @impl true
+  def handle_info({:node_selected, _selected_node}, socket) do
+    socket =
+      socket
+      |> assign_venues()
+      |> push_patch(to: Routes.venue_path(socket, :index))
+
+    {:noreply, socket}
+  end
+
+  defp assign_venues(socket) do
+    socket
+    |> assign(:venues, sorted_venues(socket.assigns.node))
   end
 
   @order [:id]

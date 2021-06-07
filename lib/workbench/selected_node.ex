@@ -1,23 +1,25 @@
 defmodule Workbench.SelectedNode do
   use Agent
 
-  def start_link(_) do
-    Agent.start_link(fn -> nil end, name: __MODULE__)
+  @default_id :default
+
+  def start_link(opts) do
+    id = Keyword.get(opts, :id, @default_id)
+    name = process_name(id)
+    Agent.start_link(fn -> Workbench.Nodes.this() end, name: name)
   end
 
-  # TODO: This would allow each user to select a different node
-  # def get(user_id) do
-  #   Agent.get(__MODULE__, &Map.get(&1, user_id))
-  # end
-  def get do
-    Agent.get(__MODULE__, & &1)
+  def process_name(id), do: :"#{__MODULE__}_#{id}"
+
+  def get(id \\ @default_id) do
+    id
+    |> process_name()
+    |> Agent.get(& &1)
   end
 
-  # TODO: This would allow each user to select a different node
-  # def put(user_id, node) when is_bitstring(user_id) do
-  #   Agent.update(__MODULE__, &Map.put(&1, user_id, node))
-  # end
-  def put(node) do
-    Agent.update(__MODULE__, fn _ -> node end)
+  def put(node, id \\ @default_id) do
+    id
+    |> process_name()
+    |> Agent.update(fn _ -> node end)
   end
 end

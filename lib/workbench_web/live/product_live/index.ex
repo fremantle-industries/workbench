@@ -23,25 +23,21 @@ defmodule WorkbenchWeb.ProductLive.Index do
   end
 
   @impl true
-  def handle_event("node_selected", params, socket) do
-    socket_with_node = assign_node(socket, params)
-
-    socket =
-      socket_with_node
-      |> assign_products()
-      |> push_patch(
-        to: Routes.product_path(socket, :index, %{node: socket_with_node.assigns.node})
-      )
-
-    {:noreply, socket}
-  end
-
-  @impl true
   def handle_event("search", params, socket) do
     socket =
       socket
       |> assign_search_query(params)
       |> assign_products()
+
+    {:noreply, socket}
+  end
+
+  @impl true
+  def handle_info({:node_selected, _selected_node}, socket) do
+    socket =
+      socket
+      |> assign_products()
+      |> push_patch(to: Routes.product_path(socket, :index))
 
     {:noreply, socket}
   end
