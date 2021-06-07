@@ -1,11 +1,11 @@
 <h2 class="text-3xl">Orders</h2>
 
-<div class="flex items-center mt-4 space-x-4">
+<div class="flex items-center mt-4">
   <form phx-change="search" phx-submit="search">
     <input type="text" name="query" value="<%= @query %>" placeholder="Search" autocomplete="off"/>
   </form>
 
-  <form phx-change="node-selected">
+  <form phx-change="node-selected" class="ml-4">
     <select name="node" id="select_nodes" phx-update="ignore">
       <%= content_tag :option, value: Node.self() do %>
         <%= Node.self() %>
@@ -19,7 +19,7 @@
     </select>
   </form>
 
-  <form>
+  <form class="ml-4">
     <span class="relative inline-flex rounded-md shadow-sm">
       <button
         type="button"
@@ -30,6 +30,16 @@
       </button>
       <%= render_ping(@follow) %>
     </span>
+  </form>
+
+  <form class="ml-auto">
+    <button
+      type="button"
+      phx-click="clear-orders"
+      class="bg-red-500 text-white font-bold rounded-md px-4 p-2"
+    >
+      Clear
+    </button>
   </form>
 </div>
 

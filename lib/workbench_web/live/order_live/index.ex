@@ -61,6 +61,18 @@ defmodule WorkbenchWeb.OrderLive.Index do
   end
 
   @impl true
+  def handle_event("clear-orders", _params, socket) do
+    selected_node = String.to_atom(socket.assigns.node)
+    {_, _} = Tai.Commander.delete_all_orders(node: selected_node)
+
+    socket =
+      socket
+      |> assign_search()
+
+    {:noreply, socket}
+  end
+
+  @impl true
   def handle_event("toggle-follow", _params, socket) do
     follow = !socket.assigns.follow
 
