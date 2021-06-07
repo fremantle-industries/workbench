@@ -53,6 +53,7 @@ defmodule WorkbenchWeb.OrderLive.Index do
     socket =
       socket
       |> cancel_search_timer()
+      |> cancel_load_placeholder_timer()
       |> assign_search_query(params)
       |> send_search_after(200)
 
@@ -91,28 +92,31 @@ defmodule WorkbenchWeb.OrderLive.Index do
 
   @impl true
   def handle_info(:load_placeholder_orders, socket) do
-    orders = socket.assigns.orders
+    visible_orders = socket.assigns.orders
+    placeholder_orders = Enum.filter(visible_orders, &(&1.venue == nil))
     search_node = String.to_atom(socket.assigns.node)
-    loaded_new_orders = orders
-                        |> Enum.filter(& &1.venue == nil)
-                        |> Enum.map(& &1.client_id)
-                        |> Tai.Commander.get_new_orders_by_client_ids(node: search_node)
-                        |> Map.new(fn o -> {o.client_id, o} end)
 
-    loaded_orders = orders
-                    |> Enum.map(fn o ->
-                      if o.venue == nil do
-                        Map.fetch!(loaded_new_orders, o.client_id)
-                      else
-                        o
-                      end
-                    end)
+    loaded_new_orders =
+      placeholder_orders
+      |> Enum.map(& &1.client_id)
+      |> Tai.Commander.get_new_orders_by_client_ids(node: search_node)
+      |> Map.new(fn o -> {o.client_id, o} end)
+
+    orders =
+      visible_orders
+      |> Enum.map(fn o ->
+        if o.venue == nil do
+          Map.get(loaded_new_orders, o.client_id) || o
+        else
+          o
+        end
+      end)
 
     socket =
       socket
-      |> assign(:search_timer, nil)
+      |> assign(:load_placeholder_timer, nil)
       |> assign(:new_follow_orders_count, 0)
-      |> assign(:orders, loaded_orders)
+      |> assign(:orders, orders)
 
     {:noreply, socket}
   end
@@ -131,21 +135,10 @@ defmodule WorkbenchWeb.OrderLive.Index do
     socket =
       socket
       |> assign(:last_order_updated, client_id)
-      |> cancel_search_timer()
       |> send_clear_last_order_updated_after(5000)
       |> update_or_search_orders(client_id, transition)
 
     {:noreply, socket}
-  end
-
-  defp cancel_search_timer(socket) do
-    search_timer = socket.assigns[:search_timer]
-    if search_timer do
-      Process.cancel_timer(search_timer)
-    end
-
-    socket
-    |> assign(:search_timer, nil)
   end
 
   defp update_or_search_orders(socket, client_id, nil) do
@@ -162,6 +155,7 @@ defmodule WorkbenchWeb.OrderLive.Index do
       socket.assigns.follow && socket.assigns.query == nil ->
         orders = socket.assigns.orders
         orders_count = socket.assigns.orders_count + 1
+        new_follow_orders_count = socket.assigns.new_follow_orders_count + 1
         new_order = %Tai.NewOrders.Order{client_id: client_id, status: :enqueued}
 
         updated_orders =
@@ -171,19 +165,18 @@ defmodule WorkbenchWeb.OrderLive.Index do
             orders ++ [new_order]
           end
 
-        new_follow_orders_count = socket.assigns.new_follow_orders_count + 1
-        send_load_placeholder_after_ms = if new_follow_orders_count >= 10, do: 0, else: 200
-
         socket
+        |> cancel_search_timer()
         |> assign(:new_follow_orders_count, new_follow_orders_count)
         |> assign(:orders_count, orders_count)
         |> assign_pages()
         |> assign(:orders, updated_orders)
-        |> send_load_placeholder_orders_after(send_load_placeholder_after_ms)
+        |> send_load_placeholder_orders_after(500)
 
       socket.assigns.follow ->
         socket
-        |> send_search_after(200)
+        |> cancel_load_placeholder_timer()
+        |> send_search_after(500)
 
       true ->
         socket
@@ -222,18 +215,51 @@ defmodule WorkbenchWeb.OrderLive.Index do
     end
   end
 
-  defp send_search_after(socket, after_ms) do
-    search_timer = Process.send_after(self(), :search, after_ms)
+  defp cancel_search_timer(socket) do
+    timer = socket.assigns[:search_timer]
+
+    if timer do
+      Process.cancel_timer(timer)
+    end
 
     socket
-    |> assign(:search_timer, search_timer)
+    |> assign(:search_timer, nil)
+  end
+
+  defp cancel_load_placeholder_timer(socket) do
+    timer = socket.assigns[:load_placeholder_timer]
+
+    if timer do
+      Process.cancel_timer(timer)
+    end
+
+    socket
+    |> assign(:load_placeholder_timer, nil)
+  end
+
+  defp send_search_after(socket, after_ms) do
+    if socket.assigns[:search_timer] do
+      socket
+    else
+      timer = Process.send_after(self(), :search, after_ms)
+      assign(socket, :search_timer, timer)
+    end
   end
 
   defp send_load_placeholder_orders_after(socket, after_ms) do
-    search_timer = Process.send_after(self(), :load_placeholder_orders, after_ms)
+    if socket.assigns[:load_placeholder_timer] do
+      socket
+    else
+      timer = Process.send_after(self(), :load_placeholder_orders, after_ms)
+      assign(socket, :load_placeholder_timer, timer)
+    end
+  end
+
+  defp send_clear_last_order_updated_after(socket, after_ms) do
+    timer = Process.send_after(self(), :clear_last_order_updated, after_ms)
 
     socket
-    |> assign(:search_timer, search_timer)
+    |> assign(:clear_last_order_updated_timer, timer)
   end
 
   defp assign_search(socket) do
@@ -268,22 +294,13 @@ defmodule WorkbenchWeb.OrderLive.Index do
       socket
       |> put_flash(
         :warn,
-        "Page parameter=#{assigned_page} is > than the last available page=#{last_page}. The orders table is using the first page=#{
-          first_page
-        } instead."
+        "Page parameter=#{assigned_page} is > than the last available page=#{last_page}. The orders table is using the first page=#{first_page} instead."
       )
     else
       socket
     end
     |> assign(:current_page, current_page)
     |> assign(:last_page, last_page)
-  end
-
-  defp send_clear_last_order_updated_after(socket, after_ms) do
-    timer = Process.send_after(self(), :clear_last_order_updated, after_ms)
-
-    socket
-    |> assign(:clear_last_order_updated_timer, timer)
   end
 
   defp to(socket, page, current_page, _follow) when page < current_page do
