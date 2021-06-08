@@ -3,7 +3,7 @@
   "license": "MIT",
   "scripts": {
     "deploy": "webpack --mode production",
-    "watch": "webpack --mode development --watch",
+    "watch": "NODE_ENV=development webpack --mode development --watch",
     "lint": "eslint -c './.eslintrc' './js/**/*.ts'",
     "lint:fix": "eslint -c './.eslintrc' --fix './js/**/*.ts'"
   },

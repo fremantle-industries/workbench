@@ -126,12 +126,9 @@ if config_env() == :dev do
 
   config :workbench, WorkbenchWeb.Endpoint,
     watchers: [
-      node: [
-        "node_modules/webpack/bin/webpack.js",
-        "--mode",
-        "development",
-        "--watch",
-        "--watch-options-stdin",
+      npm: [
+        "run",
+        "watch",
         cd: Path.expand("../assets", __DIR__)
       ]
     ]
