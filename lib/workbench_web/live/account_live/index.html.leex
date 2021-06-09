@@ -26,32 +26,32 @@
     </div>
   </div>
 
-  <table class="w-full mt-4">
-    <thead>
-      <th scope="col" class="px-4 py-2">Venue</th>
-      <th scope="col" class="px-4 py-2">Asset</th>
-      <th scope="col" class="px-4 py-2">Type</th>
-      <th scope="col" class="px-4 py-2">Credential</th>
-      <th scope="col" class="px-4 py-2">Equity</th>
-      <th scope="col" class="px-4 py-2">Free</th>
-      <th scope="col" class="px-4 py-2">Locked</th>
+  <table class="w-full mt-8">
+    <thead class="bg-gray-200 border-t-2 border-gray-400">
+      <th scope="col" class="px-4 py-3 text-left text-gray-700">Venue</th>
+      <th scope="col" class="px-4 py-3 text-left text-gray-700">Asset</th>
+      <th scope="col" class="px-4 py-3 text-left text-gray-700">Type</th>
+      <th scope="col" class="px-4 py-3 text-left text-gray-700">Credential</th>
+      <th scope="col" class="px-4 py-3 text-left text-gray-700">Equity</th>
+      <th scope="col" class="px-4 py-3 text-left text-gray-700">Free</th>
+      <th scope="col" class="px-4 py-3 text-left text-gray-700">Locked</th>
     </thead>
     <tbody>
       <%= if Enum.any?(@accounts) do %>
         <%= Enum.map @accounts, fn a -> %>
-          <tr>
-            <td class="border px-4 py-2"><%= a.venue_id %></td>
-            <td class="border px-4 py-2"><%= a.asset %></td>
-            <td class="border px-4 py-2"><%= a.type %></td>
-            <td class="border px-4 py-2"><%= a.credential_id %></td>
-            <td class="border px-4 py-2"><%= a.equity %></td>
-            <td class="border px-4 py-2"><%= a.free %></td>
-            <td class="border px-4 py-2"><%= a.locked %></td>
+          <tr class="hover:bg-gray-50 border-t border-b group">
+            <td class="border px-4 py-3"><%= a.venue_id %></td>
+            <td class="border px-4 py-3"><%= a.asset %></td>
+            <td class="border px-4 py-3"><%= a.type %></td>
+            <td class="border px-4 py-3"><%= a.credential_id %></td>
+            <td class="border px-4 py-3"><%= a.equity %></td>
+            <td class="border px-4 py-3"><%= a.free %></td>
+            <td class="border px-4 py-3"><%= a.locked %></td>
           </tr>
         <% end %>
       <% else %>
-        <tr>
-          <td colspan="7" class="border px-4 py-2">No accounts</td>
+        <tr class="hover:bg-gray-50 border-t border-b group">
+          <td colspan="7" class="px-4 py-3">No accounts</td>
         </tr>
       <% end %>
     </tbody>
