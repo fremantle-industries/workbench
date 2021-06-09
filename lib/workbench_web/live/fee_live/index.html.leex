@@ -20,32 +20,32 @@
   </div>
 </div>
 
-<table class="w-full mt-4">
-  <thead>
-    <th scope="col" class="px-4 py-2">Venue</th>
-    <th scope="col" class="px-4 py-2">Symbol</th>
-    <th scope="col" class="px-4 py-2">Credential</th>
-    <th scope="col" class="px-4 py-2">Maker</th>
-    <th scope="col" class="px-4 py-2">Maker Type</th>
-    <th scope="col" class="px-4 py-2">Taker</th>
-    <th scope="col" class="px-4 py-2">Taker Type</th>
+<table class="w-full mt-8">
+  <thead class="bg-gray-200 border-t-2 border-gray-400">
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Venue</th>
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Symbol</th>
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Credential</th>
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Maker</th>
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Maker Type</th>
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Taker</th>
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Taker Type</th>
   </thead>
   <tbody>
     <%= if Enum.any?(@fees) do %>
       <%= for f <- @fees do %>
-        <tr>
-          <td class="border px-4 py-2"><%= f.venue_id %></td>
-          <td class="border px-4 py-2"><%= f.symbol %></td>
-          <td class="border px-4 py-2"><%= f.credential_id %></td>
-          <td class="border px-4 py-2"><%= f.maker && decimal(f.maker) %></td>
-          <td class="border px-4 py-2"><%= f.maker_type %></td>
-          <td class="border px-4 py-2"><%= f.taker && decimal(f.taker) %></td>
-          <td class="border px-4 py-2"><%= f.taker_type %></td>
+        <tr class="hover:bg-gray-50 border-t border-b group">
+          <td class="px-4 py-3"><%= f.venue_id %></td>
+          <td class="px-4 py-3"><%= f.symbol %></td>
+          <td class="px-4 py-3"><%= f.credential_id %></td>
+          <td class="px-4 py-3"><%= f.maker && decimal(f.maker) %></td>
+          <td class="px-4 py-3"><%= f.maker_type %></td>
+          <td class="px-4 py-3"><%= f.taker && decimal(f.taker) %></td>
+          <td class="px-4 py-3"><%= f.taker_type %></td>
         </tr>
       <% end %>
     <% else %>
-      <tr>
-        <td colspan="7" class="border px-4 py-2">No fees</td>
+      <tr class="hover:bg-gray-50 border-t border-b group">
+        <td colspan="7" class="px-4 py-3">No fees</td>
       </tr>
     <% end %>
   </tbody>
