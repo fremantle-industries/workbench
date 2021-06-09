@@ -43,68 +43,68 @@
   </form>
 </div>
 
-<table class="w-full table-fixed mt-4">
-  <thead>
-    <th scope="col" class="w-5/36 text-left px-4 py-2">Client ID</th>
-    <th scope="col" class="w-3/36 text-left px-4 py-2">Venue</th>
-    <th scope="col" class="w-3/36 text-left px-4 py-2">Credential</th>
-    <th scope="col" class="w-3/36 text-left px-4 py-2">Symbol</th>
-    <th scope="col" class="w-3/36 text-left px-4 py-2">Status</th>
-    <th scope="col" class="w-3/36 text-left px-4 py-2">Price</th>
-    <th scope="col" class="w-2/36 text-left px-4 py-2">Qty</th>
-    <th scope="col" class="w-2/36 text-left px-4 py-2">Leaves Qty</th>
-    <th scope="col" class="w-2/36 text-left px-4 py-2">Cumulative Qty</th>
-    <th scope="col" class="w-1/36 text-left px-4 py-2">Post Only?</th>
-    <th scope="col" class="w-1/36 text-left px-4 py-2">Close?</th>
-    <th scope="col" class="w-2/36 text-left px-4 py-2">Enqueued</th>
-    <th scope="col" class="w-2/36 text-left px-4 py-2">Updated</th>
-    <th scope="col" class="w-2/36 text-left px-4 py-2">Received</th>
-    <th scope="col" class="w-2/36 text-left px-4 py-2">Venue Timestamp</th>
+<table class="w-full table-fixed mt-8">
+  <thead class="bg-gray-200 border-t-2 border-gray-400">
+    <th scope="col" class="w-5/36 text-left px-4 py-3 text-left text-gray-700">Client ID</th>
+    <th scope="col" class="w-3/36 text-left px-4 py-3 text-left text-gray-700">Venue</th>
+    <th scope="col" class="w-3/36 text-left px-4 py-3 text-left text-gray-700">Credential</th>
+    <th scope="col" class="w-3/36 text-left px-4 py-3 text-left text-gray-700">Symbol</th>
+    <th scope="col" class="w-3/36 text-left px-4 py-3 text-left text-gray-700">Status</th>
+    <th scope="col" class="w-3/36 text-left px-4 py-3 text-left text-gray-700">Price</th>
+    <th scope="col" class="w-2/36 text-left px-4 py-3 text-left text-gray-700">Qty</th>
+    <th scope="col" class="w-2/36 text-left px-4 py-3 text-left text-gray-700">Leaves Qty</th>
+    <th scope="col" class="w-2/36 text-left px-4 py-3 text-left text-gray-700">Cumulative Qty</th>
+    <th scope="col" class="w-1/36 text-left px-4 py-3 text-left text-gray-700">Post Only?</th>
+    <th scope="col" class="w-1/36 text-left px-4 py-3 text-left text-gray-700">Close?</th>
+    <th scope="col" class="w-2/36 text-left px-4 py-3 text-left text-gray-700">Enqueued</th>
+    <th scope="col" class="w-2/36 text-left px-4 py-3 text-left text-gray-700">Updated</th>
+    <th scope="col" class="w-2/36 text-left px-4 py-3 text-left text-gray-700">Received</th>
+    <th scope="col" class="w-2/36 text-left px-4 py-3 text-left text-gray-700">Venue Timestamp</th>
   </thead>
   <tbody>
     <%= if Enum.any?(@orders) do %>
       <%= Enum.map @orders, fn o -> %>
-        <tr class="<%= if o.client_id == @last_order_updated, do: "animate-pulse bg-blue-50" %>">
-          <td scope="row" class="border px-4 py-2">
+        <tr class="<%= if o.client_id == @last_order_updated, do: "animate-pulse bg-blue-50" %> hover:bg-gray-50 border-t border-b group">
+          <td scope="row" class="px-4 py-3">
             <%= link(
               o.client_id |> Tai.Utils.String.truncate(24),
               to: Routes.order_transition_path(@socket, :index, o.client_id),
               title: o.client_id,
               class: "hover:opacity-75") %>
           </td>
-          <td class="border px-4 py-2"><%= o.venue || "..." %></td>
-          <td class="border px-4 py-2"><%= o.credential || "..." %></td>
-          <td class="border px-4 py-2"><%= o.product_symbol || "..." %></td>
-          <td class="border px-4 py-2">
+          <td class="px-4 py-3"><%= o.venue || "..." %></td>
+          <td class="px-4 py-3"><%= o.credential || "..." %></td>
+          <td class="px-4 py-3"><%= o.product_symbol || "..." %></td>
+          <td class="px-4 py-3">
             <%= render WorkbenchWeb.OrderView, "_status.html", status: o.status %>
           </td>
-          <td class="border px-4 py-2"><%= (o.price && o.price |> Decimal.to_string(:normal)) || "..." %></td>
-          <td class="border px-4 py-2"><%= (o.qty && o.qty |> Decimal.to_string(:normal)) || "..." %></td>
-          <td class="border px-4 py-2"><%= (o.leaves_qty && o.leaves_qty |> Decimal.to_string(:normal)) || "..." %></td>
-          <td class="border px-4 py-2"><%= (o.cumulative_qty && o.cumulative_qty |> Decimal.to_string(:normal)) || "..." %></td>
-          <td class="border px-4 py-2">
+          <td class="px-4 py-3"><%= (o.price && o.price |> Decimal.to_string(:normal)) || "..." %></td>
+          <td class="px-4 py-3"><%= (o.qty && o.qty |> Decimal.to_string(:normal)) || "..." %></td>
+          <td class="px-4 py-3"><%= (o.leaves_qty && o.leaves_qty |> Decimal.to_string(:normal)) || "..." %></td>
+          <td class="px-4 py-3"><%= (o.cumulative_qty && o.cumulative_qty |> Decimal.to_string(:normal)) || "..." %></td>
+          <td class="px-4 py-3">
             <%= if o.post_only do %>
               <%= render WorkbenchWeb.IconView, "_check_circle.html", title: o.post_only %>
             <% else %>
               <%= render WorkbenchWeb.IconView, "_minus_circle.html", title: o.post_only %>
             <% end %>
           </td>
-          <td class="border px-4 py-2">
+          <td class="px-4 py-3">
             <%= if o.close do %>
               <%= render WorkbenchWeb.IconView, "_check_circle.html", title: o.close %>
             <% else %>
               <%= render WorkbenchWeb.IconView, "_minus_circle.html", title: o.close %>
             <% end %>
           </td>
-          <td class="border px-4 py-2 text-xs"><%= (o.inserted_at && relative_time(o.inserted_at)) || "..." %></td>
-          <td class="border px-4 py-2 text-xs"><%= (o.updated_at && relative_time(o.updated_at)) || "-" %></td>
-          <td class="border px-4 py-2 text-xs"><%= (o.last_received_at && relative_time(o.last_received_at)) || "-" %></td>
-          <td class="border px-4 py-2 text-xs"><%= (o.last_venue_timestamp && relative_time(o.last_venue_timestamp)) || "-" %></td>
+          <td class="px-4 py-3 text-xs"><%= (o.inserted_at && relative_time(o.inserted_at)) || "..." %></td>
+          <td class="px-4 py-3 text-xs"><%= (o.updated_at && relative_time(o.updated_at)) || "-" %></td>
+          <td class="px-4 py-3 text-xs"><%= (o.last_received_at && relative_time(o.last_received_at)) || "-" %></td>
+          <td class="px-4 py-3 text-xs"><%= (o.last_venue_timestamp && relative_time(o.last_venue_timestamp)) || "-" %></td>
         </tr>
       <% end %>
     <% else %>
-      <tr>
-        <td colspan="15" class="border px-4 py-2">No orders</td>
+      <tr class="hover:bg-gray-50 border-t border-b group">
+        <td colspan="15" class="px-4 py-3">No orders</td>
       </tr>
     <% end %>
   </tbody>
