@@ -22,26 +22,26 @@
 
 <hr class="mt-4" />
 
-<div class="mt-4 mb-4">
+<div class="mt-8 mb-4">
   <h3 class="text-2xl">Groups</h3>
 
   <table class="w-full mt-4">
-    <thead>
-      <th scope="col" class="px-4 py-2">Group ID</th>
-      <th scope="col" class="px-4 py-2">Total</th>
-      <th scope="col" class="px-4 py-2">Running</th>
-      <th scope="col" class="px-4 py-2">Stopped</th>
-      <th scope="col" class="px-4 py-2">Actions</th>
+    <thead class="bg-gray-200 border-t-2 border-gray-400">
+      <th scope="col" class="px-4 py-3 text-left text-gray-700">Group ID</th>
+      <th scope="col" class="px-4 py-3 text-left text-gray-700">Total</th>
+      <th scope="col" class="px-4 py-3 text-left text-gray-700">Running</th>
+      <th scope="col" class="px-4 py-3 text-left text-gray-700">Stopped</th>
+      <th scope="col" class="px-4 py-3 text-left text-gray-700">Actions</th>
     </thead>
     <tbody>
       <%= if Enum.any?(@groups) do %>
         <%= Enum.map @groups, fn g -> %>
-          <tr>
-            <td scope="row" class="border px-4 py-2"><%= g.id %></td>
-            <td class="border px-4 py-2"><%= g.total %></td>
-            <td class="border px-4 py-2"><%= g.running %></td>
-            <td class="border px-4 py-2"><%= g.stopped %></td>
-            <td class="border px-4 py-2 text-right">
+          <tr class="hover:bg-gray-50 border-t border-b group">
+            <td scope="row" class="px-4 py-2"><%= g.id %></td>
+            <td class="px-4 py-2"><%= g.total %></td>
+            <td class="px-4 py-2"><%= g.running %></td>
+            <td class="px-4 py-2"><%= g.stopped %></td>
+            <td class="px-4 py-2 text-right">
               <%= if g.running == g.total do %>
                 <button
                   phx-click="start-group"
@@ -83,36 +83,34 @@
           </tr>
         <% end %>
       <% else %>
-        <tr>
-          <td colspan="5" class="border px-4 py-2">No advisor groups</td>
+        <tr class="hover:bg-gray-50 border-t border-b group">
+          <td colspan="5" class="px-4 py-3">No advisor groups</td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
 
-<hr />
-
 <div class="mt-4">
   <h3 class="text-2xl">Advisors</h3>
 
   <table class="w-full mt-4">
-    <thead>
-      <th scope="col" class="px-4 py-2">Group ID</th>
-      <th scope="col" class="px-4 py-2">Advisor ID</th>
-      <th scope="col" class="px-4 py-2">Status</th>
-      <th scope="col" class="px-4 py-2">PID</th>
-      <th scope="col" class="px-4 py-2">Actions</th>
+    <thead class="bg-gray-200 border-t-2 border-gray-400">
+      <th scope="col" class="px-4 py-3 text-left text-gray-700">Group ID</th>
+      <th scope="col" class="px-4 py-3 text-left text-gray-700">Advisor ID</th>
+      <th scope="col" class="px-4 py-3 text-left text-gray-700">Status</th>
+      <th scope="col" class="px-4 py-3 text-left text-gray-700">PID</th>
+      <th scope="col" class="px-4 py-3 text-left text-gray-700">Actions</th>
     </thead>
     <tbody>
       <%= if Enum.any?(@instances) do %>
         <%= Enum.map @instances, fn a -> %>
-          <tr>
-            <td class="border px-4 py-2"><%= a.group_id %></td>
-            <td class="border px-4 py-2"><%= a.advisor_id %></td>
-            <td class="border px-4 py-2"><%= a.status %></td>
-            <td class="border px-4 py-2"><%= a.pid |> format %></td>
-            <td class="border px-4 py-2 text-right">
+          <tr class="hover:bg-gray-50 border-t border-b group">
+            <td class="px-4 py-3"><%= a.group_id %></td>
+            <td class="px-4 py-3"><%= a.advisor_id %></td>
+            <td class="px-4 py-3"><%= a.status %></td>
+            <td class="px-4 py-3"><%= a.pid |> format %></td>
+            <td class="px-4 py-3 text-right">
               <%= if a.status == :running do %>
                 <button
                   phx-click="stop-advisor"
@@ -136,8 +134,8 @@
           </tr>
         <% end %>
       <% else %>
-        <tr>
-          <td colspan="5" class="border px-4 py-2">No instances</td>
+        <tr class="hover:bg-gray-50 border-t border-b group">
+          <td colspan="5" class="px-4 py-3">No instances</td>
         </tr>
       <% end %>
     </tbody>
