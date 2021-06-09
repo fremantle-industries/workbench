@@ -20,34 +20,34 @@
   </div>
 </div>
 
-<table class="w-full mt-4">
-  <thead>
-    <th scope="col" class="px-4 py-2">Venue</th>
-    <th scope="col" class="px-4 py-2">Product</th>
-    <th scope="col" class="px-4 py-2">Account</th>
-    <th scope="col" class="px-4 py-2">Side</th>
-    <th scope="col" class="px-4 py-2">Qty</th>
-    <th scope="col" class="px-4 py-2">Entry Price</th>
-    <th scope="col" class="px-4 py-2">Leverage</th>
-    <th scope="col" class="px-4 py-2">Margin Mode</th>
+<table class="w-full mt-8">
+  <thead class="bg-gray-200 border-t-2 border-gray-400">
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Venue</th>
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Product</th>
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Account</th>
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Side</th>
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Qty</th>
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Entry Price</th>
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Leverage</th>
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Margin Mode</th>
   </thead>
   <tbody>
     <%= if Enum.any?(@positions) do %>
       <%= Enum.map @positions, fn p -> %>
-        <tr>
-          <td class="border px-4 py-2"><%= p.venue_id %></td>
-          <td class="border px-4 py-2"><%= p.product_symbol %></td>
-          <td class="border px-4 py-2"><%= p.credential_id %></td>
-          <td class="border px-4 py-2"><%= p.side %></td>
-          <td class="border px-4 py-2"><%= p.qty %></td>
-          <td class="border px-4 py-2"><%= p.entry_price %></td>
-          <td class="border px-4 py-2"><%= p.leverage %></td>
-          <td class="border px-4 py-2"><%= p.margin_mode %></td>
+        <tr class="hover:bg-gray-50 border-t border-b group">
+          <td class="px-4 py-3"><%= p.venue_id %></td>
+          <td class="px-4 py-3"><%= p.product_symbol %></td>
+          <td class="px-4 py-3"><%= p.credential_id %></td>
+          <td class="px-4 py-3"><%= p.side %></td>
+          <td class="px-4 py-3"><%= p.qty %></td>
+          <td class="px-4 py-3"><%= p.entry_price %></td>
+          <td class="px-4 py-3"><%= p.leverage %></td>
+          <td class="px-4 py-3"><%= p.margin_mode %></td>
         </tr>
       <% end %>
     <% else %>
-      <tr>
-        <td colspan="8" class="border px-4 py-2">No positions</td>
+      <tr class="hover:bg-gray-50 border-t border-b group">
+        <td colspan="8" class="px-4 py-3">No positions</td>
       </tr>
     <% end %>
   </tbody>
