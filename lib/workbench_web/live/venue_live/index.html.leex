@@ -20,27 +20,27 @@
   </div>
 </div>
 
-<table class="w-full mt-4">
-  <thead>
-    <th scope="col" class="px-4 py-2">Venue</th>
-    <th scope="col" class="px-4 py-2">Status</th>
-    <th scope="col" class="px-4 py-2">Credentials</th>
-    <th scope="col" class="px-4 py-2">Quote Depth</th>
-    <th scope="col" class="px-4 py-2">Timeout</th>
-    <th scope="col" class="px-4 py-2">Start On Boot</th>
-    <th scope="col" class="px-4 py-2">Actions</th>
+<table class="w-full mt-8">
+  <thead class="bg-gray-200 border-t-2 border-gray-400">
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Venue</th>
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Status</th>
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Credentials</th>
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Quote Depth</th>
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Timeout</th>
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Start On Boot</th>
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Actions</th>
   </thead>
   <tbody>
     <%= if Enum.any?(@venues) do %>
       <%= Enum.map @venues, fn v -> %>
-        <tr>
-          <td scope="row" class="border px-4 py-2"><%= v.id %></td>
-          <td class="border px-4 py-2"><%= v.status %></td>
-          <td class="border px-4 py-2"><%= v.credentials |> Map.keys() |> Enum.join(", ") %></td>
-          <td class="border px-4 py-2"><%= v.quote_depth %></td>
-          <td class="border px-4 py-2"><%= v.timeout %> ms</td>
-          <td class="border px-4 py-2"><%= v.start_on_boot %></td>
-          <td class="border px-4 py-2 text-right">
+        <tr class="hover:bg-gray-50 border-t border-b group">
+          <td scope="row" class="px-4 py-3"><%= v.id %></td>
+          <td class="px-4 py-3"><%= v.status %></td>
+          <td class="px-4 py-3"><%= v.credentials |> Map.keys() |> Enum.join(", ") %></td>
+          <td class="px-4 py-3"><%= v.quote_depth %></td>
+          <td class="px-4 py-3"><%= v.timeout %> ms</td>
+          <td class="px-4 py-3"><%= v.start_on_boot %></td>
+          <td class="px-4 py-3 text-right">
             <%= if v.status == :running do %>
               <button phx-click="stop" phx-value-id="<%= v.id %>" type="button" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">stop</button>
             <% else %>
@@ -50,8 +50,8 @@
         </tr>
       <% end %>
     <% else %>
-      <tr>
-        <td colspan="7" class="border px-4 py-2">No venues</td>
+      <tr class="hover:bg-gray-50 border-t border-b group">
+        <td colspan="7" class="px-4 py-3">No venues</td>
       </tr>
     <% end %>
   </tbody>
