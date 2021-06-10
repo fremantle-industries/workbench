@@ -1,16 +1,14 @@
 defmodule WorkbenchWeb.ViewHelpers.SearchQueryHelper do
   def assign_search_query(conn, params) do
-    query = query_from_params(params) || conn.assigns.query
+    query = extract_query(params, conn)
     Phoenix.LiveView.assign(conn, :query, query)
   end
 
-  defp query_from_params(params) do
-    query = Map.get(params, "query")
-
-    if query == "" do
-      nil
-    else
-      query
+  defp extract_query(params, conn) do
+    case Map.get(params, "query") do
+      "" -> nil
+      nil -> conn.assigns.query
+      query -> query
     end
   end
 end

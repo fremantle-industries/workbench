@@ -1,29 +1,37 @@
 defmodule WorkbenchWeb.AdvisorLive.Index do
   use WorkbenchWeb, :live_view
   import WorkbenchWeb.ViewHelpers.NodeHelper, only: [assign_node: 2]
+  import WorkbenchWeb.ViewHelpers.SearchQueryHelper, only: [assign_search_query: 2]
 
+  @impl true
   def mount(_params, _session, socket) do
+    socket =
+      socket
+      |> assign(:query, nil)
+
     {:ok, socket}
   end
 
+  @impl true
   def handle_params(params, _uri, socket) do
-    socket_with_node = assign_node(socket, params)
-
     socket =
-      socket_with_node
-      |> assign(:groups, sorted_groups(socket_with_node.assigns.node))
-      |> assign(:instances, sorted_instances(socket_with_node.assigns.node))
+      socket
+      |> assign_node(params)
+      |> assign_search_query(params)
+      |> assign_groups()
+      |> assign_instances()
 
     {:noreply, socket}
   end
 
+  @impl true
   def handle_event("node_selected", params, socket) do
     socket_with_node = assign_node(socket, params)
 
     socket =
       socket_with_node
-      |> assign(:groups, sorted_groups(socket_with_node.assigns.node))
-      |> assign(:instances, sorted_instances(socket_with_node.assigns.node))
+      |> assign_groups()
+      |> assign_instances()
       |> push_patch(
         to: Routes.advisor_path(socket, :index, %{node: socket_with_node.assigns.node})
       )
@@ -31,6 +39,18 @@ defmodule WorkbenchWeb.AdvisorLive.Index do
     {:noreply, socket}
   end
 
+  @impl true
+  def handle_event("search", params, socket) do
+    socket =
+      socket
+      |> assign_search_query(params)
+      |> assign_groups()
+      |> assign_instances()
+
+    {:noreply, socket}
+  end
+
+  @impl true
   def handle_event("start-group", %{"id" => group_id}, socket) do
     Tai.Commander.start_advisors(
       where: [group_id: String.to_atom(group_id)],
@@ -39,12 +59,13 @@ defmodule WorkbenchWeb.AdvisorLive.Index do
 
     socket =
       socket
-      |> assign(:groups, sorted_groups(socket.assigns.node))
-      |> assign(:instances, sorted_instances(socket.assigns.node))
+      |> assign_groups()
+      |> assign_instances()
 
     {:noreply, socket}
   end
 
+  @impl true
   def handle_event("stop-group", %{"id" => group_id}, socket) do
     Tai.Commander.stop_advisors(
       where: [group_id: String.to_atom(group_id)],
@@ -53,12 +74,13 @@ defmodule WorkbenchWeb.AdvisorLive.Index do
 
     socket =
       socket
-      |> assign(:groups, sorted_groups(socket.assigns.node))
-      |> assign(:instances, sorted_instances(socket.assigns.node))
+      |> assign_groups()
+      |> assign_instances()
 
     {:noreply, socket}
   end
 
+  @impl true
   def handle_event("start-advisor", %{"group-id" => group_id, "advisor-id" => advisor_id}, socket) do
     Tai.Commander.start_advisors(
       where: [group_id: String.to_atom(group_id), advisor_id: String.to_atom(advisor_id)],
@@ -67,12 +89,13 @@ defmodule WorkbenchWeb.AdvisorLive.Index do
 
     socket =
       socket
-      |> assign(:groups, sorted_groups(socket.assigns.node))
-      |> assign(:instances, sorted_instances(socket.assigns.node))
+      |> assign_groups()
+      |> assign_instances()
 
     {:noreply, socket}
   end
 
+  @impl true
   def handle_event("stop-advisor", %{"group-id" => group_id, "advisor-id" => advisor_id}, socket) do
     Tai.Commander.stop_advisors(
       where: [group_id: String.to_atom(group_id), advisor_id: String.to_atom(advisor_id)],
@@ -81,15 +104,48 @@ defmodule WorkbenchWeb.AdvisorLive.Index do
 
     socket =
       socket
-      |> assign(:groups, sorted_groups(socket.assigns.node))
-      |> assign(:instances, sorted_instances(socket.assigns.node))
+      |> assign_groups()
+      |> assign_instances()
 
     {:noreply, socket}
   end
 
-  def format(nil), do: "-"
-  def format(val) when is_pid(val), do: val |> inspect()
-  def format(val), do: val
+  defp assign_groups(socket) do
+    query = socket.assigns.query
+
+    groups =
+      sorted_groups(socket.assigns.node)
+      |> Enum.filter(fn g ->
+        if query != nil do
+          group_id = g.id |> Atom.to_string()
+          String.contains?(group_id, query)
+        else
+          true
+        end
+      end)
+
+    socket
+    |> assign(:groups, groups)
+  end
+
+  defp assign_instances(socket) do
+    query = socket.assigns.query
+
+    instances =
+      sorted_instances(socket.assigns.node)
+      |> Enum.filter(fn i ->
+        if query != nil do
+          group_id = i.group_id |> Atom.to_string()
+          advisor_id = i.advisor_id |> Atom.to_string()
+          String.contains?(group_id, query) || String.contains?(advisor_id, query)
+        else
+          true
+        end
+      end)
+
+    socket
+    |> assign(:instances, instances)
+  end
 
   @order [:group_id, :advisor_id]
   defp sorted_instances(node) do
@@ -125,4 +181,8 @@ defmodule WorkbenchWeb.AdvisorLive.Index do
     |> Map.values()
     |> Enumerati.order(@group_order)
   end
+
+  defp format(nil), do: "-"
+  defp format(val) when is_pid(val), do: val |> inspect()
+  defp format(val), do: val
 end
