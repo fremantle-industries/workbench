@@ -31,7 +31,7 @@
       <th scope="col" class="px-4 py-3 text-left text-gray-700">Total</th>
       <th scope="col" class="px-4 py-3 text-left text-gray-700">Running</th>
       <th scope="col" class="px-4 py-3 text-left text-gray-700">Stopped</th>
-      <th scope="col" class="px-4 py-3 text-left text-gray-700">Actions</th>
+      <th scope="col" class="px-4 py-3 text-right text-gray-700">Actions</th>
     </thead>
     <tbody>
       <%= if Enum.any?(@groups) do %>
@@ -42,43 +42,23 @@
             <td class="px-4 py-2"><%= g.running %></td>
             <td class="px-4 py-2"><%= g.stopped %></td>
             <td class="px-4 py-2 text-right">
-              <%= if g.running == g.total do %>
-                <button
-                  phx-click="start-group"
-                  phx-value-id="<%= g.id %>"
-                  class="bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded invisible group-hover:visible"
-                  disabled
-                >
-                  start all
-                </button>
-              <% else %>
-                <button
-                  phx-click="start-group"
-                  phx-value-id="<%= g.id %>"
-                  class="bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded invisible group-hover:visible"
-                >
-                  start all
-                </button>
-              <% end %>
+              <%= content_tag(
+                :button,
+                "start all",
+                class: "text-green-500 disabled:opacity-25 font-bold invisible group-hover:visible py-3 ",
+                disabled: g.running == g.total,
+                "phx-click": "start-group",
+                "phx-value-id": g.id
+              ) %>
 
-              <%= if g.running > 0 do %>
-                <button
-                  phx-click="stop-group"
-                  phx-value-id="<%= g.id %>"
-                  class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded invisible group-hover:visible"
-                >
-                  stop all
-                </button>
-              <% else %>
-                <button
-                  phx-click="stop-group"
-                  phx-value-id="<%= g.id %>"
-                  class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded invisible group-hover:visible"
-                  disabled
-                >
-                  stop all
-                </button>
-              <% end %>
+              <%= content_tag(
+                :button,
+                "stop all",
+                class: "text-red-500 disabled:opacity-25 font-bold invisible group-hover:visible py-3 ml-4",
+                disabled: g.running == 0,
+                "phx-click": "stop-group",
+                "phx-value-id": g.id
+              ) %>
             </td>
           </tr>
         <% end %>
@@ -100,7 +80,7 @@
       <th scope="col" class="px-4 py-3 text-left text-gray-700">Advisor ID</th>
       <th scope="col" class="px-4 py-3 text-left text-gray-700">Status</th>
       <th scope="col" class="px-4 py-3 text-left text-gray-700">PID</th>
-      <th scope="col" class="px-4 py-3 text-left text-gray-700">Actions</th>
+      <th scope="col" class="px-4 py-3 text-right text-gray-700">Actions</th>
     </thead>
     <tbody>
       <%= if Enum.any?(@instances) do %>
@@ -111,25 +91,24 @@
             <td class="px-4 py-3"><%= a.status %></td>
             <td class="px-4 py-3"><%= a.pid |> format %></td>
             <td class="px-4 py-3 text-right">
-              <%= if a.status == :running do %>
-                <button
-                  phx-click="stop-advisor"
-                  phx-value-group-id="<%= a.group_id %>"
-                  phx-value-advisor-id="<%= a.advisor_id %>"
-                  class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded invisible group-hover:visible"
-                >
-                  stop
-                </button>
-              <% else %>
-                <button
-                  phx-click="start-advisor"
-                  phx-value-group-id="<%= a.group_id %>"
-                  phx-value-advisor-id="<%= a.advisor_id %>"
-                  class="bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded invisible group-hover:visible"
-                >
-                  start
-                </button>
-              <% end %>
+              <%= content_tag(
+                :button,
+                "start",
+                class: "text-green-500 disabled:opacity-25 font-bold invisible group-hover:visible py-3 ml-4",
+                disabled: a.status == :running,
+                "phx-click": "start-advisor",
+                "phx-value-group-id": a.group_id,
+                "phx-value-advisor-id": a.advisor_id
+              ) %>
+              <%= content_tag(
+                :button,
+                "stop",
+                class: "text-red-500 disabled:opacity-25 font-bold invisible group-hover:visible py-3 ml-4",
+                disabled: a.status != :running,
+                "phx-click": "stop-advisor",
+                "phx-value-group-id": a.group_id,
+                "phx-value-advisor-id": a.advisor_id
+              ) %>
             </td>
           </tr>
         <% end %>
