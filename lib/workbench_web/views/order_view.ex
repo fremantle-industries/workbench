@@ -7,14 +7,15 @@ defmodule WorkbenchWeb.OrderView do
     color_class =
       case assigns.status do
         :enqueued -> ["bg-yellow-50", "text-yellow-500"]
-        :create_accepted -> ["bg-purple-100", "text-purple-500"]
-        :open -> ["bg-green-50", "text-green-500"]
-        :pending_cancel -> ["bg-purple-50", "text-purple-500"]
-        :cancel_accepted -> ["bg-purple-100", "text-purple-500"]
-        :pending_amend -> ["bg-purple-50", "text-purple-500"]
-        :amend_accepted -> ["bg-purple-100", "text-purple-500"]
+        :create_accepted -> ["bg-purple-50", "text-purple-500"]
+        :cancel_accepted -> ["bg-purple-50", "text-purple-500"]
+        :amend_accepted -> ["bg-purple-50", "text-purple-500"]
+        :open -> ["bg-blue-50", "text-blue-500"]
+        :filled -> ["bg-green-50", "text-green-500"]
+        :pending_cancel -> ["bg-purple-100", "text-purple-500"]
+        :pending_amend -> ["bg-purple-100", "text-purple-500"]
         :create_error -> ["bg-red-50", "text-red-500"]
-        _ -> ["bg-gray-50"]
+        _ -> ["bg-gray-100"]
       end
       |> Enum.join(" ")
 
