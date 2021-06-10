@@ -34,23 +34,23 @@
       </div>
 
       <table class="mt-4 w-full table-auto">
-        <thead>
-          <th scope="col" class="px-4 py-2">Created At</th>
-          <th scope="col" class="px-4 py-2">Type</th>
-          <th scope="col" class="px-4 py-2">Error</th>
+        <thead class="bg-gray-200 border-t-2 border-gray-400">
+          <th scope="col" class="w-2/12 px-4 py-3 text-left text-gray-700">Created At</th>
+          <th scope="col" class="w-4/12 px-4 py-3 text-left text-gray-700">Type</th>
+          <th scope="col" class="w-6/12 px-4 py-3 text-left text-gray-700">Error</th>
         </thead>
         <tbody>
           <%= if Enum.any?(@failed_order_transitions) do %>
             <%= Enum.map @failed_order_transitions, fn f -> %>
-              <tr>
-                <td scope="row" class="border px-4 py-2"><%= f.inserted_at %></td>
-                <td scope="row" class="border px-4 py-2"><%= f.type %></td>
-                <td scope="row" class="border px-4 py-2"><%= f.error |> inspect %></td>
+              <tr class="hover:bg-gray-50 border-t border-b group">
+                <td scope="row" class="px-4 py-3"><%= f.inserted_at %></td>
+                <td scope="row" class="px-4 py-3"><%= f.type %></td>
+                <td scope="row" class="px-4 py-3"><%= f.error |> inspect %></td>
               </tr>
             <% end %>
           <% else %>
-            <tr>
-              <td colspan="3" class="border px-4 py-2">No failed transitions</td>
+            <tr class="hover:bg-gray-50 border-t border-b group">
+              <td colspan="3" class="px-4 py-3">No failed transitions</td>
             </tr>
           <% end %>
         </tbody>
