@@ -2,9 +2,11 @@
   <h2 class="text-3xl">Products</h2>
 
   <div class="mt-4 flex items-center space-x-2">
-    <form phx-change="node_selected" class="space-x-2">
-      <input type="text" placeholder="Search" disabled title="coming soon..." class="bg-gray-100 opacity-25" />
+    <form phx-change="search" phx-submit="search">
+      <input type="text" name="query" value="<%= @query %>" placeholder="Search" autocomplete="off"/>
+    </form>
 
+    <form phx-change="node_selected" class="space-x-2">
       <select name="node" id="select_nodes" phx-update="ignore">
         <%= content_tag :option, value: Node.self() do %>
           <%= Node.self() %>
