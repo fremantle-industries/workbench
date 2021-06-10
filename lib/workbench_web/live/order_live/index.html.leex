@@ -46,9 +46,10 @@
 <table class="w-full table-fixed mt-8">
   <thead class="bg-gray-200 border-t-2 border-gray-400">
     <th scope="col" class="w-5/36 text-left px-4 py-3 text-left text-gray-700">Client ID</th>
-    <th scope="col" class="w-3/36 text-left px-4 py-3 text-left text-gray-700">Venue</th>
-    <th scope="col" class="w-3/36 text-left px-4 py-3 text-left text-gray-700">Credential</th>
+    <th scope="col" class="w-2/36 text-left px-4 py-3 text-left text-gray-700">Venue</th>
+    <th scope="col" class="w-2/36 text-left px-4 py-3 text-left text-gray-700">Credential</th>
     <th scope="col" class="w-3/36 text-left px-4 py-3 text-left text-gray-700">Symbol</th>
+    <th scope="col" class="w-2/36 text-left px-4 py-3 text-left text-gray-700">Side</th>
     <th scope="col" class="w-3/36 text-left px-4 py-3 text-left text-gray-700">Status</th>
     <th scope="col" class="w-3/36 text-left px-4 py-3 text-left text-gray-700">Price</th>
     <th scope="col" class="w-2/36 text-left px-4 py-3 text-left text-gray-700">Qty</th>
@@ -75,6 +76,7 @@
           <td class="px-4 py-3"><%= o.venue || "..." %></td>
           <td class="px-4 py-3"><%= o.credential || "..." %></td>
           <td class="px-4 py-3"><%= o.product_symbol || "..." %></td>
+          <td class="px-4 py-3"><%= o.side || "..." %></td>
           <td class="px-4 py-3">
             <%= render WorkbenchWeb.OrderView, "_status.html", status: o.status %>
           </td>
@@ -104,13 +106,13 @@
       <% end %>
     <% else %>
       <tr class="hover:bg-gray-50 border-t border-b group">
-        <td colspan="15" class="px-4 py-3">No orders</td>
+        <td colspan="16" class="px-4 py-3">No orders</td>
       </tr>
     <% end %>
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="15" class="py-4 text-right">
+      <td colspan="16" class="py-4 text-right">
         <%= render(
           Stylish.Table,
           "navigation.html",

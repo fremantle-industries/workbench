@@ -30,6 +30,10 @@ defmodule WorkbenchWeb.OrderView do
     ~E"""
     <div>
       <div class="space-y-4">
+        <dt class="inline-block font-bold w-52">Side:</dt>
+        <dd class="inline-block"><%= assigns.order.side %></dd>
+      </div>
+      <div class="space-y-4">
         <dt class="inline-block font-bold w-52">Status:</dt>
         <dd class="inline-block">
           <%= render WorkbenchWeb.OrderView, "_status.html", status: assigns.order.status %>
