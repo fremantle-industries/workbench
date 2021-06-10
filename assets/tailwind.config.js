@@ -86,9 +86,11 @@ module.exports = {
     },
   },
   variants: {
-    visibility: ['group-hover'],
     display: ['responsive', 'empty'],
-    extend: {},
+    extend: {
+      opacity: ['disabled'],
+      visibility: ['group-hover'],
+    },
   },
   plugins: [
     require('@tailwindcss/forms'),

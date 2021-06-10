@@ -46,7 +46,7 @@
                 <button
                   phx-click="start-group"
                   phx-value-id="<%= g.id %>"
-                  class="bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded"
+                  class="bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded invisible group-hover:visible"
                   disabled
                 >
                   start all
@@ -55,7 +55,7 @@
                 <button
                   phx-click="start-group"
                   phx-value-id="<%= g.id %>"
-                  class="bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded"
+                  class="bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded invisible group-hover:visible"
                 >
                   start all
                 </button>
@@ -65,7 +65,7 @@
                 <button
                   phx-click="stop-group"
                   phx-value-id="<%= g.id %>"
-                  class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                  class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded invisible group-hover:visible"
                 >
                   stop all
                 </button>
@@ -73,7 +73,7 @@
                 <button
                   phx-click="stop-group"
                   phx-value-id="<%= g.id %>"
-                  class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                  class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded invisible group-hover:visible"
                   disabled
                 >
                   stop all
@@ -116,7 +116,7 @@
                   phx-click="stop-advisor"
                   phx-value-group-id="<%= a.group_id %>"
                   phx-value-advisor-id="<%= a.advisor_id %>"
-                  class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                  class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded invisible group-hover:visible"
                 >
                   stop
                 </button>
@@ -125,7 +125,7 @@
                   phx-click="start-advisor"
                   phx-value-group-id="<%= a.group_id %>"
                   phx-value-advisor-id="<%= a.advisor_id %>"
-                  class="bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded"
+                  class="bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded invisible group-hover:visible"
                 >
                   start
                 </button>
