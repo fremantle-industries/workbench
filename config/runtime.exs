@@ -4,8 +4,13 @@ import Config
 env = config_env() |> Atom.to_string()
 http_port = (System.get_env("HTTP_PORT") || "4000") |> String.to_integer()
 host = System.get_env("HOST") || "workbench.localhost"
-secret_key_base = System.get_env("SECRET_KEY_BASE") || "vJP36v4Gi2Orw8b8iBRg6ZFdzXKLvcRYkk1AaMLYX0+ry7k5XaJXd/LY/itmoxPP"
-live_view_signing_salt = System.get_env("LIVE_VIEW_SIGNING_SALT") || "TolmUusQ6//zaa5GZHu7DG2V3YAgOoP/"
+
+secret_key_base =
+  System.get_env("SECRET_KEY_BASE") ||
+    "vJP36v4Gi2Orw8b8iBRg6ZFdzXKLvcRYkk1AaMLYX0+ry7k5XaJXd/LY/itmoxPP"
+
+live_view_signing_salt =
+  System.get_env("LIVE_VIEW_SIGNING_SALT") || "TolmUusQ6//zaa5GZHu7DG2V3YAgOoP/"
 
 # Telemetry
 config :telemetry_poller, :default, period: 1_000
@@ -115,16 +120,14 @@ config :tai, Tai.NewOrders.OrderRepo,
 config :tai, venues: %{}
 config :tai, advisor_groups: %{}
 
-# # Logger
-# config :logger, :console,
-#   format: "$time $metadata[$level] $message\n",
-#   metadata: [:request_id, :config_url]
-
 # Conditional configuration
 if config_env() == :dev do
   config :workbench, Workbench.Repo, show_sensitive_data_on_connection_error: true
 
   config :workbench, WorkbenchWeb.Endpoint,
+    debug_errors: true,
+    check_origin: false,
+    code_reloader: true,
     watchers: [
       npm: [
         "run",
@@ -136,16 +139,19 @@ if config_env() == :dev do
   config :workbench, WorkbenchWeb.Endpoint,
     live_reload: [
       patterns: [
-        ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
-        ~r"priv/gettext/.*(po)$",
-        ~r"lib/workbench_web/{live,views}/.*(ex)$",
-        ~r"lib/workbench_web/templates/.*(eex)$"
+        ~r"{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$}",
+        ~r"{priv/gettext/.*(po)$}",
+        ~r"{lib/workbench_web/{live,views}/.*(ex|leex)$}",
+        ~r"{lib/workbench_web/templates/.*(eex)$}"
       ]
     ]
 
-  config :workbench, WorkbenchWeb.Endpoint,
-    debug_errors: true,
-    check_origin: false
+  config :libcluster,
+    topologies: [
+      gossip: [
+        strategy: Cluster.Strategy.Gossip
+      ]
+    ]
 
   config :tai, Tai.NewOrders.OrderRepo, show_sensitive_data_on_connection_error: true
 end
