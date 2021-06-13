@@ -28,7 +28,7 @@
     <th scope="col" class="px-4 py-3 text-left text-gray-700">Quote Depth</th>
     <th scope="col" class="px-4 py-3 text-left text-gray-700">Timeout</th>
     <th scope="col" class="px-4 py-3 text-left text-gray-700">Start On Boot</th>
-    <th scope="col" class="px-4 py-3 text-left text-gray-700">Actions</th>
+    <th scope="col" class="px-4 py-3 text-right text-gray-700">Actions</th>
   </thead>
   <tbody>
     <%= if Enum.any?(@venues) do %>
@@ -41,11 +41,23 @@
           <td class="px-4 py-3"><%= v.timeout %> ms</td>
           <td class="px-4 py-3"><%= v.start_on_boot %></td>
           <td class="px-4 py-3 text-right">
-            <%= if v.status == :running do %>
-              <button phx-click="stop" phx-value-id="<%= v.id %>" type="button" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">stop</button>
-            <% else %>
-              <button phx-click="start" phx-value-id="<%= v.id %>" type="button" class="bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded">start</button>
-            <% end %>
+            <%= content_tag(
+              :button,
+              "start",
+              class: "text-green-500 disabled:opacity-25 font-bold invisible group-hover:visible py-3 ",
+              disabled: v.status != :stopped,
+              "phx-click": "start",
+              "phx-value-id": v.id
+            ) %>
+
+            <%= content_tag(
+              :button,
+              "stop",
+              class: "text-red-500 disabled:opacity-25 font-bold invisible group-hover:visible py-3 ml-4",
+              disabled: v.status == :stopped,
+              "phx-click": "stop",
+              "phx-value-id": v.id
+            ) %>
           </td>
         </tr>
       <% end %>
