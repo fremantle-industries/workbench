@@ -9,7 +9,7 @@ defmodule WorkbenchWeb.SharedLive.SelectNodeComponent do
     class = assigns[:class]
 
     ~L"""
-    <form phx-change="node_selected" phx-target="<%= @myself %>" class="<%= class %>">
+    <form phx-change="change" phx-auto-recover="ignore" phx-target="<%= @myself %>" class="<%= class %>">
       <select name="node" id="select_nodes" phx-update="ignore">
         <%= for n <- nodes do %>
           <%= content_tag :option, value: n, selected: n == selected_node do %>
@@ -21,7 +21,7 @@ defmodule WorkbenchWeb.SharedLive.SelectNodeComponent do
     """
   end
 
-  def handle_event("node_selected", params, socket) do
+  def handle_event("change", params, socket) do
     socket = assign_node(socket, params)
     send(self(), {:node_selected, socket.assigns.node})
     {:noreply, socket}
