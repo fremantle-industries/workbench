@@ -1,8 +1,9 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
-  mode: "jit",
+  mode: 'jit',
   purge: [
+    '../config/runtime.exs',
     '../lib/**/*.ex',
     '../lib/**/*.leex',
     '../lib/**/*.eex',
