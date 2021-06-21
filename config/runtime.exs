@@ -122,6 +122,14 @@ config :tai, advisor_groups: %{}
 
 # Conditional configuration
 if config_env() == :dev do
+  # Set a higher stacktrace during development. Avoid configuring such
+  # in production as building large stacktraces may be expensive.
+  config :phoenix, :stacktrace_depth, 20
+
+  # Initialize plugs at runtime for faster development compilation
+  config :phoenix, :plug_init_mode, :runtime
+
+  # Show more DB info for debugging in development
   config :workbench, Workbench.Repo, show_sensitive_data_on_connection_error: true
 
   config :workbench, WorkbenchWeb.Endpoint,
