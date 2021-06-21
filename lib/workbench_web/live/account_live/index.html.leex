@@ -5,7 +5,7 @@
     <input type="text" placeholder="Search" disabled title="coming soon..." class="bg-gray-100 opacity-25" />
   </form>
 
-  <%= live_component @socket, WorkbenchWeb.SharedLive.SelectNodeComponent, id: :select_node, class: "ml-4 mr-4" %>
+  <%= live_component WorkbenchWeb.SharedLive.SelectNodeComponent, id: :select_node, class: "ml-4 mr-4" %>
 
   <%= if @show_zero do %>
     <%= live_redirect "hide zero balances", to: Routes.account_path(@socket, :index, %{}) %>

@@ -5,7 +5,7 @@
     <input type="text" name="query" value="<%= @query %>" placeholder="Search" autocomplete="off"/>
   </form>
 
-  <%= live_component @socket, WorkbenchWeb.SharedLive.SelectNodeComponent, id: :select_node, class: "ml-4" %>
+  <%= live_component WorkbenchWeb.SharedLive.SelectNodeComponent, id: :select_node, class: "ml-4" %>
 </div>
 
 <hr class="mt-4" />
