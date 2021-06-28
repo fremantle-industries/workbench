@@ -58,8 +58,7 @@ module.exports = (_env, options) => {
                   ],
                 },
               },
-            },
-            'sass-loader',
+            }
           ],
         }
       ]
