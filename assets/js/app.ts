@@ -13,8 +13,8 @@ import "phoenix_html"
 
 // Phoenix Live View
 import {Socket} from "phoenix"
+import * as topbar from "topbar"
 import * as phoenixLiveView from "phoenix_live_view"
-import * as NProgress from "nprogress"
 
 // Import local files
 //
@@ -22,12 +22,13 @@ import * as NProgress from "nprogress"
 // import socket from "./socket"
 import {hooks} from "./hooks"
 
-// let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-// const liveSocket = new phoenixLiveView.LiveSocket("/live", Socket, {_csrf_token: csrfToken, hooks: hooks})
-const liveSocket = new phoenixLiveView.LiveSocket("/live", Socket, {hooks: hooks})
+let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
+const liveSocket = new phoenixLiveView.LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}, hooks: hooks})
 
-window.addEventListener("phx:page-loading-start", () => NProgress.start())
-window.addEventListener("phx:page-loading-stop", () => NProgress.done())
+// Show progress bar on live navigation and form submits
+topbar.config({barColors: {0: "#29d"}, shadowColor: "rgba(0, 0, 0, .3)"})
+window.addEventListener("phx:page-loading-start", () => topbar.show())
+window.addEventListener("phx:page-loading-stop", () => topbar.hide())
 
 // connect if there are any LiveViews on the page
 liveSocket.connect()

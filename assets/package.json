@@ -11,7 +11,6 @@
     "@popperjs/core": "^2.9.2",
     "chart.js": "^2.9.4",
     "notified_phoenix": "file:../deps/notified_phoenix",
-    "nprogress": "^0.2.0",
     "phoenix": "file:../deps/phoenix",
     "phoenix_html": "file:../deps/phoenix_html",
     "phoenix_live_view": "file:../deps/phoenix_live_view",
@@ -19,7 +18,8 @@
     "react-chartjs-2": "^2.11.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
-    "redux": "^4.1.0"
+    "redux": "^4.1.0",
+    "topbar": "^1.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
@@ -27,7 +27,6 @@
     "@babel/preset-react": "^7.14.5",
     "@tailwindcss/forms": "^0.3.3",
     "@types/chart.js": "^2.9.31",
-    "@types/nprogress": "^0.2.0",
     "@types/phoenix": "^1.5.1",
     "@types/phoenix_live_view": "^0.15.0",
     "@types/react": "^17.0.11",

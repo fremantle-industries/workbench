@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-// TODO: Include type definitions
 import {NotifiedPhoenix} from "notified_phoenix"
 import {createStore} from './createStore';
 import BalanceAll from './components/BalanceAll';
