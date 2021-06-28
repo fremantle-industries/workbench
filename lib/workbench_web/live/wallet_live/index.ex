@@ -1,45 +1,55 @@
 defmodule WorkbenchWeb.WalletLive.Index do
   use WorkbenchWeb, :live_view
-  require Ecto.Query
+  alias Workbench.Wallets
 
+  @impl true
   def mount(_params, _session, socket) do
     socket =
       socket
-      |> assign(:wallets, sorted_wallets())
-      |> assign(:changeset, Workbench.Wallet.changeset(%Workbench.Wallet{}, %{}))
+      |> assign(:changeset, Wallets.changeset())
 
     {:ok, socket}
   end
 
+  @impl true
+  def handle_params(_params, _uri, socket) do
+    socket =
+      socket
+      |> assign(:query, nil)
+      |> assign_wallets()
+
+    {:noreply, socket}
+  end
+
+  @impl true
   def handle_event("save", %{"wallet" => wallet_params}, socket) do
-    changeset = Workbench.Wallet.changeset(%Workbench.Wallet{}, wallet_params)
-    Workbench.Repo.insert(changeset)
+    changeset =
+      case Wallets.insert(wallet_params) do
+        {:ok, _} -> Wallets.changeset(wallet_params)
+        {:error, changeset} -> changeset
+      end
 
     socket =
       socket
-      |> assign(:wallets, sorted_wallets())
+      |> assign_wallets()
       |> assign(:changeset, changeset)
 
     {:noreply, socket}
   end
 
-  def handle_event("delete", %{"wallet-id" => wallet_id}, socket) do
-    id = wallet_id |> String.to_integer()
-    %Workbench.Wallet{id: id} |> Workbench.Repo.delete()
+  @impl true
+  def handle_event("delete", %{"wallet-id" => id}, socket) do
+    {:ok, _} = Workbench.Wallets.delete(id)
 
     socket =
       socket
-      |> assign(:wallets, sorted_wallets())
+      |> assign_wallets()
 
     {:noreply, socket}
   end
 
-  defp sorted_wallets do
-    Ecto.Query.from(
-      b in "wallets",
-      order_by: [asc: :name],
-      select: [:id, :name, :asset, :amount, :address]
-    )
-    |> Workbench.Repo.all()
+  defp assign_wallets(socket) do
+    socket
+    |> assign(:wallets, Wallets.search(socket.assigns.query))
   end
 end

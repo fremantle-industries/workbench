@@ -22,14 +22,14 @@
             <td class="px-4 py-3"><%= number_to_delimited(w.amount) %></td>
             <td class="px-4 py-3"><%= w.address %></td>
             <td class="px-4 py-3 text-right">
-              <button
-                type="button"
-                class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                phx-click="delete"
-                phx-value-wallet-id="<%= w.id %>"
-              >
-                Delete
-              </button>
+              <%= content_tag(
+                :button,
+                "delete",
+                type: :button,
+                class: "text-red-500 font-bold invisible group-hover:visible py-3 ml-4",
+                "phx-click": "delete",
+                "phx-value-wallet-id": w.id
+              ) %>
             </td>
           </tr>
         <% end %>
