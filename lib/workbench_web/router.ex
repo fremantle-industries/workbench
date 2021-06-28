@@ -37,6 +37,8 @@ defmodule WorkbenchWeb.Router do
   end
 
   scope "/", NotifiedPhoenix do
+    pipe_through([:browser])
+
     live("/notifications", ListLive, :index,
       as: :notification,
       layout: {WorkbenchWeb.LayoutView, :root}
