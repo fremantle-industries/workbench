@@ -36,9 +36,9 @@ $ mix ecto.migrate
 
 ## Features
 
-### Notifications
+### Stream Real Time Orders
 
-[![notifications](./docs/notifications.png)](https://youtu.be/NJS0YTsKoiQ)
+![stream-real-time-orders](./docs/stream-realtime-orders.png)
 
 ### Remotely Control Trade Instances in a Cluster
 
@@ -48,10 +48,6 @@ $ mix ecto.migrate
 
 [![live-balance-snapshots](./docs/live-balance-snapshots.png)](https://youtu.be/cklMhS0KD88)
 
-### Watch System, Research & Trade Metrics Across Your Cluster
-
-![metrics](./docs/metrics.png)
-
 ### Track Cold Storage
 
 ![wallets](./docs/wallets.png)
@@ -60,6 +56,18 @@ $ mix ecto.migrate
 
 ![products-index](./docs/products-index.png)
 ![products-show](./docs/products-show.png)
+
+### Receive Notifications
+
+[![notifications](./docs/notifications.png)](https://youtu.be/NJS0YTsKoiQ)
+
+### Monitor Operations Across Your Cluster
+
+![dashboard-beam-vm-health](./docs/grafana-dashboard-beam-vm-health.png)
+
+![dashboard-tai-health](./docs/grafana-dashboard-tai-health.png)
+
+![dashboard-balances](./docs/grafana-dashboard-balances.png)
 
 ## Usage
 

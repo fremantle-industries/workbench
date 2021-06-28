@@ -31,8 +31,8 @@ trading operation.
 
 It includes a grafana dashboard for balances and trade performance
 
-![balances](./home-balances-grafana.png)
+![dashboard-balances](./grafana-dashboard-balances.png)
 
 Along with a dashboard to monitor the state of venues running in `tai`
 
-![tai health](./tai-health-grafana.png)
+![dashboard-tai-health](./grafana-dashboard-tai-health.png)
