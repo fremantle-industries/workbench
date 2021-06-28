@@ -43,10 +43,10 @@ config :workbench,
     boot_delay_ms: {:system, :integer, "BALANCE_SNAPSHOT_BOOT_DELAY_MS", 10_000},
     every_ms: {:system, :integer, "BALANCE_SNAPSHOT_EVERY_MS", 60_000},
     btc_usd_venue: {:system, :atom, "BALANCE_SNAPSHOT_BTC_USD_VENUE", :binance},
-    btc_usd_symbol: {:system, :atom, "BALANCE_SNAPSHOT_BTC_USD_SYMBOL", :btc_usdc},
+    btc_usd_symbol: {:system, :atom, "BALANCE_SNAPSHOT_BTC_USD_SYMBOL", :btc_usdt},
     usd_quote_venue: {:system, :atom, "BALANCE_SNAPSHOT_USD_QUOTE_VENUE", :binance},
     usd_quote_asset: {:system, :atom, "BALANCE_SNAPSHOT_USD_QUOTE_ASSET", :usdt},
-    quote_pairs: [binance: :usdt, okex: :usdt]
+    quote_pairs: [binance: :usdt]
   }
 
 # Support .leex LiveView templates
@@ -169,6 +169,15 @@ if config_env() == :dev do
     ]
 
   config :tai, Tai.NewOrders.OrderRepo, show_sensitive_data_on_connection_error: true
+
+  config :tai,
+    venues: %{
+      binance: [
+        enabled: true,
+        adapter: Tai.VenueAdapters.Binance,
+        products: "btc_usdt eth_usdt usdc_usdt"
+      ]
+    }
 end
 
 if config_env() == :test do
