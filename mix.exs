@@ -41,7 +41,6 @@ defmodule Workbench.MixProject do
       {:ecto_sql, "~> 3.1"},
       {:enumerati, "~> 0.0.8"},
       {:gettext, "~> 0.18.0"},
-      {:guardian, "~> 2.0"},
       {:jason, "~> 1.0"},
       {:libcluster, "~> 3.2"},
       {:navigator, "~> 0.0.3"},
