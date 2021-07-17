@@ -160,7 +160,7 @@ defmodule WorkbenchWeb.OrderLive.Index do
         orders = socket.assigns.orders
         orders_count = socket.assigns.orders_count + 1
         new_follow_orders_count = socket.assigns.new_follow_orders_count + 1
-        new_order = %Tai.NewOrders.Order{client_id: client_id, status: :enqueued}
+        new_order = %Tai.Orders.Order{client_id: client_id, status: :enqueued}
 
         updated_orders =
           if length(orders) >= socket.assigns.page_size do
