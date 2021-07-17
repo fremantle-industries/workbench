@@ -113,7 +113,7 @@ config :notified_phoenix,
   to_list: {WorkbenchWeb.Router.Helpers, :notification_path, [WorkbenchWeb.Endpoint, :index]}
 
 # Tai
-config :tai, Tai.NewOrders.OrderRepo,
+config :tai, Tai.Orders.OrderRepo,
   url: database_url,
   pool_size: 5
 
@@ -168,7 +168,7 @@ if config_env() == :dev do
       ]
     ]
 
-  config :tai, Tai.NewOrders.OrderRepo, show_sensitive_data_on_connection_error: true
+  config :tai, Tai.Orders.OrderRepo, show_sensitive_data_on_connection_error: true
 
   config :tai,
     venues: %{
@@ -202,7 +202,7 @@ if config_env() == :test do
     pool: Ecto.Adapters.SQL.Sandbox,
     show_sensitive_data_on_connection_error: true
 
-  config :tai, Tai.NewOrders.OrderRepo,
+  config :tai, Tai.Orders.OrderRepo,
     pool: Ecto.Adapters.SQL.Sandbox,
     show_sensitive_data_on_connection_error: true
 

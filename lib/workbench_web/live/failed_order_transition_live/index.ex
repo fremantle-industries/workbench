@@ -69,7 +69,7 @@ defmodule WorkbenchWeb.FailedOrderTransitionLive.Index do
     socket
     |> assign(
       :order,
-      Tai.Commander.get_new_order_by_client_id(socket.assigns.client_id, node: selected_node)
+      Tai.Commander.get_order_by_client_id(socket.assigns.client_id, node: selected_node)
     )
   end
 

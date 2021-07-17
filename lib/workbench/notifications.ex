@@ -1,6 +1,6 @@
 defmodule Workbench.Notifications do
   use GenServer
-  alias Tai.NewOrders.Transitions
+  alias Tai.Orders.Transitions
 
   @spec start_link(term) :: GenServer.on_start()
   def start_link(_) do

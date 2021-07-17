@@ -103,7 +103,7 @@ defmodule WorkbenchWeb.OrderLive.Index do
     loaded_new_orders =
       placeholder_orders
       |> Enum.map(& &1.client_id)
-      |> Tai.Commander.get_new_orders_by_client_ids(node: search_node)
+      |> Tai.Commander.get_orders_by_client_ids(node: search_node)
       |> Map.new(fn o -> {o.client_id, o} end)
 
     orders =
@@ -160,7 +160,7 @@ defmodule WorkbenchWeb.OrderLive.Index do
         orders = socket.assigns.orders
         orders_count = socket.assigns.orders_count + 1
         new_follow_orders_count = socket.assigns.new_follow_orders_count + 1
-        new_order = %Tai.NewOrders.Order{client_id: client_id, status: :enqueued}
+        new_order = %Tai.Orders.Order{client_id: client_id, status: :enqueued}
 
         updated_orders =
           if length(orders) >= socket.assigns.page_size do
@@ -269,7 +269,7 @@ defmodule WorkbenchWeb.OrderLive.Index do
   defp assign_search(socket) do
     query = socket.assigns.query
     search_node = String.to_atom(socket.assigns.node)
-    orders_count = Tai.Commander.new_orders_count(query, node: search_node)
+    orders_count = Tai.Commander.orders_count(query, node: search_node)
 
     socket_with_assigned_pages =
       socket
@@ -278,7 +278,7 @@ defmodule WorkbenchWeb.OrderLive.Index do
       |> assign_pages()
 
     orders =
-      Tai.Commander.new_orders(query,
+      Tai.Commander.orders(query,
         page: socket_with_assigned_pages.assigns.current_page,
         page_size: socket_with_assigned_pages.assigns.page_size,
         node: search_node

@@ -98,7 +98,7 @@
   "stored": {:hex, :stored, "0.0.8", "48f4fbd874a43586f542fb3b3ba0766befca6b24c04ab2464208b52e0ab6d623", [:mix], [], "hexpm", "8f62b6fe2c3413ed630921b19bdcb7d8db5db2b4596dd0842ca0078b37871fbe"},
   "stylish": {:hex, :stylish, "0.0.5", "8b61822ff66d2bfb0bd028d3905de432e977c6d47dd44a36622556658e6d59ec", [:mix], [{:phoenix_html, "~> 2.14", [hex: :phoenix_html, repo: "hexpm", optional: false]}], "hexpm", "19e2ccd6bf22c00fcad8ea906a9b6b100611fd059b6161f3d013ad110fbd4476"},
   "table_rex": {:hex, :table_rex, "3.1.1", "0c67164d1714b5e806d5067c1e96ff098ba7ae79413cc075973e17c38a587caa", [:mix], [], "hexpm", "678a23aba4d670419c23c17790f9dcd635a4a89022040df7d5d772cb21012490"},
-  "tai": {:git, "https://github.com/fremantle-industries/tai.git", "91721acf1b39d32ad371cd27dbe9f9f99cd96054", [sparse: "apps/tai", branch: "main"]},
+  "tai": {:git, "https://github.com/fremantle-industries/tai.git", "b72f40045ffa40cad7a7704bb5788cb07c04e574", [sparse: "apps/tai", branch: "main"]},
   "tai_events": {:hex, :tai_events, "0.0.1", "653c800eed3af9a23c813a1bf5fef5cf52138fc22345612be0729eb5481b7614", [:mix], [{:jason, "~> 1.1", [hex: :jason, repo: "hexpm", optional: false]}], "hexpm", "37c10169732ce9e11f227400acabf1d2537689b59e07b11b9ce1a5464774e72a"},
   "telemetry": {:hex, :telemetry, "0.4.3", "a06428a514bdbc63293cd9a6263aad00ddeb66f608163bdec7c8995784080818", [:rebar3], [], "hexpm", "eb72b8365ffda5bed68a620d1da88525e326cb82a75ee61354fc24b844768041"},
   "telemetry_metrics": {:hex, :telemetry_metrics, "0.6.1", "315d9163a1d4660aedc3fee73f33f1d355dcc76c5c3ab3d59e76e3edf80eef1f", [:mix], [{:telemetry, "~> 0.4 or ~> 1.0", [hex: :telemetry, repo: "hexpm", optional: false]}], "hexpm", "7be9e0871c41732c233be71e4be11b96e56177bf15dde64a8ac9ce72ac9834c6"},

@@ -72,7 +72,7 @@ defmodule WorkbenchWeb.OrderTransitionLive.Index do
     socket
     |> assign(
       :order,
-      Tai.Commander.get_new_order_by_client_id(socket.assigns.client_id, node: search_node)
+      Tai.Commander.get_order_by_client_id(socket.assigns.client_id, node: search_node)
     )
   end
 

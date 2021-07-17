@@ -1,6 +1,6 @@
 require Ecto.Query
 
-alias Tai.NewOrders.{FailedOrderTransition, Order, OrderTransition, OrderRepo}
+alias Tai.Orders.{FailedOrderTransition, Order, OrderTransition, OrderRepo}
 
 # create error order
 {:ok, order_1} =
@@ -38,8 +38,8 @@ alias Tai.NewOrders.{FailedOrderTransition, Order, OrderTransition, OrderRepo}
       },
       stacktrace: [
         {Ecto.Changeset, :from, [], []},
-        {Tai.NewOrders.Services.ApplyOrderTransition, :call, 1,
-         [file: "lib/tai/new_orders/services/apply_order_transition.ex", line: 11]}
+        {Tai.Orders.Services.ApplyOrderTransition, :call, 1,
+         [file: "lib/tai/orders/services/apply_order_transition.ex", line: 11]}
       ],
       __type__: :rescue_create_error
     }
