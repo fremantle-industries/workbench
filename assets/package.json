@@ -29,7 +29,7 @@
     "@types/chart.js": "^2.9.34",
     "@types/phoenix": "^1.5.2",
     "@types/phoenix_live_view": "^0.15.1",
-    "@types/react": "^17.0.18",
+    "@types/react": "^17.0.19",
     "@types/react-dom": "^17.0.9",
     "@types/react-redux": "^7.1.18",
     "autoprefixer": "^10.3.1",
