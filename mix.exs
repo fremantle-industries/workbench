@@ -59,7 +59,7 @@ defmodule Workbench.MixProject do
       # {:stylish, github: "fremantle-industries/stylish", branch: "ping"},
       {:stylish, "~> 0.0.2"},
       # {:tai, github: "fremantle-industries/tai", sparse: "apps/tai", branch: "main"},
-      {:tai, "~> 0.0.67"},
+      {:tai, "~> 0.0.69"},
       {:telemetry, "~> 0.4"},
       {:telemetry_metrics, "~> 0.4"},
       {:telemetry_metrics_prometheus, "~> 1.0"},
