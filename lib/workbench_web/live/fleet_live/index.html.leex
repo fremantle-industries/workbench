@@ -1,0 +1,54 @@
+<h2 class="text-3xl">Fleets</h2>
+
+<div class="flex items-center mt-4">
+  <form phx-change="search" phx-submit="search">
+    <input type="text" name="query" value="<%= @query %>" placeholder="Search" autocomplete="off"/>
+  </form>
+
+  <%= live_component WorkbenchWeb.SharedLive.SelectNodeComponent, id: :select_node, class: "ml-4" %>
+</div>
+
+<table class="w-full mt-8">
+  <thead class="bg-gray-200 border-t-2 border-gray-400">
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Fleet ID</th>
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Total</th>
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Running</th>
+    <th scope="col" class="px-4 py-3 text-left text-gray-700">Stopped</th>
+    <th scope="col" class="px-4 py-3 text-right text-gray-700">Actions</th>
+  </thead>
+  <tbody>
+    <%= if Enum.any?(@fleets) do %>
+      <%= Enum.map @fleets, fn f -> %>
+        <tr class="hover:bg-gray-50 border-t border-b group">
+          <td scope="row" class="px-4 py-2"><%= f.fleet_id %></td>
+          <td class="px-4 py-2"><%= f.total %></td>
+          <td class="px-4 py-2"><%= f.running %></td>
+          <td class="px-4 py-2"><%= f.stopped %></td>
+          <td class="px-4 py-2 text-right">
+            <%= content_tag(
+              :button,
+              "start all",
+              class: "text-green-500 disabled:opacity-25 font-bold invisible group-hover:visible py-3 ",
+              disabled: f.running == f.total,
+              "phx-click": "start-fleet",
+              "phx-value-id": f.fleet_id
+            ) %>
+
+            <%= content_tag(
+              :button,
+              "stop all",
+              class: "text-red-500 disabled:opacity-25 font-bold invisible group-hover:visible py-3 ml-4",
+              disabled: f.running == 0,
+              "phx-click": "stop-fleet",
+              "phx-value-id": f.fleet_id
+            ) %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr class="hover:bg-gray-50 border-t border-b group">
+        <td colspan="5" class="px-4 py-3">No fleets</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

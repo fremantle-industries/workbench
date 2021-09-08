@@ -52,6 +52,13 @@ config :workbench,
 # Support .leex LiveView templates
 config :phoenix, template_engines: [leex: Phoenix.LiveView.Engine]
 
+# Logger
+config :logger,
+  backends: [{LoggerFileBackend, :file_log}],
+  utc_log: true
+
+config :logger, :file_log, path: "./log/#{Mix.env()}.log"
+
 # Navigation
 config :navigator,
   links: %{
@@ -94,8 +101,8 @@ config :navigator,
         link: {WorkbenchWeb.Router.Helpers, :venue_path, [WorkbenchWeb.Endpoint, :index]}
       },
       %{
-        label: "Advisors",
-        link: {WorkbenchWeb.Router.Helpers, :advisor_path, [WorkbenchWeb.Endpoint, :index]}
+        label: "Fleets",
+        link: {WorkbenchWeb.Router.Helpers, :fleet_path, [WorkbenchWeb.Endpoint, :index]}
       }
     ]
   }
@@ -118,10 +125,17 @@ config :tai, Tai.Orders.OrderRepo,
   pool_size: 5
 
 config :tai, venues: %{}
-config :tai, advisor_groups: %{}
+config :tai, fleets: %{}
 
 # Conditional configuration
 if config_env() == :dev do
+  config :libcluster,
+    topologies: [
+      gossip: [
+        strategy: Cluster.Strategy.Gossip
+      ]
+    ]
+
   # Set a higher stacktrace during development. Avoid configuring such
   # in production as building large stacktraces may be expensive.
   config :phoenix, :stacktrace_depth, 20
@@ -151,20 +165,6 @@ if config_env() == :dev do
         ~r"{priv/gettext/.*(po)$}",
         ~r"{lib/workbench_web/{live,views}/.*(ex|leex)$}",
         ~r"{lib/workbench_web/templates/.*(eex)$}"
-      ]
-    ]
-
-  config :libcluster,
-    topologies: [
-      gossip: [
-        strategy: Cluster.Strategy.Gossip
-      ]
-    ]
-
-  config :libcluster,
-    topologies: [
-      gossip: [
-        strategy: Cluster.Strategy.Gossip
       ]
     ]
 

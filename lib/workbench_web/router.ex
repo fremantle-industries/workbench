@@ -33,7 +33,7 @@ defmodule WorkbenchWeb.Router do
     resources("/products/:venue", ProductController, only: [:show])
     live("/fees", FeeLive.Index, :index, as: :fee)
     live("/venues", VenueLive.Index, :index, as: :venue)
-    live("/advisors", AdvisorLive.Index, :index, as: :advisor)
+    live("/fleets", FleetLive.Index, :index, as: :fleet)
   end
 
   scope "/", NotifiedPhoenix do
