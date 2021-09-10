@@ -47,7 +47,6 @@ defmodule Workbench.MixProject do
       {:notified_phoenix, "~> 0.0.6"},
       {:number, "~> 1.0.0"},
       {:phoenix, "~> 1.5.12"},
-      {:phoenix_active_link, "~> 0.3"},
       {:phoenix_ecto, "~> 4.0"},
       {:phoenix_html, "~> 2.14 or ~> 3.0"},
       {:phoenix_live_view, "~> 0.15"},
