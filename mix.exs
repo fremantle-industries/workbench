@@ -73,7 +73,7 @@ defmodule Workbench.MixProject do
       {:ex_doc, ">= 0.0.0", only: :dev},
       {:floki, ">= 0.0.0", only: :test},
       {:mock, "~> 0.3", only: :test},
-      {:wallaby, "~> 0.28.0", runtime: false, only: :test}
+      {:wallaby, "~> 0.29.0", runtime: false, only: :test}
     ]
   end
 
