@@ -44,7 +44,7 @@
     "postcss-preset-env": "^6.7.0",
     "redux-devtools-extension": "^2.13.9",
     "source-map-loader": "^3.0.0",
-    "tailwindcss": "^2.2.15",
+    "tailwindcss": "^2.2.16",
     "tailwindcss-empty-pseudo-class": "^1.0.0",
     "terser-webpack-plugin": "^5.2.4",
     "ts-loader": "^9.2.5",
