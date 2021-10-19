@@ -8,8 +8,8 @@ defmodule WorkbenchWeb.SharedLive.SelectNodeComponent do
     selected_node = Workbench.SelectedNode.get()
     class = assigns[:class]
 
-    ~L"""
-    <form phx-change="change" phx-auto-recover="ignore" phx-target="<%= @myself %>" class="<%= class %>">
+    ~H"""
+    <form phx-change="change" phx-auto-recover="ignore" phx-target={@myself} class={class}>
       <select name="node" id="select_nodes" phx-update="ignore">
         <%= for n <- nodes do %>
           <%= content_tag :option, value: n, selected: n == selected_node do %>

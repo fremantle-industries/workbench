@@ -325,7 +325,7 @@ defmodule WorkbenchWeb.OrderLive.Index do
       relative_color_class: relative_color_class
     ]
 
-    ~E"""
+    ~H"""
     <%= render Stylish.Ping, "ping.html", assigns %>
     """
   end

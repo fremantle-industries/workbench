@@ -19,15 +19,15 @@ defmodule WorkbenchWeb.OrderView do
       end
       |> Enum.join(" ")
 
-    ~E"""
-    <span class="rounded-lg px-2 py-1 <%= class %> <%= color_class %>">
+    ~H"""
+    <span class={"rounded-lg px-2 py-1 #{class} #{color_class}"}>
       <%= assigns.status %>
     </span>
     """
   end
 
   def render("_summary.html", assigns) do
-    ~E"""
+    ~H"""
     <div>
       <div class="space-y-4">
         <dt class="inline-block font-bold w-52">Side:</dt>

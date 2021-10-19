@@ -14,7 +14,7 @@ import "phoenix_html"
 // Phoenix Live View
 import {Socket} from "phoenix"
 import * as topbar from "topbar"
-import * as phoenixLiveView from "phoenix_live_view"
+import { LiveSocket } from "phoenix_live_view"
 
 // Import local files
 //
@@ -23,7 +23,7 @@ import * as phoenixLiveView from "phoenix_live_view"
 import {hooks} from "./hooks"
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-const liveSocket = new phoenixLiveView.LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}, hooks: hooks})
+const liveSocket = new LiveSocket("/live", Socket, { params: { _csrf_token: csrfToken }, hooks: hooks })
 
 // Show progress bar on live navigation and form submits
 topbar.config({barColors: {0: "#29d"}, shadowColor: "rgba(0, 0, 0, .3)"})
