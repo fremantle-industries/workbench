@@ -13,7 +13,7 @@
 # The app stage executes the Elixir release and runs on the slim Elixir alpine image.
 # It does not require Elixir, Erlang or NodeJS as ERTS is packaged with the release
 
-FROM bitwalker/alpine-elixir-phoenix:1.11.4 AS builder
+FROM bitwalker/alpine-elixir-phoenix:1.12.2 AS builder
 WORKDIR /tmp/app
 RUN chown -R nobody: /tmp/app
 RUN apk add --update alpine-sdk
@@ -39,7 +39,7 @@ RUN mix clean --deps
 RUN mix setup.deps
 RUN MIX_ENV=prod mix tai.gen.migration
 
-FROM bitwalker/alpine-elixir-phoenix:1.11.4 AS release
+FROM bitwalker/alpine-elixir-phoenix:1.12.2 AS release
 ARG release_name
 WORKDIR /tmp/app
 RUN chown -R nobody: /tmp/app
@@ -56,7 +56,7 @@ RUN cat _build/prod/rel/$release_name/bin/$release_name \
       | sed -e 's/set[ ]-e/set -ex/' \
       > _build/prod/rel/$release_name/bin/$release_name
 
-FROM elixir:1.11.4-alpine AS app
+FROM elixir:1.12.2-alpine AS app
 ARG release_name
 WORKDIR /app
 RUN chown -R nobody: /app
