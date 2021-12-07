@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   db:
-    image: timescale/timescaledb:2.4.0-pg13
+    image: timescale/timescaledb:2.5.0-pg14
     ports:
       - "5432:5432"
     volumes:
@@ -36,7 +36,7 @@ services:
       - DATABASE_URL
 
   prometheus:
-    image: 'prom/prometheus:v2.28.1'
+    image: 'prom/prometheus:v2.31.1'
     restart: always
     ports:
       - 9090:9090
@@ -50,7 +50,7 @@ services:
       - '--web.console.templates=/usr/share/prometheus/consoles'
 
   grafana:
-    image: 'grafana/grafana:8.1.0'
+    image: 'grafana/grafana:8.3.0'
     restart: always
     ports:
       - "3000:3000"
