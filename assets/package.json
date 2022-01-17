@@ -31,7 +31,7 @@
     "@types/phoenix_live_view": "^0.15.1",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
-    "@types/react-redux": "^7.1.21",
+    "@types/react-redux": "^7.1.22",
     "autoprefixer": "^10.4.2",
     "babel-loader": "^8.2.3",
     "copy-webpack-plugin": "^10.2.0",
