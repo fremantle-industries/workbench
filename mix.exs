@@ -43,7 +43,7 @@ defmodule Workbench.MixProject do
       {:gettext, "~> 0.19.0"},
       {:jason, "~> 1.0"},
       {:libcluster, "~> 3.2"},
-      {:navigator, "~> 0.0.6"},
+      {:navigator, "~> 0.0.7"},
       {:notified_phoenix, "~> 0.0.7"},
       {:number, "~> 1.0.0"},
       {:phoenix, "~> 1.6.2"},
