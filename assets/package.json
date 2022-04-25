@@ -27,7 +27,7 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@tailwindcss/forms": "^0.5.0",
-    "@types/chart.js": "^2.9.36",
+    "@types/chart.js": "^2.9.37",
     "@types/phoenix": "^1.5.4",
     "@types/phoenix_live_view": "^0.15.1",
     "@types/react": "^18.0.5",
