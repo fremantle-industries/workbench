@@ -19,7 +19,7 @@
     "react-chartjs-2": "^2.11.2",
     "react-dom": "^18.0.0",
     "react-redux": "^8.0.0",
-    "redux": "^4.1.2",
+    "redux": "^4.2.0",
     "topbar": "^1.0.1"
   },
   "devDependencies": {
