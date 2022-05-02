@@ -33,7 +33,7 @@
     "@types/react": "^18.0.7",
     "@types/react-dom": "^18.0.3",
     "@types/react-redux": "^7.1.24",
-    "autoprefixer": "^10.4.4",
+    "autoprefixer": "^10.4.7",
     "babel-loader": "^8.2.5",
     "copy-webpack-plugin": "^10.2.4",
     "css-loader": "^6.7.1",
