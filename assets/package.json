@@ -17,7 +17,7 @@
     "phoenix_live_view": "file:../deps/phoenix_live_view",
     "react": "^18.1.0",
     "react-chartjs-2": "^2.11.2",
-    "react-dom": "^18.0.0",
+    "react-dom": "^18.1.0",
     "react-redux": "^8.0.0",
     "redux": "^4.2.0",
     "topbar": "^1.0.1"
