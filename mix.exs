@@ -40,7 +40,7 @@ defmodule Workbench.MixProject do
       {:deque, "~> 1.0"},
       {:ecto_sql, "~> 3.1"},
       {:enumerati, "~> 0.0.8"},
-      {:gettext, "~> 0.19.0"},
+      {:gettext, "~> 0.21.0"},
       {:jason, "~> 1.0"},
       {:libcluster, "~> 3.2"},
       {:navigator, "~> 0.0.7"},
